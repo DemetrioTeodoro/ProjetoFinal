@@ -36,7 +36,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				try { 
 					stmt.setInt(1, peca.getIdPeca());
-					stmt.setInt(2, peca.getQuantida());
+					stmt.setInt(2, peca.getQuantida()); 
 					stmt.setDouble(3, peca.getValCompra());
 					stmt.setDouble(4, peca.getValVenda());
 					stmt.setString(5, peca.getDataEntrada());
@@ -50,7 +50,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 				generatedKeys = stmt.getGeneratedKeys();
 				if(generatedKeys.next()) {
 					idGerado = generatedKeys.getInt(1);
-					peca.setIdItempeca(idGerado);
+					peca.setIdItempeca(idGerado); 
 				}
 			}
 					

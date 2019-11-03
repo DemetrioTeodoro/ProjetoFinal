@@ -59,7 +59,7 @@ import java.sql.Statement;
  *         ======= Classe responsável pela conexão JDBC com o banco de dados
  *         escolhido.
  * 
- * @author Adriano de Melo
+ * @author Adriano de Melon
  *
  */
 public class Banco {
@@ -94,10 +94,10 @@ public class Banco {
 			conn = DriverManager.getConnection(CONEXAO, USER, PASSWORD);
 			return conn;
 		} catch (ClassNotFoundException e) {
-			System.out.println("Classe do Driver não foi encontrada. Causa: " + e.getMessage());
+			System.out.println("Classe do Driver não foi encontrada.  Causa: " + e.getMessage());
 			return null;
 		} catch (SQLException e) {
-			System.out.println("Erro ao obter a Connection. Causa: " + e.getMessage());
+			System.out.println("Erro ao obter a Connection.  Causa: " + e.getMessage());
 			return null;
 		}
 	}

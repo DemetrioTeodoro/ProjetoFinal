@@ -11,7 +11,7 @@ public class Peca {
 	private String dataSaida;
 	private int quantida;
 	private int idPeca;
-	private int idItempeca;
+	private int idItempeca; 
 	
 	public Peca() {
 		super();
