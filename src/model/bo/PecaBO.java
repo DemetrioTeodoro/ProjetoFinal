@@ -1,25 +1,27 @@
 package model.bo;
 
+import model.dao.PecaDAO;
+
 public class PecaBO {
 
 	public String cadastrarPecaBO() {
-		// TODO Auto-generated method stub
-		return null;
+		PecaDAO pecaDAO = new PecaDAO();
+		return pecaDAO.cadastrarPeca();
 	}
 
 	public String consultarPecaBO() {
-		// TODO Auto-generated method stub
-		return null;
+		PecaDAO pecaDAO = new PecaDAO();
+		return pecaDAO.consultarPeca();
 	}
 
 	public String alterarPecaBO() {
-		// TODO Auto-generated method stub
-		return null;
+		PecaDAO pecaDAO = new PecaDAO();
+		return pecaDAO.alterarPeca();
 	}
 
 	public String deletarPecaBO() {
-		// TODO Auto-generated method stub
-		return null;
+		PecaDAO pecaDAO = new PecaDAO();
+		return pecaDAO.deletarPeca();
 	}
 
 }
