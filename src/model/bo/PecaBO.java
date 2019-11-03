@@ -1,27 +1,28 @@
 package model.bo;
 
 import model.dao.PecaDAO;
+import model.entity.Peca;
 
 public class PecaBO {
 
-	public String cadastrarPecaBO() {
+	public Peca cadastrarPecaBO(Peca peca) {
 		PecaDAO pecaDAO = new PecaDAO();
-		return pecaDAO.cadastrarPeca();
+		return pecaDAO.cadastrar(peca);
 	}
 
-	public String consultarPecaBO() {
+	public Peca consultarPecaBO(Peca peca) {
 		PecaDAO pecaDAO = new PecaDAO();
-		return pecaDAO.consultarPeca();
+		return pecaDAO.consultar(peca);
 	}
 
-	public String alterarPecaBO() {
+	public boolean alterarPecaBO(Peca peca) {
 		PecaDAO pecaDAO = new PecaDAO();
-		return pecaDAO.alterarPeca();
+		return pecaDAO.alterar(peca);
 	}
 
-	public String deletarPecaBO() {
+	public int deletarPecaBO(int id) {
 		PecaDAO pecaDAO = new PecaDAO();
-		return pecaDAO.deletarPeca();
+		return pecaDAO.deletar(id);
 	}
 
 }

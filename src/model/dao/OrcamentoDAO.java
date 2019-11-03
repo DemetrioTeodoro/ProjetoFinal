@@ -1,25 +1,33 @@
 package model.dao;
 
-public class OrcamentoDAO {
+import model.entity.Orcamento;
 
-	public String cadastrarOrcamento() {
+public class OrcamentoDAO implements BaseDAO<Orcamento> {
+
+	@Override
+	public Orcamento cadastrar(Orcamento orcamento) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String consultarOrcamento() {
+	@Override
+	public Orcamento consultar(Orcamento orcamento) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String alterarOrcamento() {
+	@Override
+	public boolean alterar(Orcamento orcamento) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
-	public String deletarOrcamento() {
+	@Override
+	public int deletar(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
+
+	
 
 }

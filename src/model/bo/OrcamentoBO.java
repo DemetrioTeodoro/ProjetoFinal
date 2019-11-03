@@ -1,27 +1,28 @@
 package model.bo;
 
 import model.dao.OrcamentoDAO;
+import model.entity.Orcamento;
 
 public class OrcamentoBO {
 
-	public String cadastrarOrcamentoBO() {
+	public Orcamento cadastrarOrcamentoBO(Orcamento orcamento) {
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		return orcamentoDAO.cadastrarOrcamento();
+		return orcamentoDAO.cadastrar(orcamento);
 	}
 	
-	public String consultarOrcamentoBO() {
+	public Orcamento consultarOrcamentoBO(Orcamento orcamento) {
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		return orcamentoDAO.consultarOrcamento();
+		return orcamentoDAO.consultar(orcamento);
 	}
 	
-	public String alterarOrcamentoBO() {
+	public boolean alterarOrcamentoBO(Orcamento orcamento) {
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		return orcamentoDAO.alterarOrcamento();
+		return orcamentoDAO.alterar(orcamento);
 	}
 	
-	public String deletarOrcamentoBO() {
+	public int deletarOrcamentoBO(int id) {
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		return orcamentoDAO.deletarOrcamento();
+		return orcamentoDAO.deletar(id);
 	}
 
 }

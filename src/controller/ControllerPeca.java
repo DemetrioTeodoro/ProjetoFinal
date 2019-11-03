@@ -1,26 +1,35 @@
 package controller;
 
 import model.bo.PecaBO;
+import model.entity.Peca;
 
 public class ControllerPeca {
 	
-	public String cadastrarPeca() {
+	public String cadastrarPeca(Peca peca) {
+		String msg = null;
 		PecaBO pecaBO = new PecaBO();
-		return pecaBO.cadastrarPecaBO();
+		pecaBO.cadastrarPecaBO(peca);
+		return msg;
 	}
 	
-	public String consultarPeca() {
+	public String consultarPeca(Peca peca) {
+		String msg = null;
 		PecaBO pecaBO = new PecaBO();
-		return pecaBO.consultarPecaBO();
+		pecaBO.consultarPecaBO(peca);
+		return msg;
 	}
 	
-	public String alterarPeca() {
+	public String alterarPeca(Peca peca) {
+		String msg = null;
 		PecaBO pecaBO = new PecaBO();
-		return pecaBO.alterarPecaBO();
+		pecaBO.alterarPecaBO(peca);
+		return msg;
 	}
 	
-	public String deletarPeca() {
+	public String deletarPeca(int id) {
+		String msg = null;
 		PecaBO pecaBO = new PecaBO();
-		return pecaBO.deletarPecaBO();
+		pecaBO.deletarPecaBO(id);
+		return msg;
 	}
 }
