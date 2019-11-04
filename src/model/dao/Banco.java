@@ -87,7 +87,7 @@ public class Banco {
 	 * @throws SQLException           caso a URL_CONEXAO, USUARIO e/ou SENHA estejam
 	 *                                incorretos.
 	 */
-	public static Connection getConnection() {
+	public static Connection getConnection() { 
 		try {
 			Connection conn = null;
 			Class.forName(DRIVER);

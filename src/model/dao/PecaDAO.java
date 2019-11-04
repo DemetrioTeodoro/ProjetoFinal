@@ -18,7 +18,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		try {
-			stmt.setString(1, peca.getNomePeca());
+			stmt.setString(1, peca.getNomePeca()); 
 			stmt.setString(2, peca.getCodigo());
 			
 			
