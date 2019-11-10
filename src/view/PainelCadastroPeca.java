@@ -9,12 +9,23 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.text.html.parser.ParserDelegator;
+import javax.xml.bind.ParseConversionEvent;
+
+import controller.ControllerPeca;
+import model.entity.Peca;
 
 public class PainelCadastroPeca extends JPanel {
-	private JTextField textNomePeca;
-	private JTextField textNomeFabricante;
-	private JTextField textValor;
-	private JTextField textQuantidade;
+	private JTextField txtNmPeca;
+	private JTextField txtCdPeca;
+	private JTextField txtValorCompra;
+	private JTextField txtValorVenda;
+	private JTextField txtQuantidade;
+	private JTextField txtDtEntrada;
+	private JTextField txtDtSaida;
+	
+	ControllerPeca controller = new ControllerPeca();
 
 	/**
 	 * Create the panel.
@@ -25,25 +36,39 @@ public class PainelCadastroPeca extends JPanel {
 		
 		JLabel lblNomeDaPeca = new JLabel("Nome da Peca:");
 		
-		JLabel lblFabricante = new JLabel("Fabricante:");
+		JLabel lblCodigo = new JLabel("C\u00F3digo:");
 		
-		JLabel lblValor = new JLabel("Valor:");
+		JLabel lblValorCompra = new JLabel("Valor de Compra:");
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		
-		textNomePeca = new JTextField();
-		textNomePeca.setColumns(10);
+		txtNmPeca = new JTextField();
+		txtNmPeca.setColumns(10);
 		
-		textNomeFabricante = new JTextField();
-		textNomeFabricante.setColumns(10);
+		txtCdPeca = new JTextField();
+		txtCdPeca.setColumns(10);
 		
-		textValor = new JTextField();
-		textValor.setColumns(10);
+		txtValorCompra = new JTextField();
+		txtValorCompra.setColumns(10);
 		
-		textQuantidade = new JTextField();
-		textQuantidade.setColumns(10);
+		txtQuantidade = new JTextField();
+		txtQuantidade.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Peca peca = new Peca();
+				peca.setNomePeca(txtNmPeca.getText());
+				peca.setCodigo(txtCdPeca.getText());
+				peca.setValCompra(Double.parseDouble(txtValorCompra.getText()));
+				peca.setValVenda(Double.parseDouble(txtValorVenda.getText()));
+				peca.setQuantida(Integer.parseInt(txtQuantidade.getText()));
+				peca.setDataEntrada(txtDtEntrada.getText());
+				peca.setDataSaida(txtDtSaida.getText());
+				
+				controller.cadastrarPeca(peca);
+			}
+		});
 		
 		JButton btnFechar = new JButton("Fechar");
 		btnFechar.addActionListener(new ActionListener() {
@@ -51,37 +76,64 @@ public class PainelCadastroPeca extends JPanel {
 				setVisible(false);
 			}
 		});
+		
+		txtValorVenda = new JTextField();
+		txtValorVenda.setColumns(10);
+		
+		JLabel lblValorVenda = new JLabel("Valor de Venda:");
+		
+		JLabel lblDtEntrada = new JLabel("Data de Entrada:");
+		
+		txtDtEntrada = new JTextField();
+		txtDtEntrada.setColumns(10);
+		
+		JLabel lblDtSaida = new JLabel("Data de Sa\u00EDda:");
+		
+		txtDtSaida = new JTextField();
+		txtDtSaida.setColumns(10);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(160)
-					.addComponent(lblCadastroDePeca))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
-					.addComponent(lblNomeDaPeca)
-					.addGap(6)
-					.addComponent(textNomePeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
-					.addComponent(lblFabricante)
-					.addGap(6)
-					.addComponent(textNomeFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
-					.addComponent(lblValor)
-					.addGap(6)
-					.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(49)
-					.addComponent(lblQuantidade)
-					.addGap(6)
-					.addComponent(textQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(66)
-					.addComponent(btnFechar)
-					.addGap(159)
-					.addComponent(btnCadastrar))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(160)
+							.addComponent(lblCadastroDePeca))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(49)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblNomeDaPeca)
+									.addGap(6))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblCodigo)
+										.addComponent(lblValorCompra))
+									.addPreferredGap(ComponentPlacement.UNRELATED))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(btnFechar)
+										.addComponent(lblQuantidade)
+										.addComponent(lblDtSaida))
+									.addPreferredGap(ComponentPlacement.UNRELATED))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblValorVenda, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblDtEntrada, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addComponent(txtNmPeca, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(btnCadastrar)
+										.addPreferredGap(ComponentPlacement.RELATED)))
+								.addComponent(txtCdPeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtValorCompra, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtValorVenda, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtDtEntrada, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtDtSaida, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(71, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -91,29 +143,36 @@ public class PainelCadastroPeca extends JPanel {
 					.addGap(24)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNomeDaPeca)
-						.addComponent(textNomePeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(12)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblFabricante))
-						.addComponent(textNomeFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblValor))
-						.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(15)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblQuantidade))
-						.addComponent(textQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(51)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(txtNmPeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCodigo)
+						.addComponent(txtCdPeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblValorCompra)
+						.addComponent(txtValorCompra, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtValorVenda, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblValorVenda))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblQuantidade)
+						.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDtEntrada)
+						.addComponent(txtDtEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDtSaida)
+						.addComponent(txtDtSaida, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(20)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnFechar)
-						.addComponent(btnCadastrar)))
+						.addComponent(btnCadastrar))
+					.addGap(280))
 		);
 		setLayout(groupLayout);
 
