@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.util.Date;
 
 public class Peca {
 	
@@ -7,8 +8,8 @@ public class Peca {
 	private String codigo;
 	private double valCompra;
 	private double valVenda;
-	private String dataEntrada;
-	private String dataSaida;
+	private Date dataEntrada;
+	private Date dataSaida;
 	private int quantida;
 	private int idPeca;
 	private int idItempeca;  
@@ -18,7 +19,7 @@ public class Peca {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Peca(String nomePeca, String codigo, double valCompra, double valVenda, String dataEntrada, int quantida) {
+	public Peca(String nomePeca, String codigo, double valCompra, double valVenda, Date dataEntrada, int quantida) {
 		super();
 		this.nomePeca = nomePeca;
 		this.codigo = codigo;
@@ -60,19 +61,19 @@ public class Peca {
 		this.valVenda = valVenda;
 	}
 
-	public String getDataEntrada() {
+	public Date getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(String dataEntrada) {
+	public void setDataEntrada(Date dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public String getDataSaida() {
+	public Date getDataSaida() {
 		return dataSaida;
 	}
 
-	public void setDataSaida(String dataSaida) {
+	public void setDataSaida(Date dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 
