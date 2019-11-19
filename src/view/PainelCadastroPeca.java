@@ -2,6 +2,9 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -10,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.text.html.parser.ParserDelegator;
-import javax.xml.bind.ParseConversionEvent;
 
 import controller.ControllerPeca;
 import model.entity.Peca;
@@ -24,6 +25,8 @@ public class PainelCadastroPeca extends JPanel {
 	private JTextField txtQuantidade;
 	private JTextField txtDtEntrada;
 	private JTextField txtDtSaida;
+
+	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	ControllerPeca controller = new ControllerPeca();
 
@@ -63,8 +66,8 @@ public class PainelCadastroPeca extends JPanel {
 				peca.setValCompra(Double.parseDouble(txtValorCompra.getText()));
 				peca.setValVenda(Double.parseDouble(txtValorVenda.getText()));
 				peca.setQuantida(Integer.parseInt(txtQuantidade.getText()));
-				peca.setDataEntrada(txtDtEntrada.getText());
-				peca.setDataSaida(txtDtSaida.getText());
+				peca.setDataEntrada((Date) format.parse(txtDtEntrada.getText()));
+				peca.setDataSaida((Date) format.parse(txtDtSaida.getText()));
 				
 				controller.cadastrarPeca(peca);
 			}
