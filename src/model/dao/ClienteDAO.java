@@ -7,19 +7,19 @@ import model.entity.Cliente;
 public class ClienteDAO implements BaseDAO<Cliente> {
 
 	@Override
-	public Cliente cadastrar(Cliente novaEntidade) {
+	public Cliente cadastrar(Cliente cliente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Cliente consultar(Cliente novaEntidade) {
+	public Cliente consultar(Cliente cliente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean alterar(Cliente novaEntidade) {
+	public boolean alterar(Cliente cliente) {
 		// TODO Auto-generated method stub
 		return false;
 	}
