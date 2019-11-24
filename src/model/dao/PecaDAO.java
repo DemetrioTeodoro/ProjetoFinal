@@ -25,7 +25,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 			stmt.setString(2, peca.getCodigo());
 			
 			
-			stmt.execute(sql);
+			stmt.execute();
 			
 			ResultSet generatedKeys = stmt.getGeneratedKeys();
 			if(generatedKeys.next()) {
@@ -45,7 +45,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 					stmt.setDate(5, (Date) peca.getDataEntrada());
 					stmt.setDate(6, (Date) peca.getDataSaida());
 					
-					stmt.execute(sql);
+					stmt.execute();
 				
 			
 				
@@ -73,7 +73,11 @@ public class PecaDAO implements BaseDAO<Peca> {
 	@Override
 	public Peca consultar(Peca peca) {
 		Connection conn = Banco.getConnection();
-		String sql = "SELECT NOMEPECA,CODIGO FROM PECA ";
+		String sql = " SELECT ITEM_PECA.IDPECA, IDORCAMENTO, PECA.NOMEPECA, PECA.CODIGO ,QUANTIDADE, VALORCOMPRA, VALORVENDA, ITEM_PECA.DATAENTRADA, ITEM_PECA.DATASAIDA "
+				+ " FROM ITEM_PECA "
+				+ " INNER JOIN PECA ON "
+				+ " ITEM_PECA.IDPECA = PECA.IDPECA "
+				+ " WHERE ITEM_PECA.IDPECA = ? ";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet rs = null;
@@ -81,48 +85,25 @@ public class PecaDAO implements BaseDAO<Peca> {
 		
 		try {
 			
+			stmt.setInt(1, peca.getIdPeca());
 			
 			pecs.setNomePeca(rs.getString("NOMEPECA")); 
 			pecs.setCodigo(rs.getString("CODIGO"));
-			
-			
-			stmt.execute(sql);
-			
-			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			if(generatedKeys.next()) {
-				int idGerado = generatedKeys.getInt(1);
-				peca.setIdPeca(idGerado);
-			
-			//Consulta Item Peï¿½a
-				sql = "SELECT IDPECA, QUANTIDADE, VALORCOMPRA, VALORVENDA, DATAENTRADA, DATASAIDA FROM ITEM_PECA ";
-				stmt = Banco.getPreparedStatement(conn, sql, 
-						PreparedStatement.RETURN_GENERATED_KEYS);
-				try { 
-					pecs.setIdPeca(rs.getInt("IDPECA"));
-					pecs.setQuantida(rs.getInt("QUANTIDADE"));
-					pecs.setValCompra(rs.getDouble("VALORCOMPRA"));
-					pecs.setValVenda(rs.getDouble("VALORVENDA"));
-					pecs.setDataEntrada(rs.getDate("DATAENTRADA"));
-					pecs.setDataSaida(rs.getDate("DATASAIDA"));
+			pecs.setIdPeca(rs.getInt("IDPECA"));
+			pecs.setQuantida(rs.getInt("QUANTIDADE"));
+			pecs.setValCompra(rs.getDouble("VALORCOMPRA"));
+			pecs.setValVenda(rs.getDouble("VALORVENDA"));
+			pecs.setDataEntrada(rs.getDate("DATAENTRADA"));
+			pecs.setDataSaida(rs.getDate("DATASAIDA"));
 					
-					stmt.execute(sql);
-				
-			
-				
-			}finally {
-				generatedKeys = stmt.getGeneratedKeys();
-				if(generatedKeys.next()) {
-					idGerado = generatedKeys.getInt(1);
-					peca.setIdItempeca(idGerado); 
-				}
-				Banco.closeConnection(conn);
-				Banco.closePreparedStatement(stmt);
-				Banco.closeResultSet(generatedKeys);
-			}
+			stmt.execute();
 					
-		} }catch (SQLException e) {
-			System.out.println("Erro ao inserir nova Peï¿½a.");
+		}catch (SQLException e) {
+			System.out.println("Erro ao inserir nova Peça.");
 			System.out.println("Erro: " + e.getMessage());
+		}finally {
+			Banco.closeConnection(conn);
+			Banco.closePreparedStatement(stmt);
 		}
 		
 
@@ -132,57 +113,41 @@ public class PecaDAO implements BaseDAO<Peca> {
 	@Override
 	public boolean alterar(Peca peca) {
 		Connection conn = Banco.getConnection();
-		String sql = "UPDATE PECA SET NOMEPECA = " + peca.getNomePeca()
-				+ ", CODIGO = " + peca.getCodigo()
-				+ "WHERE IDPECA = " + peca.getIdPeca() ;
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
-				PreparedStatement.RETURN_GENERATED_KEYS);
+		String sql = "UPDATE ITEM_PECA SET IDPECA = ?, QUANTIDADE = ?, VALORCOMPRA = ?, VALORVENDA = ?, DATAENTRADA = ?,DATASAIDA = ?"
+				+ " WHERE IDPECA = ? ";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn);
 		ResultSet rs = null;
 		boolean resultado = false;
-		
-		try {
-			if (stmt.executeUpdate(sql) != 0) {
+			//Atualiza Item Peça
 				
-				resultado = true;
-				
-			}			
-			
-			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			if(generatedKeys.next()) {
-				int idGerado = generatedKeys.getInt(1);
-				peca.setIdPeca(idGerado);
-			
-			//Atualiza Item Peï¿½a
-				sql = "UPDATE ITEM_PECA SET IDPECA = " + peca.getIdPeca()
-						+ ",QUANTIDADE = " + peca.getQuantida()
-						+ ",VALORCOMPRA = " + peca.getValCompra()
-						+ ",VALORVENDA = " + peca.getValVenda()
-						+ ",DATAENTRADA = " + peca.getDataEntrada()
-						+ ",DATASAIDA = " + peca.getDataSaida()
-						+ " WHERE IDITEMPECA = " + peca.getIdItempeca();
 				stmt = Banco.getPreparedStatement(conn, sql, 
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				try { 
-					if (stmt.executeUpdate(sql) != 0) {
+					
+					stmt.setInt(1, peca.getIdPeca());
+					stmt.setInt(2, peca.getQuantida());
+					stmt.setDouble(3, peca.getValCompra());
+					stmt.setDouble(4, peca.getValVenda());
+					stmt.setDate(4, (Date) peca.getDataEntrada());
+					stmt.setDate(4, (Date) peca.getDataSaida());
+					stmt.setInt(5, peca.getIdPeca());
+					
+					stmt.executeUpdate();
+					
+					if (stmt.executeUpdate() != 0) {
 						
 						resultado = true;
 						
 					}
 				
-			}finally {
-				generatedKeys = stmt.getGeneratedKeys();
-				if(generatedKeys.next()) {
-					idGerado = generatedKeys.getInt(1);
-					peca.setIdItempeca(idGerado); 
-				}
-				Banco.closeConnection(conn);
-				Banco.closePreparedStatement(stmt);
-				Banco.closeResultSet(generatedKeys);
-			}
+			
 					
-		} }catch (SQLException e) {
+		 }catch (SQLException e) {
 			System.out.println("Erro ao inserir nova Peï¿½a.");
 			System.out.println("Erro: " + e.getMessage());
+		}finally {
+			Banco.closeConnection(conn);
+			Banco.closePreparedStatement(stmt);
 		}
 		
 
@@ -192,51 +157,34 @@ public class PecaDAO implements BaseDAO<Peca> {
 	@Override
 	public int deletar(int id) {
 		Connection conn = Banco.getConnection();
-		String sql = "DELETE FROM PECA WHERE IDPECA = " + id;
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
-				PreparedStatement.RETURN_GENERATED_KEYS);
+		String sql = "DELETE * FROM ITEM_PECA WHERE IDPECA = " + id;
+		PreparedStatement stmt = Banco.getPreparedStatement(conn);
 		ResultSet rs = null;
-		Peca pecs = new Peca();
+		Peca peca = new Peca();
 		boolean resultado = false;
 		int resposta = 0;
 		
-		try {
-			
-			resultado = stmt.execute(sql);
-			
-			if (resultado != false) {
-				resposta = 1;
-			}else {
-				resposta = 0;
-			}
-			
-			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			if(generatedKeys.next()) {
-				int idGerado = generatedKeys.getInt(1);
-			
-			//Consulta Item Peï¿½a
-				sql = "DELETE FROM ITEM_PECA WHERE IDPECA = " + id;
-				stmt = Banco.getPreparedStatement(conn, sql, 
-						PreparedStatement.RETURN_GENERATED_KEYS);
-				try { 
+			//Consulta Item Peça
+				
+				
+		try { 
 					
-					resultado = stmt.execute();
-					if (resultado != false) {
+				resultado = stmt.execute(sql);
+					
+				if (resultado != false) {
 						resposta = 1;
-					}else {
+				}else {
 						resposta = 0;
-					}
+				}
 					
-			}finally {
-				generatedKeys = stmt.getGeneratedKeys();
-				Banco.closeConnection(conn);
-				Banco.closePreparedStatement(stmt);
-				Banco.closeResultSet(generatedKeys);
-			}
+			
 					
-		} }catch (SQLException e) {
-			System.out.println("Erro ao inserir nova Peï¿½a.");
+		}catch (SQLException e) {
+			System.out.println("Erro ao inserir nova Peça.");
 			System.out.println("Erro: " + e.getMessage());
+		}finally {
+			Banco.closeConnection(conn);
+			Banco.closePreparedStatement(stmt);
 		}
 		
 
