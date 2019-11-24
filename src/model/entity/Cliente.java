@@ -7,6 +7,7 @@ public class Cliente {
 	private String telefone;
 	private Carro carro;
 	private int idCliente;
+	private int idCarro;
 	
 	public Cliente(String nome, String cpf, String telefone, Carro carro) {
 		super();
@@ -59,6 +60,14 @@ public class Cliente {
 
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
+	}
+
+	public int getIdCarro() {
+		return idCarro;
+	}
+
+	public void setIdCarro(int idCarro) {
+		this.idCarro = idCarro;
 	}
 	
 	

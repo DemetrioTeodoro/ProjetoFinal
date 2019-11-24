@@ -11,10 +11,11 @@ public class Orcamento {
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
 	private Mecanico mecanico;
-	private Carro carro;
+	private Cliente cliente;
 	private Situacao situacao;
 	private Servico servico;
 	private int idOrcamento;
+	private int idCliente;
 	
 
 	public Orcamento() {
@@ -78,12 +79,12 @@ public class Orcamento {
 		this.mecanico = mecanico;
 	}
 
-	public Carro getCarro() {
-		return carro;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setCarro(Carro carro) {
-		this.carro = carro;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Situacao getSituacao() {
@@ -108,6 +109,14 @@ public class Orcamento {
 
 	public void setIdOrcamento(int idOrcamento) {
 		this.idOrcamento = idOrcamento;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
 	
 	
