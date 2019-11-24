@@ -14,6 +14,7 @@ public class Peca {
 	private int quantida;
 	private int idPeca;
 	private int idItempeca;  
+
 	
 	public Peca() {
 		super();
@@ -92,6 +93,8 @@ public class Peca {
 	public void setIdItempeca(int idItempeca) {
 		this.idItempeca = idItempeca;
 	}
+
+
 	
 	
 	

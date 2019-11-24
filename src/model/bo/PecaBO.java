@@ -12,7 +12,12 @@ public class PecaBO {
 	PecaDAO pecaDAO = new PecaDAO();
 
 	public Peca cadastrarPecaBO(Peca peca) {
-		return pecaDAO.cadastrar(peca);
+		 pecaDAO.cadastrar(peca);
+		 if (peca.getIdPeca() != 0) {
+			 pecaDAO.cadastrarItemPeca(peca);
+			
+		}
+		 return peca;
 	}
 
 	public Peca consultarPecaBO(Peca peca) {

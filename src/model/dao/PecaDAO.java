@@ -35,42 +35,17 @@ public class PecaDAO implements BaseDAO<Peca> {
 			if(generatedKeys.next()) {
 				int idGerado = generatedKeys.getInt(1);
 				peca.setIdPeca(idGerado);
-			
-			//Adiciona Item Peï¿½a
-				sql = "INSERT INTO ITEM_PECA (IDPECA, QUANTIDADE, VALORCOMPRA, VALORVENDA, DATAENTRADA, DATASAIDA ) "
-						+ "VALUES (?,?,?,?,?,?)";
-				stmt = Banco.getPreparedStatement(conn, sql, 
-						PreparedStatement.RETURN_GENERATED_KEYS);
-				try { 
-					stmt.setInt(1, peca.getIdPeca());
-					stmt.setInt(2, peca.getQuantida()); 
-					stmt.setDouble(3, peca.getValCompra());
-					stmt.setDouble(4, peca.getValVenda());
-					stmt.setDate(5, Date.valueOf(peca.getDataEntrada()));
-					stmt.setDate(6, Date.valueOf(peca.getDataSaida()));
-					
-					stmt.execute();
-				
-			
+			}
+			}catch (SQLException e) {
+				System.out.println("Erro ao inserir nova Peça.");
+				System.out.println("Erro: " + e.getMessage());
 				
 			}finally {
-				generatedKeys = stmt.getGeneratedKeys();
-				if(generatedKeys.next()) {
-					idGerado = generatedKeys.getInt(1);
-					peca.setIdItempeca(idGerado); 
-				}
 				Banco.closeConnection(conn);
-				Banco.closePreparedStatement(stmt);
-				Banco.closeResultSet(generatedKeys);
+				Banco.closePreparedStatement(stmt);		
 			}
-					
-		} }catch (SQLException e) {
-			System.out.println("Erro ao inserir nova Peça.");
-			System.out.println("Erro: " + e.getMessage());
-		}
+		return peca;	
 		
-
-		return peca;
 		}
 	
 
@@ -229,4 +204,40 @@ public class PecaDAO implements BaseDAO<Peca> {
 
 	
 	}
+
+
+	public Peca cadastrarItemPeca(Peca peca) {
+		Connection conn = Banco.getConnection();
+		String sql = "INSERT INTO ITEM_PECA (IDPECA, QUANTIDADE, VALORCOMPRA, VALORVENDA, DATAENTRADA, DATASAIDA) "
+				+ "VALUES (?,?,?,?,?,?)";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		
+		try {
+			stmt.setInt(1, peca.getIdPeca());
+			stmt.setInt(2, peca.getQuantida()); 
+			stmt.setDouble(3, peca.getValCompra());
+			stmt.setDouble(4, peca.getValVenda());
+			stmt.setDate(5, Date.valueOf(peca.getDataEntrada()));
+			stmt.setDate(6, Date.valueOf(peca.getDataSaida()));
+			
+			
+			stmt.execute();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if(generatedKeys.next()) {
+				int idGerado = generatedKeys.getInt(1);
+				peca.setIdItempeca(idGerado);
+			}
+			}catch (SQLException e) {
+				System.out.println("Erro ao inserir nova Peça.");
+				System.out.println("Erro: " + e.getMessage());
+				
+			}finally {
+				Banco.closeConnection(conn);
+				Banco.closePreparedStatement(stmt);		
+			}
+		return peca;	
+		
+		}
 }
