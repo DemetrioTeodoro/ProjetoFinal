@@ -3,6 +3,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -67,8 +68,8 @@ public class PainelCadastroPeca extends JPanel {
 				peca.setValCompra(Double.parseDouble(txtValorCompra.getText()));
 				peca.setValVenda(Double.parseDouble(txtValorVenda.getText()));
 				peca.setQuantida(Integer.parseInt(txtQuantidade.getText()));
-				peca.setDataEntrada((Date) format.parse(txtDtEntrada.getText()));
-				peca.setDataSaida((Date) format.parse(txtDtSaida.getText()));
+				peca.setDataEntrada(LocalDate.parse((txtDtEntrada.getText()), format));
+				peca.setDataSaida(LocalDate.parse((txtDtSaida.getText()),format));
 				
 				controller.cadastrarPeca(peca);
 				limparCampos();

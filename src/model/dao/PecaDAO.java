@@ -5,12 +5,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import model.entity.Peca;
 
 
 public class PecaDAO implements BaseDAO<Peca> {
+	
+	DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	@Override
 	public Peca cadastrar(Peca peca) {
@@ -42,8 +46,8 @@ public class PecaDAO implements BaseDAO<Peca> {
 					stmt.setInt(2, peca.getQuantida()); 
 					stmt.setDouble(3, peca.getValCompra());
 					stmt.setDouble(4, peca.getValVenda());
-					stmt.setDate(5, (Date) peca.getDataEntrada());
-					stmt.setDate(6, (Date) peca.getDataSaida());
+					stmt.setDate(5, Date.valueOf(peca.getDataEntrada()));
+					stmt.setDate(6, Date.valueOf(peca.getDataSaida()));
 					
 					stmt.execute();
 				
@@ -93,8 +97,8 @@ public class PecaDAO implements BaseDAO<Peca> {
 			pecs.setQuantida(rs.getInt("QUANTIDADE"));
 			pecs.setValCompra(rs.getDouble("VALORCOMPRA"));
 			pecs.setValVenda(rs.getDouble("VALORVENDA"));
-			pecs.setDataEntrada(rs.getDate("DATAENTRADA"));
-			pecs.setDataSaida(rs.getDate("DATASAIDA"));
+			pecs.setDataEntrada(LocalDate.parse((CharSequence) rs.getDate("DATAENTRADA"), formatador));
+			pecs.setDataSaida(LocalDate.parse((CharSequence) rs.getDate("DATASAIDA"), formatador));
 					
 			stmt.execute();
 					
@@ -128,8 +132,8 @@ public class PecaDAO implements BaseDAO<Peca> {
 					stmt.setInt(2, peca.getQuantida());
 					stmt.setDouble(3, peca.getValCompra());
 					stmt.setDouble(4, peca.getValVenda());
-					stmt.setDate(4, (Date) peca.getDataEntrada());
-					stmt.setDate(4, (Date) peca.getDataSaida());
+					stmt.setDate(4, Date.valueOf(peca.getDataEntrada()));
+					stmt.setDate(4, Date.valueOf(peca.getDataSaida()));
 					stmt.setInt(5, peca.getIdPeca());
 					
 					stmt.executeUpdate();
@@ -213,8 +217,8 @@ public class PecaDAO implements BaseDAO<Peca> {
 				p.setNomePeca(result.getString("P.NOME"));
 				p.setValVenda(result.getDouble("I.VALORVENDA"));
 				p.setValCompra(result.getDouble("I.VALORCOMPRA"));
-				p.setDataEntrada(result.getDate("I.DATAENTRADA"));
-				p.setDataSaida(result.getDate("I.DATASAIDA"));
+				p.setDataEntrada(LocalDate.parse((CharSequence) result.getDate("I.DATAENTRADA"), formatador));
+				p.setDataSaida(LocalDate.parse((CharSequence) result.getDate("I.DATASAIDA"), formatador));
 				p.setQuantida(result.getInt("I.QUANTIDADE"));
 				pecas.add(p);
 			}

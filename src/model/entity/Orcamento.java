@@ -1,6 +1,6 @@
 package model.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Orcamento {
 	
@@ -8,8 +8,8 @@ public class Orcamento {
 	private String descricao;
 	private double valorPeca;
 	private double valorMaoObra;
-	private Date dataInicio;
-	private Date dataFinal;
+	private LocalDate dataInicio;
+	private LocalDate dataFinal;
 	private Mecanico mecanico;
 	private Carro carro;
 	private Situacao situacao;
@@ -54,19 +54,19 @@ public class Orcamento {
 		this.valorMaoObra = valorMaoObra;
 	}
 
-	public Date getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDataFinal() {
+	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
 
-	public void setDataFinal(Date dataFinal) {
+	public void setDataFinal(LocalDate dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 

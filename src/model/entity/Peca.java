@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Peca {
@@ -8,8 +9,8 @@ public class Peca {
 	private String codigo;
 	private double valCompra;
 	private double valVenda;
-	private Date dataEntrada;
-	private Date dataSaida;
+	private LocalDate dataEntrada;
+	private LocalDate dataSaida;
 	private int quantida;
 	private int idPeca;
 	private int idItempeca;  
@@ -52,19 +53,19 @@ public class Peca {
 		this.valVenda = valVenda;
 	}
 
-	public Date getDataEntrada() {
+	public LocalDate getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(Date dataEntrada) {
+	public void setDataEntrada(LocalDate dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public Date getDataSaida() {
+	public LocalDate getDataSaida() {
 		return dataSaida;
 	}
 
-	public void setDataSaida(Date dataSaida) {
+	public void setDataSaida(LocalDate dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 
