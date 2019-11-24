@@ -65,7 +65,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 			}
 					
 		} }catch (SQLException e) {
-			System.out.println("Erro ao inserir nova Peï¿½a.");
+			System.out.println("Erro ao inserir nova Peça.");
 			System.out.println("Erro: " + e.getMessage());
 		}
 		
@@ -147,7 +147,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 			
 					
 		 }catch (SQLException e) {
-			System.out.println("Erro ao inserir nova Peï¿½a.");
+			System.out.println("Erro ao inserir nova Peça.");
 			System.out.println("Erro: " + e.getMessage());
 		}finally {
 			Banco.closeConnection(conn);
