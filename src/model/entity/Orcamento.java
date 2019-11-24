@@ -10,25 +10,12 @@ public class Orcamento {
 	private double valorMaoObra;
 	private Date dataInicio;
 	private Date dataFinal;
-	private Mecanico[] mecanicos;
-	private Carro[] carros;
-	private Situacao[] situacoes;
-	private Servico[] servicos;
+	private Mecanico mecanico;
+	private Carro carro;
+	private Situacao situacao;
+	private Servico servico;
+	private int idOrcamento;
 	
-	public Orcamento(int numeroOrcamento, String descricao, double valorPeca, double valorMaoObra, Date dataInicio,
-			Date dataFinal, Mecanico[] mecanicos, Carro[] carros, Situacao[] situacoes, Servico[] servicos) {
-		super();
-		this.numeroOrcamento = numeroOrcamento;
-		this.descricao = descricao;
-		this.valorPeca = valorPeca;
-		this.valorMaoObra = valorMaoObra;
-		this.dataInicio = dataInicio;
-		this.dataFinal = dataFinal;
-		this.mecanicos = mecanicos;
-		this.carros = carros;
-		this.situacoes = situacoes;
-		this.servicos = servicos;
-	}
 
 	public Orcamento() {
 		super();
@@ -83,36 +70,46 @@ public class Orcamento {
 		this.dataFinal = dataFinal;
 	}
 
-	public Mecanico[] getMecanicos() {
-		return mecanicos;
+	public Mecanico getMecanico() {
+		return mecanico;
 	}
 
-	public void setMecanicos(Mecanico[] mecanicos) {
-		this.mecanicos = mecanicos;
+	public void setMecanico(Mecanico mecanico) {
+		this.mecanico = mecanico;
 	}
 
-	public Carro[] getCarros() {
-		return carros;
+	public Carro getCarro() {
+		return carro;
 	}
 
-	public void setCarros(Carro[] carros) {
-		this.carros = carros;
+	public void setCarro(Carro carro) {
+		this.carro = carro;
 	}
 
-	public Situacao[] getSituacoes() {
-		return situacoes;
+	public Situacao getSituacao() {
+		return situacao;
 	}
 
-	public void setSituacoes(Situacao[] situacoes) {
-		this.situacoes = situacoes;
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
 	}
 
-	public Servico[] getServicos() {
-		return servicos;
+	public Servico getServico() {
+		return servico;
 	}
 
-	public void setServicos(Servico[] servicos) {
-		this.servicos = servicos;
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
+
+	public int getIdOrcamento() {
+		return idOrcamento;
+	}
+
+	public void setIdOrcamento(int idOrcamento) {
+		this.idOrcamento = idOrcamento;
+	}
+	
+	
 	
 }

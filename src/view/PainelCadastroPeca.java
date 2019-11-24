@@ -60,6 +60,7 @@ public class PainelCadastroPeca extends JPanel {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+	
 				Peca peca = new Peca();
 				peca.setNomePeca(txtNmPeca.getText());
 				peca.setCodigo(txtCdPeca.getText());
@@ -70,6 +71,7 @@ public class PainelCadastroPeca extends JPanel {
 				peca.setDataSaida((Date) format.parse(txtDtSaida.getText()));
 				
 				controller.cadastrarPeca(peca);
+				limparCampos();
 			}
 		});
 		
@@ -79,6 +81,7 @@ public class PainelCadastroPeca extends JPanel {
 				setVisible(false);
 			}
 		});
+			
 		
 		txtValorVenda = new JTextField();
 		txtValorVenda.setColumns(10);
@@ -178,6 +181,21 @@ public class PainelCadastroPeca extends JPanel {
 					.addGap(280))
 		);
 		setLayout(groupLayout);
-
+		
 	}
+
+	private void limparCampos() {
+		txtNmPeca.setText("");
+		txtCdPeca.setText("");
+		txtValorCompra.setText("");
+		txtValorVenda.setText("");
+		txtQuantidade.setText("");
+		txtDtEntrada.setText("");
+		txtDtSaida.setText("");
+		
+	}
+		
+	
 }
+
+

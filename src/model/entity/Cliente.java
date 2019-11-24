@@ -5,12 +5,15 @@ public class Cliente {
 	private String nome;
 	private String cpf;
 	private String telefone;
+	private Carro carro;
+	private int idCliente;
 	
-	public Cliente(String nome, String cpf, String telefone) {
+	public Cliente(String nome, String cpf, String telefone, Carro carro) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
+		this.carro = carro;
 	}
 
 	public Cliente() {
@@ -41,5 +44,23 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	public Carro getCarro() {
+		return carro;
+	}
+
+	public void setCarro(Carro carro) {
+		this.carro = carro;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+	
+	
 	
 }

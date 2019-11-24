@@ -27,7 +27,7 @@ public class PecaBO {
 		return pecaDAO.deletar(id);
 	}
 
-	public List<Peca> listarPecas() {
+	public ArrayList<Peca> listarPecas() {
 		ArrayList<Peca> pecas = pecaDAO.listarTodos();
 		return pecas;
 	}

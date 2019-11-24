@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.bo.PecaBO;
 import model.entity.Peca;
 
@@ -31,5 +33,12 @@ public class ControllerPeca {
 		PecaBO pecaBO = new PecaBO();
 		pecaBO.deletarPecaBO(id);
 		return msg;
+	}
+
+	public ArrayList<Peca> listarPecas() {
+		String msg = null;
+		PecaBO pecaBO = new PecaBO();
+		return pecaBO.listarPecas();
+		
 	}
 }

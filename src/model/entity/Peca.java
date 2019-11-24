@@ -19,15 +19,6 @@ public class Peca {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Peca(String nomePeca, String codigo, double valCompra, double valVenda, Date dataEntrada, int quantida) {
-		super();
-		this.nomePeca = nomePeca;
-		this.codigo = codigo;
-		this.valCompra = valCompra;
-		this.valVenda = valVenda;
-		this.dataEntrada = dataEntrada;
-		this.quantida = quantida;
-	}
 
 	public String getNomePeca() {
 		return nomePeca;

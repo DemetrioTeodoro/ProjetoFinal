@@ -7,16 +7,17 @@ public class Carro {
 	private String placa;
 	private String cor;
 	private String ano;
-	private Cliente[] clientes;
+	private int idCarro;
 	
-	public Carro(String marca, String modelo, String placa, String cor, String ano, Cliente[] clientes) {
+	
+	public Carro(String marca, String modelo, String placa, String cor, String ano) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
 		this.placa = placa;
 		this.cor = cor;
 		this.ano = ano;
-		this.clientes = clientes;
+		
 	}
 
 	public Carro() {
@@ -64,12 +65,14 @@ public class Carro {
 		this.ano = ano;
 	}
 
-	public Cliente[] getClientes() {
-		return clientes;
+	public int getIdCarro() {
+		return idCarro;
 	}
 
-	public void setClientes(Cliente[] clientes) {
-		this.clientes = clientes;
+	public void setIdCarro(int idCarro) {
+		this.idCarro = idCarro;
 	}
+
+	
 	
 }
