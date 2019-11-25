@@ -7,10 +7,10 @@ public class OrcamentoBO {
 
 	public Orcamento cadastrarOrcamentoBO(Orcamento orcamento) {
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		orcamentoDAO.cadastrarCarro(orcamento);
-		if (orcamento.getCliente().getCarro().getIdCarro() != 0) {
-			orcamentoDAO.cadastrarCliente(orcamento);
-			if (orcamento.getCliente().getIdCliente() !=0) {
+		orcamentoDAO.cadastrarCliente(orcamento);
+		if (orcamento.getCliente().getIdCliente() != 0) {
+			orcamentoDAO.cadastrarCarro(orcamento);
+			if (orcamento.getCliente().getCarro().getIdCarro() !=0) {
 				orcamentoDAO.cadastrar(orcamento);
 			}
 			

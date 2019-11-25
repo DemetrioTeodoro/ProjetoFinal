@@ -8,6 +8,7 @@ public class Carro {
 	private String cor;
 	private String ano;
 	private int idCarro;
+
 	
 	
 	public Carro(String marca, String modelo, String placa, String cor, String ano) {
@@ -72,6 +73,8 @@ public class Carro {
 	public void setIdCarro(int idCarro) {
 		this.idCarro = idCarro;
 	}
+
+	
 
 	
 	
