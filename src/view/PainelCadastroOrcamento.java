@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControllerMecanico;
 import controller.ControllerOrcamento;
 import controller.ControllerServico;
 import controller.ControllerSituacao;
@@ -39,7 +40,6 @@ public class PainelCadastroOrcamento extends JPanel {
 	private JFormattedTextField txtCPF;
 	private JTextField txtModelo;
 	private JTextField txtPlaca;
-	private JTextField txtMecanico;
 	private JTextField txtDataSaida;
 	private JTextField txtDtEntrada;
 	private JTextField txtMarca;
@@ -58,7 +58,7 @@ public class PainelCadastroOrcamento extends JPanel {
 	public PainelCadastroOrcamento() {
 		
 		JLabel lblCadastroOrcamento = new JLabel("Cadastro Or\u00E7amento");
-		lblCadastroOrcamento.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
+		lblCadastroOrcamento.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblNomeCliente = new JLabel("Nome do Cliente:");
 		
@@ -132,9 +132,6 @@ public class PainelCadastroOrcamento extends JPanel {
 		
 		JLabel lblMecanico = new JLabel("Mecanico:");
 		
-		txtMecanico = new JTextField();
-		txtMecanico.setColumns(10);
-		
 		JLabel lblPeca = new JLabel("Pe\u00E7a:");
 		
 		JComboBox cbPeca = new JComboBox();
@@ -187,17 +184,22 @@ public class PainelCadastroOrcamento extends JPanel {
 		JComboBox cbServico = new JComboBox(servicos.toArray());
 		
 		table = new JTable();
+		
+		ControllerMecanico controllerMecanico = new ControllerMecanico();
+		ArrayList<String> mecanicos = controllerMecanico.consultarMecanico();
+		JComboBox cbMecanico = new JComboBox(mecanicos.toArray());
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(149)
 							.addComponent(btnFechar)
 							.addGap(427)
 							.addComponent(btnSalvar))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(88)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblPlaca)
@@ -213,35 +215,35 @@ public class PainelCadastroOrcamento extends JPanel {
 								.addComponent(lblMecanico))
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtMecanico, GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
-								.addComponent(txtDtEntrada, 551, 551, Short.MAX_VALUE)
-								.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(txtDataSaida, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(txtPlaca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+											.addComponent(txtAno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(txtModelo, 147, 147, 147)
-												.addComponent(txtPlaca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-											.addGap(50)
-											.addComponent(lblCor)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addComponent(txtDataSaida, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addGap(208))
-								.addComponent(txtMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtAno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtDescricao, GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
-								.addComponent(cbServico, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
-								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(cbPeca, Alignment.LEADING, 0, 274, Short.MAX_VALUE)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(cbSituacao, 0, 274, Short.MAX_VALUE)))
-									.addGap(18)
-									.addComponent(btnAdd)
-									.addGap(204))
-								.addComponent(table, GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+												.addComponent(txtMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+													.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(txtModelo, 147, 147, 147)
+														.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+														.addComponent(lblCor)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(txtCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addGap(208))
+													.addComponent(txtDescricao, GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+													.addComponent(table, GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+													.addGroup(groupLayout.createSequentialGroup()
+														.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+															.addComponent(cbPeca, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+															.addComponent(cbSituacao, 0, 278, Short.MAX_VALUE))
+														.addGap(18)
+														.addComponent(btnAdd))
+													.addComponent(txtDtEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(cbMecanico, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(cbServico, Alignment.LEADING, 0, 274, Short.MAX_VALUE)))))
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(67)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblCpf)
@@ -249,20 +251,23 @@ public class PainelCadastroOrcamento extends JPanel {
 								.addComponent(lblTelefone))
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtCPF, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtTelefone, 552, 552, 552)
-								.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addGap(326)
-							.addComponent(lblCadastroOrcamento, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(txtTelefone, Alignment.LEADING)
+									.addComponent(txtCPF, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+								.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE))
+							.addGap(78)))
 					.addGap(170))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(311)
+					.addComponent(lblCadastroOrcamento, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(398, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+					.addGap(39)
 					.addComponent(lblCadastroOrcamento)
-					.addGap(62)
+					.addGap(36)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNomeCliente)
 						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -272,14 +277,14 @@ public class PainelCadastroOrcamento extends JPanel {
 						.addComponent(txtCPF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTelefone)
-						.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTelefone))
 					.addGap(7)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblModelo)
-						.addComponent(txtModelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblCor)
-						.addComponent(txtCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtModelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPlaca)
@@ -289,10 +294,10 @@ public class PainelCadastroOrcamento extends JPanel {
 						.addComponent(lblMarca)
 						.addComponent(txtMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblAno)
 						.addComponent(txtAno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(13)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblDescricao)
 						.addComponent(txtDescricao, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
@@ -302,8 +307,8 @@ public class PainelCadastroOrcamento extends JPanel {
 						.addComponent(cbServico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtMecanico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMecanico))
+						.addComponent(lblMecanico)
+						.addComponent(cbMecanico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblDataEntrada)
@@ -327,7 +332,7 @@ public class PainelCadastroOrcamento extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSalvar)
 						.addComponent(btnFechar))
-					.addContainerGap(27, Short.MAX_VALUE))
+					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 

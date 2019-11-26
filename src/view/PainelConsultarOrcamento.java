@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
 
 public class PainelConsultarOrcamento extends JPanel {
 	private JTextField textNomeCliente;
@@ -24,6 +25,7 @@ public class PainelConsultarOrcamento extends JPanel {
 	public PainelConsultarOrcamento() {
 		
 		JLabel lblConsultaOrcamento = new JLabel("Consulta Or\u00E7amento");
+		lblConsultaOrcamento.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblNomeDoCliente = new JLabel("Nome do Cliente:");
 		
@@ -56,7 +58,13 @@ public class PainelConsultarOrcamento extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(59)
+							.addGap(265)
+							.addComponent(btnFechar))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(47)
+							.addComponent(table, GroupLayout.PREFERRED_SIZE, 539, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(77)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblAutomovel)
@@ -73,22 +81,16 @@ public class PainelConsultarOrcamento extends JPanel {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(textMecanico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(44)
-							.addComponent(table, GroupLayout.PREFERRED_SIZE, 539, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(265)
-							.addComponent(btnFechar))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(241)
+							.addGap(217)
 							.addComponent(lblConsultaOrcamento)))
-					.addContainerGap(47, Short.MAX_VALUE))
+					.addContainerGap(95, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+					.addGap(48)
 					.addComponent(lblConsultaOrcamento)
-					.addGap(29)
+					.addGap(41)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNomeDoCliente)
 						.addComponent(textNomeCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -101,9 +103,9 @@ public class PainelConsultarOrcamento extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblMecanico)
 						.addComponent(textMecanico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addGap(36)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
 					.addComponent(btnFechar)
 					.addContainerGap())
 		);
