@@ -19,7 +19,7 @@ public class PainelComboBoxOpcaoCadastro extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelComboBoxOpcaoCadastro() {
-		String[] opcoes = {TelaPrincipal.OPCAO_SELECIONE,"    Orçamento","     Peça"};
+		String[] opcoes = {TelaPrincipal2.OPCAO_SELECIONE,"    Orçamento","     Peça"};
 
 		JLabel lblOpcaoDeCadastros = new JLabel("Op\u00E7\u00E3o de Cadastros");
 

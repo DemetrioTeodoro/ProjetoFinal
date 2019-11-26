@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaPrincipal2 extends JFrame {
 
+	public static final String OPCAO_SELECIONE = "   --Selecione--";
 	private JPanel contentPane;
 	private JPanel painelDireito = new JPanel();
 	private JPanel painelEsquerdo = new JPanel();

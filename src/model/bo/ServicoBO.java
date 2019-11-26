@@ -1,16 +1,14 @@
 package model.bo;
 
+import java.util.ArrayList;
+
 import model.dao.ServicoDAO;
-import model.entity.Servico;
 
 public class ServicoBO {
 	
-	ServicoDAO servicoDAO = new ServicoDAO();
-
-	public Servico consultarServico(Servico servico) {
-		return servicoDAO.consultar(servico);
-		// TODO Auto-generated method stub
-		
+	public ArrayList<String> consultarServico() {
+		ServicoDAO servicoDAO = new ServicoDAO();
+		return servicoDAO.consultar();
 	}
 
 }

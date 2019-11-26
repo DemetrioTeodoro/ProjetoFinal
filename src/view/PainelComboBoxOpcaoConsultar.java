@@ -16,7 +16,7 @@ public class PainelComboBoxOpcaoConsultar extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelComboBoxOpcaoConsultar() {
-		String[] opcoes = {TelaPrincipal.OPCAO_SELECIONE,"    Orçamento","     Peça"};
+		String[] opcoes = {TelaPrincipal2.OPCAO_SELECIONE,"    Orçamento","     Peça"};
 		
 		JLabel lblOpcaoDeConsulta = new JLabel("Op\u00E7\u00E3o de Consulta");
 		

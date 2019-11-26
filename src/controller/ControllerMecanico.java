@@ -1,16 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.bo.MecanicoBO;
-import model.entity.Mecanico;
 
 public class ControllerMecanico {
 	
-MecanicoBO mecanicoBO = new MecanicoBO();
-	
-	public String consultarMecanico(Mecanico mecanico) {
-		String msg = null;		
-		mecanicoBO.consultarMecanico(mecanico);
-		return msg;
+	public ArrayList<String> consultarMecanico() {
+		MecanicoBO mecanicoBO = new MecanicoBO();
+		return mecanicoBO.consultarMecanico();
 	}
 	
 

@@ -22,7 +22,6 @@ import javax.swing.SpringLayout;
 public class TelaPrincipal{
 
 	
-	public static final String OPCAO_SELECIONE = "    --Selecione--";
 	public JFrame frame;
 	private JPanel painelEsquerdo;
 	private JPanel painelDireito;
