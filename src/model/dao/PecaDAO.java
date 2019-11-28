@@ -69,7 +69,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 			pecs.setNomePeca(rs.getString("NOMEPECA")); 
 			pecs.setCodigo(rs.getString("CODIGO"));
 			pecs.setIdPeca(rs.getInt("IDPECA"));
-			pecs.setQuantida(rs.getInt("QUANTIDADE"));
+			pecs.setQuantidade(rs.getInt("QUANTIDADE"));
 			pecs.setValCompra(rs.getDouble("VALORCOMPRA"));
 			pecs.setValVenda(rs.getDouble("VALORVENDA"));
 			pecs.setDataEntrada(LocalDate.parse((CharSequence) rs.getDate("DATAENTRADA"), formatador));
@@ -104,7 +104,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 				try { 
 					
 					stmt.setInt(1, peca.getIdPeca());
-					stmt.setInt(2, peca.getQuantida());
+					stmt.setInt(2, peca.getQuantidade());
 					stmt.setDouble(3, peca.getValCompra());
 					stmt.setDouble(4, peca.getValVenda());
 					stmt.setDate(4, Date.valueOf(peca.getDataEntrada()));
@@ -194,7 +194,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 				p.setValCompra(result.getDouble("I.VALORCOMPRA"));
 				p.setDataEntrada(LocalDate.parse((CharSequence) result.getDate("I.DATAENTRADA"), formatador));
 				p.setDataSaida(LocalDate.parse((CharSequence) result.getDate("I.DATASAIDA"), formatador));
-				p.setQuantida(result.getInt("I.QUANTIDADE"));
+				p.setQuantidade(result.getInt("I.QUANTIDADE"));
 				pecas.add(p);
 			}
 		} catch (SQLException e) {
@@ -215,7 +215,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 		
 		try {
 			stmt.setInt(1, peca.getIdPeca());
-			stmt.setInt(2, peca.getQuantida()); 
+			stmt.setInt(2, peca.getQuantidade()); 
 			stmt.setDouble(3, peca.getValCompra());
 			stmt.setDouble(4, peca.getValVenda());
 			stmt.setDate(5, Date.valueOf(peca.getDataEntrada()));

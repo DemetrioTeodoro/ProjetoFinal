@@ -39,6 +39,7 @@ public class TelaPrincipal2 extends JFrame {
 			public void run() {
 				try {
 					TelaPrincipal2 frame = new TelaPrincipal2();
+					frame.setExtendedState(MAXIMIZED_BOTH);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

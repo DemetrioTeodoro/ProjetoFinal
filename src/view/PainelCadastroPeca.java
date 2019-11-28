@@ -37,7 +37,7 @@ public class PainelCadastroPeca extends JPanel {
 	 */
 	public PainelCadastroPeca() {
 		
-		JLabel lblCadastroDePeca = new JLabel("Cadastro de Peca");
+		JLabel lblCadastroDePeca = new JLabel("Cadastro de Pe\u00E7a");
 		lblCadastroDePeca.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblNomeDaPeca = new JLabel("Nome da Peca:");
@@ -69,7 +69,7 @@ public class PainelCadastroPeca extends JPanel {
 				peca.setCodigo(txtCdPeca.getText());
 				peca.setValCompra(Double.parseDouble(txtValorCompra.getText()));
 				peca.setValVenda(Double.parseDouble(txtValorVenda.getText()));
-				peca.setQuantida(Integer.parseInt(txtQuantidade.getText()));
+				peca.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
 				peca.setDataEntrada(LocalDate.parse((txtDtEntrada.getText()), format));
 				peca.setDataSaida(LocalDate.parse((txtDtSaida.getText()),format));
 				
@@ -102,14 +102,14 @@ public class PainelCadastroPeca extends JPanel {
 		txtDtSaida.setColumns(10);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(37)
 					.addComponent(btnFechar)
 					.addPreferredGap(ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
 					.addComponent(btnCadastrar)
 					.addGap(176))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(115)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -131,16 +131,16 @@ public class PainelCadastroPeca extends JPanel {
 								.addComponent(lblDtEntrada, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(txtNmPeca, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
 						.addComponent(txtCdPeca)
 						.addComponent(txtValorCompra)
-						.addComponent(txtValorVenda)
+						.addComponent(txtNmPeca, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(txtValorVenda, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
 							.addComponent(txtQuantidade, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
 							.addComponent(txtDtEntrada, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-							.addComponent(txtDtSaida, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(259, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addComponent(txtDtSaida, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)))
+					.addContainerGap(135, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(212)
 					.addComponent(lblCadastroDePeca)
 					.addContainerGap(290, Short.MAX_VALUE))

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -17,13 +18,14 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControllerPeca;
 
 import model.entity.Peca;
+import java.awt.Font;
 
 
 public class PainelConsultarPeca extends JPanel {
 	private JTextField textNome;
 	private JTextField textFabricante;
 	private JTable tblPeca;
-	private String[] colunasTabelaPecas = { "CODIGO"," NOME", "VALORVENDA", "VALORCOMPRA", "DATAENTRADA", "I.DATASAIDA", "QUANTIDADE" };
+	private String[] colunasTabelaPecas = { "CODIGO"," NOME", "VALOR DE VENDA", "VALOR DE COMPRA", "DATA DE ENTRADA", "DATA DE SAIDA", "QUANTIDADE" };
 	private ArrayList<Peca>pecas;
 	
 	/**
@@ -32,6 +34,7 @@ public class PainelConsultarPeca extends JPanel {
 	public PainelConsultarPeca() {
 		
 		JLabel lblConsultarPeca = new JLabel("Consultar Pe\u00E7a");
+		lblConsultarPeca.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblNome = new JLabel("Nome:");
 		
@@ -59,56 +62,79 @@ public class PainelConsultarPeca extends JPanel {
 				atualizarTabelaPecas();
 			}
 		});
+		
+		JButton btnGerarRelatorio = new JButton("Gerar Relat\u00F3rio");
+		btnGerarRelatorio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser jcf = new JFileChooser();
+				jcf.setDialogTitle("Salvar relatório como...");
+				
+				int resultado = jcf.showSaveDialog(null);
+				if (resultado == JFileChooser.APPROVE_OPTION) {
+					String caminhoEscolhido = jcf.getSelectedFile().getAbsolutePath();
+					
+					ControllerPeca controllerPeca = new ControllerPeca();
+					controllerPeca.gerarRelatorio(pecas, caminhoEscolhido);
+				}
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(67)
+					.addGap(150)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblFabricante, Alignment.TRAILING)
 						.addComponent(lblNome, Alignment.TRAILING))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(textFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
-							.addComponent(btnConsultar)
-							.addGap(61))
+						.addComponent(textFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(433, Short.MAX_VALUE))))
+							.addGap(229)
+							.addComponent(btnConsultar)))
+					.addGap(210))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(559, Short.MAX_VALUE)
-					.addComponent(btnFechar)
-					.addGap(56))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(25, Short.MAX_VALUE)
-					.addComponent(tblPeca, GroupLayout.PREFERRED_SIZE, 685, GroupLayout.PREFERRED_SIZE)
-					.addGap(28))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(307)
+					.addGap(311)
 					.addComponent(lblConsultarPeca)
-					.addContainerGap(346, Short.MAX_VALUE))
+					.addContainerGap(415, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGap(86)
+					.addComponent(btnFechar)
+					.addPreferredGap(ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
+					.addComponent(btnGerarRelatorio)
+					.addGap(105))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tblPeca, GroupLayout.PREFERRED_SIZE, 774, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(76, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblConsultarPeca)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap(71, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNome)
+								.addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblFabricante)
+								.addComponent(textFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(0))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(22)
+							.addComponent(lblConsultarPeca)
+							.addGap(30)
+							.addComponent(btnConsultar)))
 					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNome)
-						.addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFabricante)
-						.addComponent(textFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnConsultar))
-					.addGap(42)
 					.addComponent(tblPeca, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
-					.addGap(33)
-					.addComponent(btnFechar)
-					.addContainerGap(66, Short.MAX_VALUE))
+					.addGap(27)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnGerarRelatorio)
+						.addComponent(btnFechar))
+					.addGap(72))
 		);
 		setLayout(groupLayout);
 		
@@ -132,7 +158,7 @@ public class PainelConsultarPeca extends JPanel {
 			novaLinha[3] = String.valueOf(peca.getValCompra());
 			novaLinha[4] = String.valueOf(peca.getDataEntrada());
 			novaLinha[5] = String.valueOf(peca.getDataSaida());
-			novaLinha[6] = String.valueOf(peca.getQuantida());
+			novaLinha[6] = String.valueOf(peca.getQuantidade());
 			
 			model.addRow(novaLinha);
 		}
@@ -142,5 +168,4 @@ public class PainelConsultarPeca extends JPanel {
 		
 		tblPeca.setModel(new DefaultTableModel(new Object[][] { colunasTabelaPecas, }, colunasTabelaPecas));
 	}
-
 }

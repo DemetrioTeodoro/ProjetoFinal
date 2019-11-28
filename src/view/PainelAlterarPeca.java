@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Font;
 
 public class PainelAlterarPeca extends JPanel {
 	private JTextField textNomePeca;
@@ -22,6 +23,7 @@ public class PainelAlterarPeca extends JPanel {
 	public PainelAlterarPeca() {
 		
 		JLabel lblAlterarPeca = new JLabel("Alterar Pe\u00E7a");
+		lblAlterarPeca.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblNomeDaPeca = new JLabel("Nome da Peca:");
 		
@@ -54,41 +56,45 @@ public class PainelAlterarPeca extends JPanel {
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(79, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblNomeDaPeca)
+							.addGap(6)
+							.addComponent(textNomePeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblFabricante)
+							.addGap(6)
+							.addComponent(textNomeFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblValor)
+							.addGap(6)
+							.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblQuantidade)
+							.addGap(6)
+							.addComponent(textQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(17)
+							.addComponent(btnFechar)
+							.addGap(159)
+							.addComponent(btnAlterar)))
+					.addGap(53))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(160)
-					.addComponent(lblAlterarPeca))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
-					.addComponent(lblNomeDaPeca)
-					.addGap(6)
-					.addComponent(textNomePeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
-					.addComponent(lblFabricante)
-					.addGap(6)
-					.addComponent(textNomeFabricante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
-					.addComponent(lblValor)
-					.addGap(6)
-					.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(49)
-					.addComponent(lblQuantidade)
-					.addGap(6)
-					.addComponent(textQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(66)
-					.addComponent(btnFechar)
-					.addGap(159)
-					.addComponent(btnAlterar))
+					.addGap(166)
+					.addComponent(lblAlterarPeca)
+					.addContainerGap(214, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(10)
+					.addGap(26)
 					.addComponent(lblAlterarPeca)
-					.addGap(24)
+					.addGap(36)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNomeDaPeca)
 						.addComponent(textNomePeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -113,7 +119,8 @@ public class PainelAlterarPeca extends JPanel {
 					.addGap(51)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnFechar)
-						.addComponent(btnAlterar)))
+						.addComponent(btnAlterar))
+					.addContainerGap())
 		);
 		setLayout(groupLayout);
 	}

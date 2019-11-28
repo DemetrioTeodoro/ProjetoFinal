@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
 
 public class PainelDeletarOrcamento extends JPanel {
 	private JTextField textNomeCliente;
@@ -24,6 +25,7 @@ public class PainelDeletarOrcamento extends JPanel {
 	public PainelDeletarOrcamento() {
 		
 		JLabel lblConsultaOrcamento = new JLabel("Consulta Or\u00E7amento");
+		lblConsultaOrcamento.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblNomeDoCliente = new JLabel("Nome do Cliente:");
 		
@@ -56,7 +58,13 @@ public class PainelDeletarOrcamento extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(59)
+							.addGap(265)
+							.addComponent(btnFechar))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(84)
+							.addComponent(table, GroupLayout.PREFERRED_SIZE, 539, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(145)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblAutomovel)
@@ -73,22 +81,16 @@ public class PainelDeletarOrcamento extends JPanel {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(textMecanico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(44)
-							.addComponent(table, GroupLayout.PREFERRED_SIZE, 539, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(265)
-							.addComponent(btnFechar))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(241)
+							.addGap(281)
 							.addComponent(lblConsultaOrcamento)))
-					.addContainerGap(47, Short.MAX_VALUE))
+					.addContainerGap(141, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblConsultaOrcamento)
 					.addGap(29)
+					.addComponent(lblConsultaOrcamento)
+					.addGap(26)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNomeDoCliente)
 						.addComponent(textNomeCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -101,9 +103,9 @@ public class PainelDeletarOrcamento extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblMecanico)
 						.addComponent(textMecanico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addGap(28)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
 					.addComponent(btnFechar)
 					.addContainerGap())
 		);

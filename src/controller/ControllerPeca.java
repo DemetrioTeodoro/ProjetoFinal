@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.bo.PecaBO;
 import model.entity.Peca;
+import model.utils.GeradorPlanilhas;
 
 public class ControllerPeca {
 	
@@ -40,5 +41,10 @@ public class ControllerPeca {
 		PecaBO pecaBO = new PecaBO();
 		return pecaBO.listarPecas();
 		
+	}
+
+	public void gerarRelatorio(ArrayList<Peca> pecas, String caminhoEscolhido) {
+		GeradorPlanilhas gerador = new GeradorPlanilhas();
+		gerador.gerarPlanilhasPeca(pecas, caminhoEscolhido);
 	}
 }

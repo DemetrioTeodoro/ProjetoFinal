@@ -7,11 +7,11 @@ public class Peca {
 	
 	private String nomePeca;
 	private String codigo;
-	private double valCompra;
-	private double valVenda;
+	private double valorCompra;
+	private double valorVenda;
 	private LocalDate dataEntrada;
 	private LocalDate dataSaida;
-	private int quantida;
+	private int quantidade;
 	private int idPeca;
 	private int idItempeca;  
 
@@ -39,19 +39,19 @@ public class Peca {
 	}
 
 	public double getValCompra() {
-		return valCompra;
+		return valorCompra;
 	}
 
 	public void setValCompra(double valCompra) {
-		this.valCompra = valCompra;
+		this.valorCompra = valCompra;
 	}
 
 	public double getValVenda() {
-		return valVenda;
+		return valorVenda;
 	}
 
 	public void setValVenda(double valVenda) {
-		this.valVenda = valVenda;
+		this.valorVenda = valVenda;
 	}
 
 	public LocalDate getDataEntrada() {
@@ -70,12 +70,12 @@ public class Peca {
 		this.dataSaida = dataSaida;
 	}
 
-	public int getQuantida() {
-		return quantida;
+	public int getQuantidade() {
+		return quantidade;
 	}
 
-	public void setQuantida(int quantida) {
-		this.quantida = quantida;
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public int getIdPeca() {
@@ -93,13 +93,6 @@ public class Peca {
 	public void setIdItempeca(int idItempeca) {
 		this.idItempeca = idItempeca;
 	}
-
-
-	
-	
-	
-	
-	
 	
 
 }

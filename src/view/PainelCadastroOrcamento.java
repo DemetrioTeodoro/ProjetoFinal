@@ -157,6 +157,7 @@ public class PainelCadastroOrcamento extends JPanel {
 		ControllerSituacao controllerSituacao = new ControllerSituacao();
 		ArrayList<String> situacoes = controllerSituacao.consultarSituacao();
 		JComboBox cbSituacao = new JComboBox(situacoes.toArray());
+		cbSituacao.setSelectedIndex(-1);
 		
 		txtDtEntrada = new JTextField();
 		txtDtEntrada.setColumns(10);
@@ -182,12 +183,14 @@ public class PainelCadastroOrcamento extends JPanel {
 		ControllerServico controllerServico = new ControllerServico();
 		ArrayList<String> servicos = controllerServico.consultarServico();
 		JComboBox cbServico = new JComboBox(servicos.toArray());
+		cbServico.setSelectedIndex(-1);
 		
 		table = new JTable();
 		
 		ControllerMecanico controllerMecanico = new ControllerMecanico();
 		ArrayList<String> mecanicos = controllerMecanico.consultarMecanico();
 		JComboBox cbMecanico = new JComboBox(mecanicos.toArray());
+		cbMecanico.setSelectedIndex(-1);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
