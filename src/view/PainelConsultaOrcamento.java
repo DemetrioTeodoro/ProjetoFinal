@@ -199,8 +199,9 @@ public class PainelConsultaOrcamento extends JPanel {
 			orcamentos = controller.consultarOrcSituacao(filtroSituacao);
 			
 		}
-		else { 
-			orcamentos = controller.listarOrcamentos();
+		if (filtroNome.contentEquals("") && filtroCarro.equals("") && filtroSituacao == -1) {
+			
+			orcamentos = controller.listarOrcamentos();  
 		}
 			
 

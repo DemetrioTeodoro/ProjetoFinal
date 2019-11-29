@@ -1,37 +1,9 @@
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
--- -----------------------------------------------------
--- Schema oficina
--- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema oficina
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `oficina` DEFAULT CHARACTER SET latin1 ;
-USE `mydb` ;
-
--- -----------------------------------------------------
--- Table `oficina`.`mecanico`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `oficina`.`mecanico` (
-  `IDMECANICO` INT(11) NOT NULL AUTO_INCREMENT,
-  `NOME` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`IDMECANICO`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
+USE `oficina` ;
 
 -- -----------------------------------------------------
 -- Table `oficina`.`cliente`
@@ -41,28 +13,32 @@ CREATE TABLE IF NOT EXISTS `oficina`.`cliente` (
   `NOME` VARCHAR(255) NULL DEFAULT NULL,
   `CPF` CHAR(11) NULL DEFAULT NULL,
   `TELEFONE` VARCHAR(13) NULL DEFAULT NULL,
+  `AUTOMOVEL` VARCHAR(255) NULL DEFAULT NULL,
+  `PLACA` CHAR(7) NULL DEFAULT NULL,
   PRIMARY KEY (`IDCLIENTE`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`carro`
+-- Table `oficina`.`carro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`carro` (
-  `IDCARRO` INT NOT NULL,
-  `MARCA` VARCHAR(45) NULL,
-  `MODELO` VARCHAR(45) NULL,
-  `PLACA` CHAR(7) NULL,
+CREATE TABLE IF NOT EXISTS `oficina`.`carro` (
+  `IDCARRO` INT(11) NOT NULL AUTO_INCREMENT,
+  `MARCA` VARCHAR(45) NULL DEFAULT NULL,
+  `MODELO` VARCHAR(45) NULL DEFAULT NULL,
+  `PLACA` CHAR(7) NULL DEFAULT NULL,
+  `COR` VARCHAR(255) NULL DEFAULT NULL,
+  `ANO` VARCHAR(4) NULL DEFAULT NULL,
   `IDCLIENTE` INT(11) NOT NULL,
   PRIMARY KEY (`IDCARRO`),
-  INDEX `fk_carro_cliente_idx` (`IDCLIENTE` ASC) VISIBLE,
   CONSTRAINT `fk_carro_cliente`
     FOREIGN KEY (`IDCLIENTE`)
     REFERENCES `oficina`.`cliente` (`IDCLIENTE`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -71,7 +47,80 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `oficina`.`peca` (
   `IDPECA` INT(11) NOT NULL AUTO_INCREMENT,
   `NOMEPECA` VARCHAR(255) NULL DEFAULT NULL,
+  `CODIGO` VARCHAR(13) NULL DEFAULT NULL,
   PRIMARY KEY (`IDPECA`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `oficina`.`servico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `oficina`.`servico` (
+  `IDSERVICO` INT(11) NOT NULL,
+  `DESERVICO` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`IDSERVICO`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `oficina`.`situacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `oficina`.`situacao` (
+  `IDSITUACAO` INT(11) NOT NULL,
+  `DESITUACAO` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`IDSITUACAO`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `oficina`.`mecanico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `oficina`.`mecanico` (
+  `IDMECANICO` INT(11) NOT NULL AUTO_INCREMENT,
+  `NOME` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`IDMECANICO`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `oficina`.`orcamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `oficina`.`orcamento` (
+  `IDORCAMENTO` INT(11) NOT NULL AUTO_INCREMENT,  
+  `NUORCAMENTO` VARCHAR(45) NULL DEFAULT NULL,
+  `DESCRICAO` VARCHAR(255) NULL DEFAULT NULL,
+  `VALORPECAS` DOUBLE(4,2) NULL DEFAULT NULL,
+  `VALORMAOOBRA` VARCHAR(255) NULL DEFAULT NULL,
+  `DATAINICIO` DATE NULL DEFAULT NULL,
+  `DATAFINAL` DATE NULL DEFAULT NULL,
+  `IDMECANICO` INT(11) NULL DEFAULT NULL,
+  `IDCARRO` INT(11) NOT NULL,
+  `IDSITUACAO` INT(11) NOT NULL,
+  `IDSERVICO` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`IDORCAMENTO`),
+  CONSTRAINT `fk_orcamento_carro1`
+    FOREIGN KEY (`IDCARRO`)
+    REFERENCES `oficina`.`carro` (`IDCARRO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orcamento_servico1`
+    FOREIGN KEY (`IDSERVICO`)
+    REFERENCES `oficina`.`servico` (`IDSERVICO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orcamento_situacao1`
+    FOREIGN KEY (`IDSITUACAO`)
+    REFERENCES `oficina`.`situacao` (`IDSITUACAO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `orcamento_ibfk_3`
+    FOREIGN KEY (`IDMECANICO`)
+    REFERENCES `oficina`.`mecanico` (`IDMECANICO`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -80,98 +129,28 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `oficina`.`item_peca`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `oficina`.`item_peca` (
-  `IDITEMPECA` INT(11) NOT NULL,
-  `NOME` VARCHAR(45) NULL,
-  `VALOR` VARCHAR(45) NULL,
-  `DATAENTRADA` DATE NULL,
-  `DATASAIDA` DATE NULL,
-  `QUANTIDADE` INT NULL,
+  `IDITEMPECA` INT(11) NOT NULL AUTO_INCREMENT,
+  `VALORVENDA` DOUBLE(4,2) NULL DEFAULT NULL,
+  `VALORCOMPRA` DOUBLE(4,2) NULL DEFAULT NULL,
+  `DATAENTRADA` DATE NULL DEFAULT NULL,
+  `DATASAIDA` DATE NULL DEFAULT NULL,
+  `QUANTIDADE` INT(11) NULL DEFAULT NULL,
   `IDPECA` INT(11) NOT NULL,
-  INDEX `fk_item_peca_peca1_idx` (`IDPECA` ASC) VISIBLE,
+  `IDORCAMENTO` INT(11)  NULL,
   PRIMARY KEY (`IDITEMPECA`),
   CONSTRAINT `fk_item_peca_peca1`
     FOREIGN KEY (`IDPECA`)
     REFERENCES `oficina`.`peca` (`IDPECA`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `oficina`.`orcamento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `oficina`.`orcamento` (
-  `IDORCAMENTO` INT(11) NOT NULL AUTO_INCREMENT,
-  `SERVICO` VARCHAR(255) NULL DEFAULT NULL,
-  `DESCRICAO` VARCHAR(255) NULL DEFAULT NULL,
-  `VALOR` DOUBLE(4,2) NULL DEFAULT NULL,
-  `DATAINICIO` DATE NULL DEFAULT NULL,
-  `DATAFINAL` DATE NULL DEFAULT NULL,
-  `SITUACAO` VARCHAR(255) NULL DEFAULT NULL,
-  `IDMECANICO` INT(11) NOT NULL,
-  `IDCARRO` INT(11) NOT NULL,
-  `IDITEMPECA` INT(11) NOT NULL,
-  PRIMARY KEY (`IDORCAMENTO`),
-  INDEX `IDMECANICO` (`IDMECANICO` ASC) VISIBLE,
-  INDEX `fk_orcamento_carro1_idx` (`IDCARRO` ASC) VISIBLE,
-  INDEX `fk_orcamento_item_peca1_idx` (`IDITEMPECA` ASC) VISIBLE,
-  CONSTRAINT `orcamento_ibfk_3`
-    FOREIGN KEY (`IDMECANICO`)
-    REFERENCES `oficina`.`mecanico` (`IDMECANICO`),
-  CONSTRAINT `fk_orcamento_carro1`
-    FOREIGN KEY (`IDCARRO`)
-    REFERENCES `mydb`.`carro` (`IDCARRO`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orcamento_item_peca1`
-    FOREIGN KEY (`IDITEMPECA`)
-    REFERENCES `oficina`.`item_peca` (`IDITEMPECA`)
+  CONSTRAINT `fk_item_peca_orcamento1`
+    FOREIGN KEY (`IDORCAMENTO`)
+    REFERENCES `oficina`.`orcamento` (`IDORCAMENTO`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
-
--- -----------------------------------------------------
--- Table `mydb`.`situacao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`situacao` (
-  `IDSITUACAO` INT NOT NULL,
-  `SOLICITADO` VARCHAR(255) NULL,
-  `EMANDAMENTO` VARCHAR(255) NULL,
-  `FINALIZADO` VARCHAR(255) NULL,
-  `IDORCAMENTO` INT(11) NOT NULL,
-  PRIMARY KEY (`IDSITUACAO`),
-  INDEX `fk_situacao_orcamento1_idx` (`IDORCAMENTO` ASC) VISIBLE,
-  CONSTRAINT `fk_situacao_orcamento1`
-    FOREIGN KEY (`IDORCAMENTO`)
-    REFERENCES `oficina`.`orcamento` (`IDORCAMENTO`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`servico`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`servico` (
-  `IDSERVICO` INT NOT NULL,
-  `PINTURA` VARCHAR(255) NULL,
-  `BALANCEAMENTO` VARCHAR(255) NULL,
-  `TROCAPNEU` VARCHAR(255) NULL,
-  `TROCAOLEO` VARCHAR(255) NULL,
-  `IDORCAMENTO` INT(11) NOT NULL,
-  PRIMARY KEY (`IDSERVICO`),
-  INDEX `fk_servico_orcamento1_idx` (`IDORCAMENTO` ASC) VISIBLE,
-  CONSTRAINT `fk_servico_orcamento1`
-    FOREIGN KEY (`IDORCAMENTO`)
-    REFERENCES `oficina`.`orcamento` (`IDORCAMENTO`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-USE `oficina` ;
 
 -- -----------------------------------------------------
 -- Table `oficina`.`login`
@@ -180,11 +159,35 @@ CREATE TABLE IF NOT EXISTS `oficina`.`login` (
   `IDUSUARIO` INT(11) NOT NULL AUTO_INCREMENT,
   `LOGIN` VARCHAR(255) NULL DEFAULT NULL,
   `SENHA` VARCHAR(255) NULL DEFAULT NULL,
+  `TIPO` CHAR(1) NULL DEFAULT NULL,
   PRIMARY KEY (`IDUSUARIO`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
+INSERT INTO MECANICO (IDMECANICO,NOME) VALUES (0, 'GODOFREDO');
+INSERT INTO MECANICO (IDMECANICO,NOME) VALUES (1, 'JEORGE');
+INSERT INTO MECANICO (IDMECANICO,NOME) VALUES (2, 'LUCAS');
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+INSERT INTO SITUACAO (IDSITUACAO, DESITUACAO) VALUES (0, 'Em Aguardo');
+INSERT INTO SITUACAO (IDSITUACAO, DESITUACAO) VALUES (1, 'Em Andamento');
+INSERT INTO SITUACAO (IDSITUACAO, DESITUACAO) VALUES (2, 'Finalizado');
+
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (0, 'Alinhamento');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (1, 'Troca de Oleo');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (2, 'Troca de Pastilha de Freio');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (3, 'Troca de Parabrisa');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (4, 'Troca de Embreagem');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (5, 'Troca de Disco de Freio');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (6, 'Troca de Para-lama');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (7, 'Troca do Motor de Arranque');
+INSERT INTO SERVICO (IDSERVICO, DESERVICO) VALUES (8, 'Troca de Pecas');
+
+
+
+
+
+
+
+ 
+
+

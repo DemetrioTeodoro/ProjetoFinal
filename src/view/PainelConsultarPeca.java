@@ -27,7 +27,6 @@ import controller.ControllerPeca;
 import model.entity.Peca;
 import java.awt.Font;
 import javax.swing.ListSelectionModel;
-import java.awt.event.MouseAdapter;
 
 
 public class PainelConsultarPeca extends JPanel {
@@ -55,13 +54,6 @@ public class PainelConsultarPeca extends JPanel {
 		textNome.setColumns(10);
 		
 		tblPeca = new JTable();
-		tblPeca.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				PainelAlterarPeca painelAlterarPeca = new PainelAlterarPeca();
-				painelAlterarPeca.setVisible(true);
-			}
-		});
 		tblPeca.setSurrendersFocusOnKeystroke(true);
 		tblPeca.setFillsViewportHeight(true);
 		tblPeca.setCellSelectionEnabled(true);
@@ -125,6 +117,14 @@ public class PainelConsultarPeca extends JPanel {
 				txtCodigoExclusao.setText("");
 				
 				
+				peca = controller.consultarPecaCodigo(codigo);
+				controller.excluirPeca(peca.getIdPeca());
+				peca = controller.consultarPecaCodigo(codigo);
+				controller.excluirPeca(peca.getIdPeca());
+				peca = controller.consultarPecaCodigo(codigo);
+				controller.excluirPeca(peca.getIdPeca());
+				peca = controller.consultarPecaCodigo(codigo);
+				controller.excluirPeca(peca.getIdPeca());
 						
 			}
 		});

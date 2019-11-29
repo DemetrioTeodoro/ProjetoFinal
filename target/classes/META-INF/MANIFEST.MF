@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ubunto
-Build-Jdk: 1.8.0_232-ea
+Built-By: smmac
+Build-Jdk: 1.8.0_231
 Created-By: Maven Integration for Eclipse
 

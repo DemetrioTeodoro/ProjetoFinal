@@ -35,7 +35,7 @@ public class ControllerOrcamento {
 	
 	public String deletarOrcamento(int id) {
 		String msg = null;
-		OrcamentoBO orcamentoBO = new OrcamentoBO();
+		OrcamentoBO orcamentoBO = new OrcamentoBO();  
 		orcamentoBO.deletarOrcamentoBO(id);
 		return msg;
 	}
@@ -48,7 +48,8 @@ public class ControllerOrcamento {
 
 	public ArrayList<Orcamento> consultarOrcNome(String filtroNome) {
 		OrcamentoBO orcamentoBO = new OrcamentoBO();
-		return orcamentoBO.consultarOrcNome(filtroNome);
+		orcamentos = orcamentoBO.consultarOrcNome(filtroNome);
+		return orcamentos;
 	}
 
 	public ArrayList<Orcamento> consultarOrcCarro(String filtroCarro) {
