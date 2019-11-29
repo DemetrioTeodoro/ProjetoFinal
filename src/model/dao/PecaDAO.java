@@ -172,37 +172,62 @@ public class PecaDAO implements BaseDAO<Peca> {
 
 
 	public ArrayList<Peca> listarTodos() {
-		String sql = " SELECT P.CODIGO, P.NOME, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE"
-				+ " FROM PECA"
-				+ "INNER JOIN ITEM_PECA ON"
-				+ "P.IDPECA = I.IDPECA";
+		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE"
+				+ " FROM PECA AS P"
+				+ " INNER JOIN ITEM_PECA AS I ON"
+				+ " P.IDPECA = I.IDPECA";
 
 		Connection conexao = Banco.getConnection();
-		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
 		ArrayList<Peca> pecas = new ArrayList<Peca>();
-
+		
 		try {
-			ResultSet result = prepStmt.executeQuery();
-
-			while (result.next()) {
-				Peca p = new Peca();
-
-				// Obtendo valores pelo NOME DA COLUNA
-				p.setCodigo(result.getString("P.CODIGO"));
-				p.setNomePeca(result.getString("P.NOME"));
-				p.setValVenda(result.getDouble("I.VALORVENDA"));
-				p.setValCompra(result.getDouble("I.VALORCOMPRA"));
-				p.setDataEntrada(LocalDate.parse((CharSequence) result.getDate("I.DATAENTRADA"), formatador));
-				p.setDataSaida(LocalDate.parse((CharSequence) result.getDate("I.DATASAIDA"), formatador));
-				p.setQuantidade(result.getInt("I.QUANTIDADE"));
-				pecas.add(p);
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Peca pecaBuscada = construirDoResultSet(resultadoDaConsulta);
+				pecas.add(pecaBuscada);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar pecas cadastradas ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
 		}
+		
 		return pecas;
+	}
 
-	
+	private Peca construirDoResultSet(ResultSet rs) {
+		Peca pc = null;
+		
+		try {
+			String codigo = rs.getString("CODIGO");
+			String nome = rs.getString("NOMEPECA");
+			double valorCompra = rs.getDouble("VALORCOMPRA");
+			double valorVenda = rs.getDouble("VALORVENDA");
+			LocalDate dataEntrada = (LocalDate.parse((CharSequence) rs.getDate("DATAENTRADA").toString(), formatador));
+			LocalDate dataSaida = (LocalDate.parse((CharSequence) rs.getDate("DATASAIDA").toString(), formatador));
+			int quantidade = rs.getInt("QUANTIDADE");
+			
+			pc = new Peca();
+			pc.setCodigo(codigo);
+			pc.setNomePeca(nome);
+			pc.setValCompra(valorCompra);
+			pc.setValVenda(valorVenda);
+			pc.setDataEntrada(dataEntrada);
+			pc.setDataSaida(dataSaida);
+			pc.setQuantidade(quantidade);
+					
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao construir empregado do ResultSet ");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return pc;
 	}
 
 
