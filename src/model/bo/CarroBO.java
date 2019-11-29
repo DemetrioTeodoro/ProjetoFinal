@@ -22,7 +22,7 @@ public class CarroBO {
 		
 	}
 
-	public int deletarCliente(int id) {
+	public boolean deletarCliente(int id) {
 		return carroDAO.deletar(id);
 		
 	}

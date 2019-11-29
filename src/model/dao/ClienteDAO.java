@@ -25,9 +25,9 @@ public class ClienteDAO implements BaseDAO<Cliente> {
 	}
 
 	@Override
-	public int deletar(int id) {
+	public boolean deletar(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
 	}
 
 	public ArrayList<Cliente> listarTodos() {

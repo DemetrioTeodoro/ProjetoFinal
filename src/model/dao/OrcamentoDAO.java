@@ -57,9 +57,9 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	}
 
 	@Override
-	public int deletar(int id) {
+	public boolean deletar(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
 	}
 
 	public Orcamento cadastrarCarro(Orcamento orcamento) {

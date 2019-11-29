@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import model.entity.Peca;
+
 import java.awt.Font;
 
 public class PainelAlterarPeca extends JPanel {
@@ -16,6 +19,7 @@ public class PainelAlterarPeca extends JPanel {
 	private JTextField textNomeFabricante;
 	private JTextField textValor;
 	private JTextField textQuantidade;
+	Peca peca = new Peca();
 
 	/**
 	 * Create the panel.

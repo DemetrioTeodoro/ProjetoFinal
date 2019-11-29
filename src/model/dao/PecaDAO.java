@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -134,40 +135,32 @@ public class PecaDAO implements BaseDAO<Peca> {
 	}
 
 	@Override
-	public int deletar(int id) {
-		Connection conn = Banco.getConnection();
-		String sql = "DELETE * FROM ITEM_PECA WHERE IDPECA = " + id;
-		PreparedStatement stmt = Banco.getPreparedStatement(conn);
-		ResultSet rs = null;
-		Peca peca = new Peca();
-		boolean resultado = false;
-		int resposta = 0;
-		
-			//Consulta Item Peça
-				
-				
-		try { 
-					
-				resultado = stmt.execute(sql);
-					
-				if (resultado != false) {
-						resposta = 1;
-				}else {
-						resposta = 0;
-				}
-					
+	
+	
+	public boolean deletar(int id) {
+		Connection conexao = Banco.getConnection();
+		Statement statement = Banco.getStatement(conexao);
+		String sql = " DELETE FROM ITEM_PECA WHERE IDPECA = " + id;
+
+		int quantidadeRegistrosExcluidos = 0;
+		try {
+			quantidadeRegistrosExcluidos = statement.executeUpdate(sql);
 			
-					
-		}catch (SQLException e) {
-			System.out.println("Erro ao inserir nova Peça.");
+			if (quantidadeRegistrosExcluidos > 0) {
+				sql = " DELETE FROM PECA WHERE IDPECA = " + id;
+				quantidadeRegistrosExcluidos = quantidadeRegistrosExcluidos + statement.executeUpdate(sql);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir peça.");
 			System.out.println("Erro: " + e.getMessage());
 		}finally {
-			Banco.closeConnection(conn);
-			Banco.closePreparedStatement(stmt);
+			Banco.closePreparedStatement(statement);
+			Banco.closeConnection(conexao);
 		}
-		
 
-		return resposta;
+		return quantidadeRegistrosExcluidos > 1;
 	}
 
 
@@ -265,4 +258,78 @@ public class PecaDAO implements BaseDAO<Peca> {
 		return peca;	
 		
 		}
+
+
+	public ArrayList<Peca> consultarPecaNome(String nomePeca) {
+		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE"
+				+ " FROM PECA AS P"
+				+ " INNER JOIN ITEM_PECA AS I ON"
+				+ " P.IDPECA = I.IDPECA"
+				+ " WHERE P.NOMEPECA LIKE '%" + nomePeca + "%'";
+		
+		
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Peca> pecas = new ArrayList<Peca>();
+		
+		try {
+
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Peca pecaBuscada = construirDoResultSet(resultadoDaConsulta);
+				pecas.add(pecaBuscada);
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar pecas cadastradas ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return pecas;
+	}
+
+
+	public Peca consultarPecaCodigo(String codigo) {
+		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE"
+				+ " FROM PECA AS P"
+				+ " INNER JOIN ITEM_PECA AS I ON"
+				+ " P.IDPECA = I.IDPECA"
+				+ " WHERE P.CODIGO = " + codigo;
+		
+		
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		Peca peca = new Peca();
+		
+		try {
+
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				peca = construirDoResultSet(resultadoDaConsulta);
+				
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar peca cadastradas ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return peca;
+	}
+
+
+	public String excluirPeca(String codigo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

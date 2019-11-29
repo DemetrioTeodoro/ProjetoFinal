@@ -21,6 +21,12 @@ public class Peca {
 		// TODO Auto-generated constructor stub
 	}
 
+//Construtor para a Tabela de Peca - Consulta
+	public Peca(String codigo2, String nome, double valorCompra2, double valorVenda2, LocalDate dataEntrada2,
+			LocalDate dataSaida2, int quantidade2) {
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public String getNomePeca() {
 		return nomePeca;

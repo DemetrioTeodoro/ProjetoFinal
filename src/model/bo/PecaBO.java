@@ -28,13 +28,22 @@ public class PecaBO {
 		return pecaDAO.alterar(peca);
 	}
 
-	public int deletarPecaBO(int id) {
+	public boolean excluirPeca(int id) {
 		return pecaDAO.deletar(id);
 	}
 
 	public ArrayList<Peca> listarPecas() {
 		ArrayList<Peca> pecas = pecaDAO.listarTodos();
 		return pecas;
+	}
+
+	public ArrayList<Peca> consultarPecaNome(String nomePeca) {
+		ArrayList<Peca> pecas = pecaDAO.consultarPecaNome(nomePeca);
+		return pecas;
+	}
+
+	public Peca consultarPecaCodigo(String codigo) {
+		return pecaDAO.consultarPecaCodigo(codigo);
 	}
 
 }

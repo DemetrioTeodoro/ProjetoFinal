@@ -23,7 +23,7 @@ public class ClienteBO {
 		return clienteDAO.alterar(cliente);
 	}
 
-	public int deletarCliente(int id) {
+	public boolean deletarCliente(int id) {
 		return clienteDAO.deletar(id);
 	}
 

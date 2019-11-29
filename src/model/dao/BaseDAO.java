@@ -8,6 +8,6 @@ public interface BaseDAO<T> {
 
 	public boolean alterar(T novaEntidade);
 
-	public int deletar(int id);
+	public boolean deletar(int id);
 
 }

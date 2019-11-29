@@ -28,7 +28,7 @@ public class OrcamentoBO {
 		return orcamentoDAO.alterar(orcamento);
 	}
 	
-	public int deletarOrcamentoBO(int id) {
+	public boolean deletarOrcamentoBO(int id) {
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 		return orcamentoDAO.deletar(id);
 	}

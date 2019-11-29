@@ -34,8 +34,11 @@ public class PainelConsultarPeca extends JPanel {
 	private JTable tblPeca;
 	private String[] colunasTabelaPecas = { "CODIGO"," NOME PEÇA", "VALOR DE VENDA", "VALOR DE COMPRA", "DATA DE ENTRADA", "DATA DE SAIDA", "QUANTIDADE" };
 	private ArrayList<Peca>pecas;
+	ControllerPeca controller = new ControllerPeca();
 	
 	DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	private PainelAlterarPeca painelAlterarPeca = new PainelAlterarPeca();
+	private JTextField txtCodigoExclusao;
 	
 	/**
 	 * Create the panel.
@@ -55,41 +58,8 @@ public class PainelConsultarPeca extends JPanel {
 		tblPeca.setFillsViewportHeight(true);
 		tblPeca.setCellSelectionEnabled(true);
 		tblPeca.setColumnSelectionAllowed(true);
-		tblPeca.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		tblPeca.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PainelAlterarPeca alterarPeca = new PainelAlterarPeca();
-				alterarPeca.setVisible(true);
-				
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		
+		
 		limparTabela();
 		
 		JButton btnFechar = new JButton("Fechar");
@@ -102,6 +72,7 @@ public class PainelConsultarPeca extends JPanel {
 		JButton btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				atualizarTabelaPecas();
 			}
 		});
@@ -121,30 +92,60 @@ public class PainelConsultarPeca extends JPanel {
 				}
 			}
 		});
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				limparTabela();
+			}
+		});
+		
+		JLabel lblDigiteCdigo = new JLabel("Digite C\u00F3digo:");
+		
+		txtCodigoExclusao = new JTextField();
+		txtCodigoExclusao.setColumns(10);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Peca peca = new Peca();
+				String codigo = txtCodigoExclusao.getText();
+				peca = controller.consultarPecaCodigo(codigo);
+				controller.excluirPeca(peca.getIdPeca());
+						
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(135)
-					.addComponent(lblNome)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textNome, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-					.addGap(301)
-					.addComponent(btnConsultar)
-					.addGap(96))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(311)
-					.addComponent(lblConsultarPeca)
-					.addContainerGap(415, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(86)
-					.addComponent(btnFechar)
-					.addPreferredGap(ComponentPlacement.RELATED, 559, Short.MAX_VALUE)
-					.addComponent(btnGerarRelatorio)
-					.addGap(58))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tblPeca, GroupLayout.PREFERRED_SIZE, 856, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(135)
+							.addComponent(lblNome)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textNome, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+							.addGap(301)
+							.addComponent(btnConsultar))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(311)
+							.addComponent(lblConsultarPeca))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblDigiteCdigo)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtCodigoExclusao, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnExcluir)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnGerarRelatorio)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnLimpar)
+									.addGap(18)
+									.addComponent(btnFechar))
+								.addComponent(tblPeca, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 856, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap(25, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -152,7 +153,7 @@ public class PainelConsultarPeca extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap(98, Short.MAX_VALUE)
+							.addContainerGap(130, Short.MAX_VALUE)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnConsultar)
 								.addComponent(lblNome)
@@ -163,11 +164,20 @@ public class PainelConsultarPeca extends JPanel {
 							.addComponent(lblConsultarPeca)))
 					.addGap(18)
 					.addComponent(tblPeca, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
-					.addGap(27)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnFechar)
-						.addComponent(btnGerarRelatorio))
-					.addGap(72))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(20)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnFechar)
+								.addComponent(btnLimpar)
+								.addComponent(btnGerarRelatorio)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblDigiteCdigo)
+								.addComponent(txtCodigoExclusao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnExcluir))))
+					.addGap(79))
 		);
 		setLayout(groupLayout);
 		
@@ -175,10 +185,14 @@ public class PainelConsultarPeca extends JPanel {
 	}
 	
 	protected void atualizarTabelaPecas() {
-		ControllerPeca controller = new ControllerPeca();
-
+		String objFiltro = textNome.getText();
+		if (!objFiltro.equals("")) {
+			pecas = controller.consultarPecaNome(objFiltro);
+		}
+		else { 
 			pecas = controller.listarPecas();
-		
+		}
+			
 
 		limparTabela();
 

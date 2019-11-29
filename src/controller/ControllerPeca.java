@@ -29,10 +29,10 @@ public class ControllerPeca {
 		return msg;
 	}
 	
-	public String deletarPeca(int id) {
+	public String excluirPeca(int id) {
 		String msg = null;
 		PecaBO pecaBO = new PecaBO();
-		pecaBO.deletarPecaBO(id);
+		pecaBO.excluirPeca(id);
 		return msg;
 	}
 
@@ -47,4 +47,18 @@ public class ControllerPeca {
 		GeradorPlanilhas gerador = new GeradorPlanilhas();
 		gerador.gerarPlanilhasPeca(pecas, caminhoEscolhido);
 	}
+
+	public ArrayList<Peca> consultarPecaNome(String nomePeca) {
+		String msg = null;
+		PecaBO pecaBO = new PecaBO();
+		return pecaBO.consultarPecaNome(nomePeca);
+	}
+
+	public Peca consultarPecaCodigo(String codigo) {
+		String msg = null;
+		PecaBO pecaBO = new PecaBO();
+		return pecaBO.consultarPecaCodigo(codigo);
+	}
+
+
 }
