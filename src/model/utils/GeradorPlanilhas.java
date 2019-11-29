@@ -3,6 +3,7 @@ package model.utils;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class GeradorPlanilhas {
 	}
 	
 	public void gerarPlanilhasOrcamento(List<Orcamento> orcamentos, String caminhoEscolhido) {
-		String[] colunasTabelaPecas = {  };
+		String[] colunasTabelaPecas = { "#ID"," CLIENTE", "CARRO", "DATA ENTRADA", "VALOR TOTAL", "SITUAÇÃO" };
 		
 		HSSFWorkbook planilha = new HSSFWorkbook();
 		
@@ -90,13 +91,13 @@ public class GeradorPlanilhas {
 		for (Orcamento orcamento : orcamentos) {
 			Row novaLinha = abaPlanilha.createRow(rowNum++);
 			
-			/*novaLinha.createCell(0).setCellValue(orcamento.
-			novaLinha.createCell(1).setCellValue(orcamento.
-			novaLinha.createCell(2).setCellValue(orcamento.
-			novaLinha.createCell(3).setCellValue(orcamento.
-			novaLinha.createCell(4).setCellValue(orcamento.
-			novaLinha.createCell(5).setCellValue(orcamento.
-			novaLinha.createCell(6).setCellValue(orcamento.getQuantidade());*/
+			novaLinha.createCell(0).setCellValue(orcamento.getIdOrcamento());
+			novaLinha.createCell(1).setCellValue(orcamento.getIdCliente());
+			novaLinha.createCell(2).setCellValue(orcamento.getModeloCarro());
+			novaLinha.createCell(3).setCellValue(Date.valueOf(orcamento.getDataInicio()));
+			novaLinha.createCell(4).setCellValue(Date.valueOf(orcamento.getDataFinal()));
+			novaLinha.createCell(5).setCellValue(orcamento.getValorTotal());
+			novaLinha.createCell(6).setCellValue(orcamento.getSituacao());
 		}
 		
 		for (int i = 0; i < colunasTabelaPecas.length; i++) {
