@@ -200,7 +200,7 @@ public class PainelConsultaOrcamento extends JPanel {
 			
 		}
 		else { 
-			orcamentos = controller.listarOrcamentos();
+			orcamentos = controller.listarOrcamentos();  
 		}
 			
 
