@@ -135,8 +135,6 @@ public class PecaDAO implements BaseDAO<Peca> {
 	}
 
 	@Override
-	
-	
 	public boolean deletar(int id) {
 		Connection conexao = Banco.getConnection();
 		Statement statement = Banco.getStatement(conexao);

@@ -8,14 +8,18 @@ public class Orcamento {
 	private String descricao;
 	private double valorPeca;
 	private double valorMaoObra;
+	private double valorTotal;
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
 	private Mecanico mecanico;
 	private Cliente cliente;
-	private Situacao situacao;
+	private int situacao;
 	private Servico servico;
 	private int idOrcamento;
 	private int idCliente;
+	private String deSituacao;
+	private String NmCliente;
+	private String ModeloCarro;
 	
 
 	public Orcamento() {
@@ -87,12 +91,12 @@ public class Orcamento {
 		this.cliente = cliente;
 	}
 
-	public Situacao getSituacao() {
+	public int getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
+	public void setSituacao(int i) {
+		this.situacao = i;
 	}
 
 	public Servico getServico() {
@@ -117,6 +121,38 @@ public class Orcamento {
 
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
+	}
+
+	public String getDeSituacao() {
+		return deSituacao;
+	}
+
+	public void setDeSituacao(String deSituacao) {
+		this.deSituacao = deSituacao;
+	}
+
+	public String getNmCliente() {
+		return NmCliente;
+	}
+
+	public void setNmCliente(String nmCliente) {
+		NmCliente = nmCliente;
+	}
+
+	public String getModeloCarro() {
+		return ModeloCarro;
+	}
+
+	public void setModeloCarro(String modeloCarro) {
+		ModeloCarro = modeloCarro;
+	}
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 	
 	

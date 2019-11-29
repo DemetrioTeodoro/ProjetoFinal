@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.bo.CarroBO;
 import model.bo.ClienteBO;
 import model.bo.OrcamentoBO;
@@ -7,7 +9,7 @@ import model.entity.Orcamento;
 
 public class ControllerOrcamento {
 	
-	
+	ArrayList<Orcamento> orcamentos;
 	
 	
 	public String cadastrarOrcamento(Orcamento orcamento) {
@@ -36,6 +38,29 @@ public class ControllerOrcamento {
 		OrcamentoBO orcamentoBO = new OrcamentoBO();
 		orcamentoBO.deletarOrcamentoBO(id);
 		return msg;
+	}
+
+	public ArrayList<Orcamento> listarOrcamentos() {
+		OrcamentoBO orcamentoBO = new OrcamentoBO();
+		return orcamentoBO.listarOrcamentos();
+		
+	}
+
+	public ArrayList<Orcamento> consultarOrcNome(String filtroNome) {
+		OrcamentoBO orcamentoBO = new OrcamentoBO();
+		return orcamentoBO.consultarOrcNome(filtroNome);
+	}
+
+	public ArrayList<Orcamento> consultarOrcCarro(String filtroCarro) {
+		OrcamentoBO orcamentoBO = new OrcamentoBO();
+		orcamentos = orcamentoBO.consultarOrcCarro(filtroCarro);
+		return orcamentos;
+	}
+
+	public ArrayList<Orcamento> consultarOrcSituacao(int filtroSituacao) {
+		OrcamentoBO orcamentoBO = new OrcamentoBO();
+		orcamentos = orcamentoBO.consultarOrcSituacao(filtroSituacao);
+		return orcamentos;
 	}
 
 }

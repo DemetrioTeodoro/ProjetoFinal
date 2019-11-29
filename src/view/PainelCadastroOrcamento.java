@@ -46,6 +46,9 @@ public class PainelCadastroOrcamento extends JPanel {
 	private JTextField txtAno;
 	private JTextField txtCor;
 	private JTextField txtDescricao;
+	
+	ArrayList<String> situacoes; 
+	JComboBox cbSituacao; 
 
 	
 	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -56,6 +59,8 @@ public class PainelCadastroOrcamento extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelCadastroOrcamento() {
+		
+		
 		
 		JLabel lblCadastroOrcamento = new JLabel("Cadastro Or\u00E7amento");
 		lblCadastroOrcamento.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -107,6 +112,7 @@ public class PainelCadastroOrcamento extends JPanel {
 				orcamento.setCliente(cliente);
 				orcamento.setDescricao(txtDescricao.getText());
 				orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
+				orcamento.setSituacao(cbSituacao.getSelectedIndex());
 				
 				controller.cadastrarOrcamento(orcamento);
 			
@@ -154,9 +160,12 @@ public class PainelCadastroOrcamento extends JPanel {
 			}
 		});
 		
+		abaMecanico();
+		
+		
 		ControllerSituacao controllerSituacao = new ControllerSituacao();
-		ArrayList<String> situacoes = controllerSituacao.consultarSituacao();
-		JComboBox cbSituacao = new JComboBox(situacoes.toArray());
+		situacoes = controllerSituacao.consultarSituacao();	
+		cbSituacao = new JComboBox(situacoes.toArray());
 		cbSituacao.setSelectedIndex(-1);
 		
 		txtDtEntrada = new JTextField();
@@ -184,6 +193,7 @@ public class PainelCadastroOrcamento extends JPanel {
 		ArrayList<String> servicos = controllerServico.consultarServico();
 		JComboBox cbServico = new JComboBox(servicos.toArray());
 		cbServico.setSelectedIndex(-1);
+		cbServico.setEnabled(false);
 		
 		table = new JTable();
 		
@@ -191,6 +201,8 @@ public class PainelCadastroOrcamento extends JPanel {
 		ArrayList<String> mecanicos = controllerMecanico.consultarMecanico();
 		JComboBox cbMecanico = new JComboBox(mecanicos.toArray());
 		cbMecanico.setSelectedIndex(-1);
+		cbMecanico.setEnabled(false);
+		cbPeca.setEnabled(false);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -338,6 +350,15 @@ public class PainelCadastroOrcamento extends JPanel {
 					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
-
+		
+		abaMecanico();
+		
 	}
+	
+	public void abaMecanico() {
+		txtDataSaida.setEnabled(false);
+		
+	}
+	
+	
 }

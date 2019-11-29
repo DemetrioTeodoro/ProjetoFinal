@@ -120,6 +120,10 @@ public class PainelConsultarPeca extends JPanel {
 				Peca peca = new Peca();
 				String codigo = txtCodigoExclusao.getText();
 				controller.consultarPecaCodigo(codigo);
+				limparTabela();
+				textNome.setText("");
+				txtCodigoExclusao.setText("");
+				
 				
 						
 			}
