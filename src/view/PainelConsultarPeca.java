@@ -105,6 +105,7 @@ public class PainelConsultarPeca extends JPanel {
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				limparTabela();
+				textNome.setText("");
 			}
 		});
 		
@@ -118,8 +119,8 @@ public class PainelConsultarPeca extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Peca peca = new Peca();
 				String codigo = txtCodigoExclusao.getText();
-				peca = controller.consultarPecaCodigo(codigo);
-				controller.excluirPeca(peca.getIdPeca());
+				controller.consultarPecaCodigo(codigo);
+				
 						
 			}
 		});

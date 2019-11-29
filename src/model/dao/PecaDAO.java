@@ -165,7 +165,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 
 
 	public ArrayList<Peca> listarTodos() {
-		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE"
+		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE, I.IDPECA"
 				+ " FROM PECA AS P"
 				+ " INNER JOIN ITEM_PECA AS I ON"
 				+ " P.IDPECA = I.IDPECA";
@@ -204,6 +204,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 			LocalDate dataEntrada = (LocalDate.parse((CharSequence) rs.getDate("DATAENTRADA").toString(), formatador));
 			LocalDate dataSaida = (LocalDate.parse((CharSequence) rs.getDate("DATASAIDA").toString(), formatador));
 			int quantidade = rs.getInt("QUANTIDADE");
+			int id = rs.getInt("IDPECA");
 			
 			pc = new Peca();
 			pc.setCodigo(codigo);
@@ -213,10 +214,11 @@ public class PecaDAO implements BaseDAO<Peca> {
 			pc.setDataEntrada(dataEntrada);
 			pc.setDataSaida(dataSaida);
 			pc.setQuantidade(quantidade);
+			pc.setIdPeca(id);
 					
 			
 		} catch (SQLException e) {
-			System.out.println("Erro ao construir empregado do ResultSet ");
+			System.out.println("Erro ao construir peca do ResultSet ");
 			System.out.println("Erro: " + e.getMessage());
 		}
 		
@@ -261,7 +263,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 
 
 	public ArrayList<Peca> consultarPecaNome(String nomePeca) {
-		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE"
+		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE, I.IDPECA"
 				+ " FROM PECA AS P"
 				+ " INNER JOIN ITEM_PECA AS I ON"
 				+ " P.IDPECA = I.IDPECA"
@@ -295,7 +297,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 
 
 	public Peca consultarPecaCodigo(String codigo) {
-		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE"
+		String sql = " SELECT P.CODIGO, P.NOMEPECA, I.VALORVENDA, I.VALORCOMPRA, I.DATAENTRADA, I.DATASAIDA, I.QUANTIDADE, I.IDPECA"
 				+ " FROM PECA AS P"
 				+ " INNER JOIN ITEM_PECA AS I ON"
 				+ " P.IDPECA = I.IDPECA"

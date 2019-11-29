@@ -9,6 +9,7 @@ import model.entity.Peca;
 
 public class PecaBO {
 	
+	Peca peca = new Peca();	
 	PecaDAO pecaDAO = new PecaDAO();
 
 	public Peca cadastrarPecaBO(Peca peca) {
@@ -43,7 +44,11 @@ public class PecaBO {
 	}
 
 	public Peca consultarPecaCodigo(String codigo) {
-		return pecaDAO.consultarPecaCodigo(codigo);
+		 peca = pecaDAO.consultarPecaCodigo(codigo);
+		 if (peca.getIdPeca() != 0) {
+			excluirPeca(peca.getIdPeca());
+		}
+		 return peca;
 	}
 
 }

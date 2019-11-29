@@ -2,11 +2,16 @@ package controller;
 
 import java.util.ArrayList;
 
+
 import model.bo.PecaBO;
 import model.entity.Peca;
 import model.utils.GeradorPlanilhas;
 
+
+
 public class ControllerPeca {
+	
+	Peca peca = new Peca();
 	
 	public String cadastrarPeca(Peca peca) {
 		String msg = null;
@@ -57,7 +62,8 @@ public class ControllerPeca {
 	public Peca consultarPecaCodigo(String codigo) {
 		String msg = null;
 		PecaBO pecaBO = new PecaBO();
-		return pecaBO.consultarPecaCodigo(codigo);
+		pecaBO.consultarPecaCodigo(codigo);
+		return peca;
 	}
 
 
