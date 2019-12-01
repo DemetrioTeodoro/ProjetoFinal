@@ -121,6 +121,7 @@ public class PainelCadastroOrcamento extends JPanel {
 					orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
 					orcamento.setIdSituacao(0);
 					controller.cadastrarOrcamento(orcamento);
+					limparCampos();
 					
 				}else {
 					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.INFORMATION_MESSAGE);
@@ -367,6 +368,18 @@ public class PainelCadastroOrcamento extends JPanel {
 	public void abaMecanico() {
 		txtDataSaida.setEnabled(false);
 		
+	}
+	
+	public void limparCampos() {
+		txtNome.setText("");
+		txtCPF.setText("");
+		txtTelefone.setText("");
+		txtAno.setText("");
+		txtDescricao.setText("");
+		txtModelo.setText("");
+		txtMarca.setText("");
+		txtDtEntrada.setText("");
+		txtPlaca.setText("");
 	}
 	
 	
