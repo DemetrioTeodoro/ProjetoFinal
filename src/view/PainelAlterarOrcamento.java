@@ -92,7 +92,7 @@ public class PainelAlterarOrcamento extends JPanel {
 		
 		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o:");
 		
-		JLabel lblMecanico = new JLabel("Mecanico:");
+		JLabel lblMecanico = new JLabel("Mec\u00E2nico:");
 		
 		JLabel lblPeca = new JLabel("Pe\u00E7a:");
 		
@@ -100,12 +100,12 @@ public class PainelAlterarOrcamento extends JPanel {
 		
 		JButton btnAdd = new JButton("Add");
 		
-		JLabel lblDataEntrada = new JLabel("Data Entrada:");
+		JLabel lblDataEntrada = new JLabel("Data de Entrada:");
 		
 		txtDataEntrada = new JTextField();
 		txtDataEntrada.setColumns(10);
 		
-		JLabel lblDataSada = new JLabel("Data Sa\u00EDda:");
+		JLabel lblDataSada = new JLabel("Data de Sa\u00EDda:");
 		
 		txtDataSaida = new JTextField();
 		txtDataSaida.setColumns(10);

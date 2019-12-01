@@ -62,7 +62,7 @@ public class PainelCadastroOrcamento extends JPanel {
 		
 		
 		
-		JLabel lblCadastroOrcamento = new JLabel("Cadastro Or\u00E7amento");
+		JLabel lblCadastroOrcamento = new JLabel("Cadastro de Or\u00E7amento");
 		lblCadastroOrcamento.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblNomeCliente = new JLabel("Nome do Cliente:");
@@ -144,9 +144,9 @@ public class PainelCadastroOrcamento extends JPanel {
 		
 		JButton btnAdd = new JButton("Add");
 		
-		JLabel lblDataEntrada = new JLabel("Data Entrada:");
+		JLabel lblDataEntrada = new JLabel("Data de Entrada:");
 		
-		JLabel lblDataSada = new JLabel("Data Sa\u00EDda:");
+		JLabel lblDataSada = new JLabel("Data de Sa\u00EDda:");
 		
 		txtDataSaida = new JTextField();
 		txtDataSaida.setColumns(10);
@@ -274,8 +274,8 @@ public class PainelCadastroOrcamento extends JPanel {
 					.addGap(170))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(311)
-					.addComponent(lblCadastroOrcamento, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(398, Short.MAX_VALUE))
+					.addComponent(lblCadastroOrcamento, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(257, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -347,7 +347,7 @@ public class PainelCadastroOrcamento extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSalvar)
 						.addComponent(btnFechar))
-					.addContainerGap(21, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 		

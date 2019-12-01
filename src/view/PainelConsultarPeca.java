@@ -48,7 +48,7 @@ public class PainelConsultarPeca extends JPanel {
 		JLabel lblConsultarPeca = new JLabel("Consultar Pe\u00E7a");
 		lblConsultarPeca.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
-		JLabel lblNome = new JLabel("Nome Pe\u00E7a:");
+		JLabel lblNome = new JLabel("Nome da Pe\u00E7a:");
 		
 		textNome = new JTextField();
 		textNome.setColumns(10);

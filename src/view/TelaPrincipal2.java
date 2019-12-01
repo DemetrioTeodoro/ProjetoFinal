@@ -99,7 +99,7 @@ public class TelaPrincipal2 extends JFrame {
 		
 		incluirPaineisEscondidos();
 		
-		JButton btnCadastroPeca = new JButton("Peca");
+		JButton btnCadastroPeca = new JButton("Pe\u00E7a");
 		btnCadastroPeca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mostrarPainel(painelCadastroPeca);
@@ -113,7 +113,7 @@ public class TelaPrincipal2 extends JFrame {
 		btnCadastroPeca.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/settings-icon.png")));
 		painelEsquerdo.add(btnCadastroPeca);
 		
-		JButton btnCadastroOrcamento = new JButton("Orcamento");
+		JButton btnCadastroOrcamento = new JButton("Or\u00E7amento");
 		btnCadastroOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelCadastroOrcamento);
@@ -137,7 +137,7 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, label_2, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
 		painelEsquerdo.add(label_2);
 		
-		JButton btnConsultaPeca = new JButton("Peca");
+		JButton btnConsultaPeca = new JButton("Pe\u00E7a");
 		btnConsultaPeca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelConsultarPeca);
@@ -150,7 +150,7 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnConsultaPeca, 0, SpringLayout.EAST, btnCadastroPeca);
 		painelEsquerdo.add(btnConsultaPeca);
 		
-		JButton btnConsultaOrcamento = new JButton("Orcamento");
+		JButton btnConsultaOrcamento = new JButton("Or\u00E7amento");
 		btnConsultaOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelConsultaOrcamento);
@@ -179,7 +179,7 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, label_4, 6, SpringLayout.EAST, lblAlterar);
 		painelEsquerdo.add(label_4);
 		
-		JButton btnAlteraPeca = new JButton("Peca");
+		JButton btnAlteraPeca = new JButton("Pe\u00E7a");
 		btnAlteraPeca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelAlterarPeca);
@@ -192,7 +192,7 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnAlteraPeca, 0, SpringLayout.EAST, btnCadastroPeca);
 		painelEsquerdo.add(btnAlteraPeca);
 		
-		JButton btnAlterarOrcamento = new JButton("Orcamento");
+		JButton btnAlterarOrcamento = new JButton("Or\u00E7amento");
 		btnAlterarOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelAlterarOrcamento);
@@ -221,7 +221,7 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, label_6, 0, SpringLayout.SOUTH, lblDeletar);
 		painelEsquerdo.add(label_6);
 		
-		JButton btnDeletarPeca = new JButton("Peca");
+		JButton btnDeletarPeca = new JButton("Pe\u00E7a");
 		btnDeletarPeca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelDeletarPeca);
@@ -234,7 +234,7 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnDeletarPeca, 0, SpringLayout.EAST, btnCadastroPeca);
 		painelEsquerdo.add(btnDeletarPeca);
 		
-		JButton btnDeletarOrcamento = new JButton("Orcamento");
+		JButton btnDeletarOrcamento = new JButton("Or\u00E7amento");
 		btnDeletarOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelDeletarOrcamento);

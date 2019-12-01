@@ -53,7 +53,7 @@ public class PainelConsultaOrcamento extends JPanel {
 		textNome = new JTextField();
 		textNome.setColumns(10);
 		
-		JLabel lblAutomovel = new JLabel("Automovel:");
+		JLabel lblAutomovel = new JLabel("Autom\u00F3vel:");
 		
 		textAutomovel = new JTextField();
 		textAutomovel.setColumns(10);
