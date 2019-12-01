@@ -11,16 +11,12 @@ public class Orcamento {
 	private double valorTotal;
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
-	private Mecanico mecanico;
-	private Cliente cliente;
-	private int situacao;
-	private Servico servico;
+	private int idMecanico;
+	private int idSituacao;
+	private int idServico;
 	private int idOrcamento;
-	private int idCliente;
-	private String deSituacao;
-	private String NmCliente;
-	private String ModeloCarro;
-	
+	private int idCarro;
+
 
 	public Orcamento() {
 		super();
@@ -75,37 +71,6 @@ public class Orcamento {
 		this.dataFinal = dataFinal;
 	}
 
-	public Mecanico getMecanico() {
-		return mecanico;
-	}
-
-	public void setMecanico(Mecanico mecanico) {
-		this.mecanico = mecanico;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public int getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(int i) {
-		this.situacao = i;
-	}
-
-	public Servico getServico() {
-		return servico;
-	}
-
-	public void setServico(Servico servico) {
-		this.servico = servico;
-	}
 
 	public int getIdOrcamento() {
 		return idOrcamento;
@@ -115,37 +80,14 @@ public class Orcamento {
 		this.idOrcamento = idOrcamento;
 	}
 
-	public int getIdCliente() {
-		return idCliente;
+	public int getIdCarro() {
+		return idCarro;
 	}
 
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setIdCarro(int idCarro) {
+		this.idCarro = idCarro;
 	}
 
-	public String getDeSituacao() {
-		return deSituacao;
-	}
-
-	public void setDeSituacao(String deSituacao) {
-		this.deSituacao = deSituacao;
-	}
-
-	public String getNmCliente() {
-		return NmCliente;
-	}
-
-	public void setNmCliente(String nmCliente) {
-		NmCliente = nmCliente;
-	}
-
-	public String getModeloCarro() {
-		return ModeloCarro;
-	}
-
-	public void setModeloCarro(String modeloCarro) {
-		ModeloCarro = modeloCarro;
-	}
 
 	public double getValorTotal() {
 		return valorTotal;
@@ -153,6 +95,30 @@ public class Orcamento {
 
 	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public int getIdMecanico() {
+		return idMecanico;
+	}
+
+	public void setIdMecanico(int idMecanico) {
+		this.idMecanico = idMecanico;
+	}
+
+	public int getIdSituacao() {
+		return idSituacao;
+	}
+
+	public void setIdSituacao(int idSituacao) {
+		this.idSituacao = idSituacao;
+	}
+
+	public int getIdServico() {
+		return idServico;
+	}
+
+	public void setIdServico(int idServico) {
+		this.idServico = idServico;
 	}
 	
 	

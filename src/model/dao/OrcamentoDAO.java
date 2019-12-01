@@ -28,17 +28,17 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		try {
-			stmt.setInt(1, orcamento.getCliente().getCarro().getIdCarro());
+			stmt.setInt(1, orcamento.getIdCarro());
 			stmt.setString(2, orcamento.getDescricao());
 			stmt.setDate(3, Date.valueOf(orcamento.getDataInicio()));
-			stmt.setInt(4, orcamento.getSituacao());
+			stmt.setInt(4, orcamento.getIdSituacao());
 						
 			stmt.execute();
 			
 			ResultSet generatedKeys = stmt.getGeneratedKeys();
 			if(generatedKeys.next()) {
 				int idGerado = generatedKeys.getInt(1);
-				orcamento.getCliente().getCarro().setIdCarro(idGerado);
+				orcamento.setIdOrcamento(idGerado);
 			}
 			}catch (SQLException e) {
 				System.out.println("Erro ao inserir novo Orçamento.");
@@ -85,74 +85,6 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 		return quantidadeRegistrosExcluidos > 0;
 	}
 
-	public Orcamento cadastrarCarro(Orcamento orcamento) {
-		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO CARRO (MARCA, ANO, COR, MODELO, PLACA, IDCLIENTE ) "
-				+ "VALUES (?,?,?,?,?,?)";
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
-				PreparedStatement.RETURN_GENERATED_KEYS);
-		
-		try {
-			stmt.setString(1, orcamento.getCliente().getCarro().getMarca()); 
-			stmt.setString(2, orcamento.getCliente().getCarro().getAno());
-			stmt.setString(3, orcamento.getCliente().getCarro().getCor());
-			stmt.setString(4, orcamento.getCliente().getCarro().getModelo());
-			stmt.setString(5, orcamento.getCliente().getCarro().getPlaca());
-			stmt.setInt(6, orcamento.getCliente().getIdCliente());
-			
-			
-			stmt.execute();
-			
-			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			if(generatedKeys.next()) {
-				int idGerado = generatedKeys.getInt(1);
-				orcamento.getCliente().getCarro().setIdCarro(idGerado);
-			}
-			}catch (SQLException e) {
-				System.out.println("Erro ao inserir novo Carro.");
-				System.out.println("Erro: " + e.getMessage());
-				
-			}finally {
-				Banco.closeConnection(conn);
-				Banco.closePreparedStatement(stmt);		
-			}
-		return orcamento;	
-		
-		}
-
-	public Orcamento cadastrarCliente(Orcamento orcamento) {
-		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO CLIENTE (NOME, CPF, TELEFONE) "
-				+ "VALUES (?,?,?)";
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
-				PreparedStatement.RETURN_GENERATED_KEYS);
-		
-		try {
-			stmt.setString(1, orcamento.getCliente().getNome());
-			stmt.setString(2, orcamento.getCliente().getCpf());
-			stmt.setString(3, orcamento.getCliente().getTelefone());
-			
-
-			stmt.execute();
-			
-			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			if(generatedKeys.next()) {
-				int idGerado = generatedKeys.getInt(1);
-				orcamento.getCliente().setIdCliente(idGerado);
-			}
-			}catch (SQLException e) {
-				System.out.println("Erro ao inserir novo Cliente.");
-				System.out.println("Erro: " + e.getMessage());
-				
-			}finally {
-				Banco.closeConnection(conn);
-				Banco.closePreparedStatement(stmt);		
-			}
-		return orcamento;	
-		
-		}
-
-
 	public ArrayList<Orcamento> listarTodos() {
 		String sql = " SELECT O.IDORCAMENTO, CL.NOME, C.MODELO, O.DATAINICIO, (O.VALORPECAS + O.VALORMAOOBRA) AS VALTOTAL, S.DESITUACAO"
 				+ " FROM ORCAMENTO AS O"
@@ -189,28 +121,33 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	private Orcamento construirDoResultSet(ResultSet rs) {
 		Orcamento orc = null;
 		
-		  
+
 		try {
 			int id = rs.getInt("IDORCAMENTO");
-			String nome = rs.getString("NOME");
-			String modelo = rs.getString("MODELO");
+			int numeroOrcamento = rs.getInt("NUORCAMENTO");
+			String descricao = rs.getString("DESCRICAO");
+			double ValPecas = rs.getDouble("VALORPECAS");
+			double ValMaoObra = rs.getDouble("VALORMAOOBRA");
 			LocalDate dataInicio = (LocalDate.parse((CharSequence) rs.getDate("DATAINICIO").toString(), formatador));
-			
-			double valorTotal = 0;
-			
-			if (rs.getDouble("VALTOTAL") != 0) {
-				valorTotal = rs.getDouble("VALTOTAL");
-			}
-			
-			String situacao = rs.getString("DESITUACAO");		
+			LocalDate dataFinal = (LocalDate.parse((CharSequence) rs.getDate("DATAFINAL").toString(), formatador));
+			int idMecanico = rs.getInt("IDMECANICO");
+			int idCarro = rs.getInt("IDCARRO");
+			int idSituacao = rs.getInt("IDSITUACAO");
+			int idServico = rs.getInt("IDSERVICO");
+				
 			
 			orc = new Orcamento();
 			orc.setIdOrcamento(id);
-			orc.setNmCliente(nome);
-			orc.setModeloCarro(modelo);
+			orc.setNumeroOrcamento(numeroOrcamento);
+			orc.setDescricao(descricao);
+			orc.setValorPeca(ValPecas);
+			orc.setValorMaoObra(ValMaoObra);
 			orc.setDataInicio(dataInicio);
-			orc.setValorTotal(valorTotal);
-			orc.setDeSituacao(situacao);
+			orc.setDataFinal(dataFinal);
+			orc.setIdMecanico(idMecanico);
+			orc.setIdCarro(idCarro);
+			orc.setIdSituacao(idSituacao);
+			orc.setIdServico(idServico);
 	
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir orcamento do ResultSet ");

@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControllerCarro;
 import controller.ControllerCliente;
 import controller.ControllerMecanico;
 import controller.ControllerOrcamento;
@@ -57,6 +58,7 @@ public class PainelCadastroOrcamento extends JPanel {
 	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	ControllerOrcamento controller = new ControllerOrcamento();
+	ControllerCarro controllerCarro = new ControllerCarro();
 	private JTable table;
 	/**
 	 * Create the panel.
@@ -100,7 +102,7 @@ public class PainelCadastroOrcamento extends JPanel {
 				
 				Carro carro = new Carro();
 				carro.setMarca(txtMarca.getText());
-				carro.setAno(txtAno.getText());
+				carro.setAno(Integer.parseInt(txtAno.getText()));
 				carro.setCor(txtCor.getText());
 				carro.setModelo(txtModelo.getText());
 				carro.setPlaca(txtPlaca.getText());
@@ -110,20 +112,21 @@ public class PainelCadastroOrcamento extends JPanel {
 					cliente.setCpf(cpf);
 					cliente.setTelefone(telefone);
 					cliente.setCarro(carro);
+					controllerCliente.cadastrarCliente(cliente);
+					carro.setIdCliente(cliente.getIdCliente());
+					controllerCarro.cadastrarCarro(carro);
+					
+					Orcamento orcamento = new Orcamento();
+					orcamento.setIdCarro(carro.getIdCarro());
+					orcamento.setDescricao(txtDescricao.getText());
+					orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
+					orcamento.setIdSituacao(0);
+					controller.cadastrarOrcamento(orcamento);
+					
 				}else {
 					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.INFORMATION_MESSAGE);
 				}
-				
-				
-				Orcamento orcamento = new Orcamento();
-				orcamento.setCliente(cliente);
-				orcamento.setDescricao(txtDescricao.getText());
-				orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
-				orcamento.setSituacao(cbSituacao.getSelectedIndex());
-				
-				controller.cadastrarOrcamento(orcamento);
-			
-				
+	
 			}
 		});
 		

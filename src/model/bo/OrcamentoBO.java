@@ -11,15 +11,9 @@ public class OrcamentoBO {
 	OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 	
 	public Orcamento cadastrarOrcamentoBO(Orcamento orcamento) {
-		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		orcamentoDAO.cadastrarCliente(orcamento);
-		if (orcamento.getCliente().getIdCliente() != 0) {
-			orcamentoDAO.cadastrarCarro(orcamento);
-			if (orcamento.getCliente().getCarro().getIdCarro() !=0) {
-				orcamentoDAO.cadastrar(orcamento);
-			}
+		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();		
+		orcamentoDAO.cadastrar(orcamento);
 			
-		}
 		return orcamento;
 	}
 	

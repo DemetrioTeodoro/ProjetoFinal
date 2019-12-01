@@ -10,6 +10,7 @@ import model.entity.Orcamento;
 public class ControllerOrcamento {
 	
 	ArrayList<Orcamento> orcamentos;
+	ControllerCliente controllerCliente = new ControllerCliente();
 	
 	
 	public String cadastrarOrcamento(Orcamento orcamento) {

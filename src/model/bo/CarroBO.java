@@ -6,9 +6,15 @@ import model.entity.Carro;
 public class CarroBO {
 	
 	CarroDAO carroDAO = new CarroDAO();
+	Carro objCarro = null;
 
 	public Carro cadastrarCarro(Carro carro) {
-		return carroDAO.cadastrar(carro);
+		consultarPorPlaca(carro.getPlaca());
+		if (objCarro == null) {
+			objCarro = carroDAO.cadastrar(carro);
+			
+		}
+		return objCarro;
 		
 	}
 
@@ -26,5 +32,10 @@ public class CarroBO {
 		return carroDAO.deletar(id);
 		
 	}
-
+	
+	public Carro consultarPorPlaca(String placa) {	
+		objCarro = carroDAO.consultarPorPlaca(placa);
+	return objCarro;
+	}
+	
 }

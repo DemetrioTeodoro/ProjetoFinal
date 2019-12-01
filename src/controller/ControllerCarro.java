@@ -7,8 +7,9 @@ public class ControllerCarro {
 
 	
 CarroBO carroBO = new CarroBO();
+
 	
-	public String cadastrarCarro(Carro carro) {
+	public String cadastrarCarro(Carro carro) {		
 		String msg = null;		
 		carroBO.cadastrarCarro(carro);
 		return msg;

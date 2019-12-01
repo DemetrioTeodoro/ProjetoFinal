@@ -65,7 +65,7 @@ public class PainelConsultaOrcamento extends JPanel {
 		JButton btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				orcamento.setSituacao(cbSituacao.getSelectedIndex());
+				orcamento.setIdSituacao(cbSituacao.getSelectedIndex());
 				atualizarTabelaOrc();
 				txtIdExcluir.setText("");
 				textAutomovel.setText("");
@@ -187,7 +187,7 @@ public class PainelConsultaOrcamento extends JPanel {
 	protected void atualizarTabelaOrc() {
 		String filtroNome = textNome.getText();
 		String filtroCarro = textAutomovel.getText();
-		int filtroSituacao = orcamento.getSituacao();
+		int filtroSituacao = orcamento.getIdSituacao();
 		if (!filtroNome.equals("")) {
 			orcamentos = controller.consultarOrcNome(filtroNome);
 		}
@@ -211,11 +211,11 @@ public class PainelConsultaOrcamento extends JPanel {
 		for (Orcamento orc : orcamentos) {
 			String[] novaLinha = new String[6];
 			novaLinha[0] = String.valueOf(orc.getIdOrcamento());
-			novaLinha[1] = orc.getNmCliente();
-			novaLinha[2] = orc.getModeloCarro();
+			novaLinha[1] = String.valueOf(orc.getIdCarro());
+			novaLinha[2] = String.valueOf(orc.getIdCarro());
 			novaLinha[3] = String.valueOf(orc.getDataInicio());
 			novaLinha[4] = String.valueOf(orc.getValorTotal());
-			novaLinha[5] = orc.getDeSituacao();			
+			novaLinha[5] = String.valueOf(orc.getIdSituacao());			
 			
 			model.addRow(novaLinha);
 		}

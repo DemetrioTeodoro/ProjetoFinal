@@ -1,16 +1,51 @@
 package model.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.entity.Cliente;
+import model.entity.Orcamento;
 
 public class ClienteDAO implements BaseDAO<Cliente> {
 
 	@Override
 	public Cliente cadastrar(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Connection conn = Banco.getConnection();
+		String sql = "INSERT INTO CLIENTE (NOME, CPF, TELEFONE) "
+				+ "VALUES (?,?,?)";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		
+		try {
+			stmt.setString(1, cliente.getNome());
+			stmt.setString(2, cliente.getCpf());
+			stmt.setString(3, cliente.getTelefone());
+			
+
+			stmt.execute();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if(generatedKeys.next()) {
+				int idGerado = generatedKeys.getInt(1);
+				cliente.setIdCliente(idGerado);
+			}
+			}catch (SQLException e) {
+				System.out.println("Erro ao inserir novo Cliente.");
+				System.out.println("Erro: " + e.getMessage());
+				
+			}finally {
+				Banco.closeConnection(conn);
+				Banco.closePreparedStatement(stmt);		
+			}
+		return cliente;	
+		
+		}
+	
 
 	@Override
 	public Cliente consultar(Cliente cliente) {
@@ -35,4 +70,57 @@ public class ClienteDAO implements BaseDAO<Cliente> {
 		return null;
 	}
 
+	public Cliente consultarPorCpf(String cpf) {
+		Connection conn = Banco.getConnection();
+		String sql = " SELECT * FROM CLIENTEO"
+				+ " WHERE CPF = " + cpf;
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		Cliente cliente = new Cliente();
+		
+		try {
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				cliente = construirDoResultSet(resultadoDaConsulta);
+				
+				
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar cliente por CPF cadastrado ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return cliente;
+	}
+	
+	private Cliente construirDoResultSet(ResultSet rs) {
+		Cliente cliente = null;
+		
+		  
+		try {
+			int id = rs.getInt("IDCLIENTE");
+			String nome = rs.getString("NOME");
+			String cpf = rs.getString("CPF");
+			String telefone = rs.getString("TELEFONE");	
+			
+			cliente = new Cliente();
+			cliente.setIdCliente(id);
+			cliente.setNome(nome);
+			cliente.setCpf(cpf);
+			cliente.setTelefone(telefone);
+			
+	
+		} catch (SQLException e) {
+			System.out.println("Erro ao construir orcamento do ResultSet ");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return cliente;
+	}
 }

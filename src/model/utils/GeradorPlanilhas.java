@@ -92,12 +92,15 @@ public class GeradorPlanilhas {
 			Row novaLinha = abaPlanilha.createRow(rowNum++);
 			
 			novaLinha.createCell(0).setCellValue(orcamento.getIdOrcamento());
-			novaLinha.createCell(1).setCellValue(orcamento.getIdCliente());
-			novaLinha.createCell(2).setCellValue(orcamento.getModeloCarro());
+			//trocar para nome cliente
+			novaLinha.createCell(1).setCellValue(orcamento.getIdCarro());
+			//trocar para modelo carro
+			novaLinha.createCell(2).setCellValue(orcamento.getIdCarro());
 			novaLinha.createCell(3).setCellValue(Date.valueOf(orcamento.getDataInicio()));
 			novaLinha.createCell(4).setCellValue(Date.valueOf(orcamento.getDataFinal()));
 			novaLinha.createCell(5).setCellValue(orcamento.getValorTotal());
-			novaLinha.createCell(6).setCellValue(orcamento.getSituacao());
+			//trocar para nome situacao
+			novaLinha.createCell(6).setCellValue(orcamento.getIdSituacao());
 		}
 		
 		for (int i = 0; i < colunasTabelaPecas.length; i++) {

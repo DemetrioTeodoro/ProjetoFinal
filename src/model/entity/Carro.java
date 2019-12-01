@@ -6,12 +6,13 @@ public class Carro {
 	private String modelo;
 	private String placa;
 	private String cor;
-	private String ano;
+	private int ano;
 	private int idCarro;
+	private int IdCliente;
 
 	
 	
-	public Carro(String marca, String modelo, String placa, String cor, String ano) {
+	public Carro(String marca, String modelo, String placa, String cor, int ano) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
@@ -58,11 +59,11 @@ public class Carro {
 		this.cor = cor;
 	}
 
-	public String getAno() {
+	public int getAno() {
 		return ano;
 	}
 
-	public void setAno(String ano) {
+	public void setAno(int ano) {
 		this.ano = ano;
 	}
 
@@ -72,6 +73,14 @@ public class Carro {
 
 	public void setIdCarro(int idCarro) {
 		this.idCarro = idCarro;
+	}
+
+	public int getIdCliente() {
+		return IdCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		IdCliente = idCliente;
 	}
 
 	

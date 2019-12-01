@@ -9,10 +9,15 @@ import model.entity.Cliente;
 public class ClienteBO {
 	
 	ClienteDAO clienteDAO = new ClienteDAO();
+	Cliente objCliente = null;
 
 	public Cliente cadastrarCliente(Cliente cliente) {
-		return clienteDAO.cadastrar(cliente);
+		consultarClientePorCpf(cliente.getCpf());
+		if (objCliente == null) {
+			objCliente =  clienteDAO.cadastrar(cliente);
+		}
 		
+		return objCliente;	
 	}
 
 	public Cliente consultarCliente(Cliente cliente) {
@@ -32,4 +37,8 @@ public class ClienteBO {
 		return clientes;
 	}
 	
+	public Cliente consultarClientePorCpf(String cpf) {
+		objCliente = clienteDAO.consultarPorCpf(cpf);
+		return objCliente;
+	}
 }
