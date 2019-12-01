@@ -14,11 +14,13 @@ import javax.swing.JComboBox;
 //import controller.ControladoraUsuario;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControllerCliente;
 import controller.ControllerMecanico;
 import controller.ControllerOrcamento;
 import controller.ControllerServico;
@@ -34,7 +36,8 @@ import java.awt.Font;
 public class PainelCadastroOrcamento extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtTelefone;
-//	private ControladoraUsuario controllerUsuario = new ControladoraUsuario();
+	private ControllerCliente controllerCliente = new ControllerCliente();
+	private Cliente cliente = new Cliente();
 	private String msg = "";
 	private JFormattedTextField textCPF = new JFormattedTextField();
 	private JFormattedTextField txtCPF;
@@ -93,7 +96,7 @@ public class PainelCadastroOrcamento extends JPanel {
 				String nome = txtNome.getText();
 				String cpf = textCPF.getText().replace(".", "").replace("-", "");
 				String telefone = txtTelefone.getText();
-//				msg = controllerUsuario.cadastrarUsuarioController(nome, cpf, telefone, login, senha);
+				msg = controllerCliente.validarCampos(nome, cpf, telefone);
 				
 				Carro carro = new Carro();
 				carro.setMarca(txtMarca.getText());
@@ -102,11 +105,15 @@ public class PainelCadastroOrcamento extends JPanel {
 				carro.setModelo(txtModelo.getText());
 				carro.setPlaca(txtPlaca.getText());
 				
-				Cliente cliente = new Cliente();
-				cliente.setNome(nome);
-				cliente.setCpf(cpf);
-				cliente.setTelefone(telefone);
-				cliente.setCarro(carro);
+				if (msg.isEmpty()) {
+					cliente.setNome(nome);
+					cliente.setCpf(cpf);
+					cliente.setTelefone(telefone);
+					cliente.setCarro(carro);
+				}else {
+					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 				
 				Orcamento orcamento = new Orcamento();
 				orcamento.setCliente(cliente);

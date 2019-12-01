@@ -51,7 +51,7 @@ public class TelaPrincipal2 extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal2() {
-		setTitle("Gerencia de Pe\u00E7as e Servi\u00E7os");
+		setTitle("Ger\u00EAncia de Pe\u00E7as e Servi\u00E7os");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 930, 800);
 		contentPane = new JPanel();
