@@ -10,7 +10,7 @@ public class CarroBO {
 
 	public Carro cadastrarCarro(Carro carro) {
 		consultarPorPlaca(carro.getPlaca());
-		if (objCarro == null) {
+		if (objCarro.getIdCarro() == 0) {
 			objCarro = carroDAO.cadastrar(carro);
 			
 		}

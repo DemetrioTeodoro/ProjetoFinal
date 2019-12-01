@@ -13,7 +13,7 @@ public class ClienteBO {
 
 	public Cliente cadastrarCliente(Cliente cliente) {
 		consultarClientePorCpf(cliente.getCpf());
-		if (objCliente == null) {
+		if (objCliente.getIdCliente() == 0) {
 			objCliente =  clienteDAO.cadastrar(cliente);
 		}
 		

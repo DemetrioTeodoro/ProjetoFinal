@@ -40,7 +40,6 @@ public class PainelCadastroOrcamento extends JPanel {
 	private ControllerCliente controllerCliente = new ControllerCliente();
 	private Cliente cliente = new Cliente();
 	private String msg = "";
-	private JFormattedTextField textCPF = new JFormattedTextField();
 	private JFormattedTextField txtCPF;
 	private JTextField txtModelo;
 	private JTextField txtPlaca;
@@ -96,7 +95,7 @@ public class PainelCadastroOrcamento extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String msg = "";
 				String nome = txtNome.getText();
-				String cpf = textCPF.getText().replace(".", "").replace("-", "");
+				String cpf = txtCPF.getText().replace(".", "").replace("-", "");
 				String telefone = txtTelefone.getText();
 				msg = controllerCliente.validarCampos(nome, cpf, telefone);
 				
@@ -112,9 +111,9 @@ public class PainelCadastroOrcamento extends JPanel {
 					cliente.setCpf(cpf);
 					cliente.setTelefone(telefone);
 					cliente.setCarro(carro);
-					controllerCliente.cadastrarCliente(cliente);
+					cliente = controllerCliente.cadastrarCliente(cliente);
 					carro.setIdCliente(cliente.getIdCliente());
-					controllerCarro.cadastrarCarro(carro);
+					carro = controllerCarro.cadastrarCarro(carro);
 					
 					Orcamento orcamento = new Orcamento();
 					orcamento.setIdCarro(carro.getIdCarro());

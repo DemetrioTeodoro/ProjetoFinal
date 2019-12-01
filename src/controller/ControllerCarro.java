@@ -9,23 +9,20 @@ public class ControllerCarro {
 CarroBO carroBO = new CarroBO();
 
 	
-	public String cadastrarCarro(Carro carro) {		
-		String msg = null;		
+	public Carro cadastrarCarro(Carro carro) {			
 		carroBO.cadastrarCarro(carro);
-		return msg;
+		return carro;
 	}
 	
 	
-	public String consultarCarro(Carro carro) {
-		String msg = null;
+	public Carro consultarCarro(Carro carro) {
 		carroBO.consultarCarro(carro);
-		return msg;
+		return carro;
 	}
 	
-	public String alterarCarro(Carro carro) {
-		String msg = null;
+	public Carro alterarCarro(Carro carro) {
 		carroBO.alterarCliente(carro);
-		return msg;
+		return carro;
 	}
 	
 	public String deletarCarrro(int id) {

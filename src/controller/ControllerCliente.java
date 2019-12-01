@@ -8,26 +8,23 @@ public class ControllerCliente {
 	
 	ClienteBO clienteBO = new ClienteBO();
 	
-	public String cadastrarCliente(Cliente cliente) {
-		String msg = null;		
+	public Cliente cadastrarCliente(Cliente cliente) {	
 		clienteBO.cadastrarCliente(cliente);
-		return msg;
+		return cliente;
 	}
 	
 	
-	public String consultarCliente(Cliente cliente) {
-		String msg = null;
+	public Cliente consultarCliente(Cliente cliente) {
 		clienteBO.consultarCliente(cliente);
-		return msg;
+		return cliente;
 	}
 	
-	public String alterarPeca(Cliente cliente) {
-		String msg = null;
+	public Cliente alterarCliente(Cliente cliente) {
 		clienteBO.alterarCliente(cliente);
-		return msg;
+		return cliente;
 	}
 	
-	public String deletarPeca(int id) {
+	public String deletarCliente(int id) {
 		String msg = null;
 		clienteBO.deletarCliente(id);
 		return msg;

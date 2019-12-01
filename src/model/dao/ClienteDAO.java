@@ -72,7 +72,7 @@ public class ClienteDAO implements BaseDAO<Cliente> {
 
 	public Cliente consultarPorCpf(String cpf) {
 		Connection conn = Banco.getConnection();
-		String sql = " SELECT * FROM CLIENTEO"
+		String sql = " SELECT * FROM CLIENTE"
 				+ " WHERE CPF = " + cpf;
 
 		Connection conexao = Banco.getConnection();

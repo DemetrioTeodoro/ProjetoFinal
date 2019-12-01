@@ -67,7 +67,7 @@ public class CarroDAO implements BaseDAO<Carro> {
 	public Carro consultarPorPlaca(String placa) {
 		Connection conn = Banco.getConnection();
 		String sql = " SELECT * FROM CARRO"
-				+ " WHERE PLACA = " + placa;
+				+ " WHERE PLACA = '" + placa + "'";
 
 		Connection conexao = Banco.getConnection();
 		ResultSet resultadoDaConsulta = null;
