@@ -38,7 +38,12 @@ public class PainelCadastroOrcamento extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtTelefone;
 	private ControllerCliente controllerCliente = new ControllerCliente();
+	private ControllerOrcamento controllerOrcamento = new ControllerOrcamento();
+	private ControllerCarro controllerCarro = new ControllerCarro();
+	private Orcamento orcamento = new Orcamento();
 	private Cliente cliente = new Cliente();
+	private Carro carro = new Carro();
+	private JTable table;
 	private String msg = "";
 	private JFormattedTextField txtCPF;
 	private JTextField txtModelo;
@@ -56,9 +61,6 @@ public class PainelCadastroOrcamento extends JPanel {
 	
 	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-	ControllerOrcamento controller = new ControllerOrcamento();
-	ControllerCarro controllerCarro = new ControllerCarro();
-	private JTable table;
 	/**
 	 * Create the panel.
 	 */
@@ -97,16 +99,21 @@ public class PainelCadastroOrcamento extends JPanel {
 				String nome = txtNome.getText();
 				String cpf = txtCPF.getText().replace(".", "").replace("-", "");
 				String telefone = txtTelefone.getText();
-				msg = controllerCliente.validarCampos(nome, cpf, telefone);
-				
-				Carro carro = new Carro();
-				carro.setMarca(txtMarca.getText());
-				carro.setAno(Integer.parseInt(txtAno.getText()));
-				carro.setCor(txtCor.getText());
-				carro.setModelo(txtModelo.getText());
-				carro.setPlaca(txtPlaca.getText());
+				String marca = carro.setMarca(txtMarca.getText());
+				int ano = carro.setAno(Integer.parseInt(txtAno.getText()));
+				String cor = carro.setCor(txtCor.getText());
+				String modelo = carro.setModelo(txtModelo.getText());
+				String placa = (String) carro.setPlaca(txtPlaca.getText());
+				msg += controllerOrcamento.validarCamposCliente(nome, cpf, telefone);
+				msg += controllerOrcamento.validarCamposCarro(marca, ano, cor, modelo, placa);
 				
 				if (msg.isEmpty()) {
+					carro.setMarca(txtMarca.getText());
+					carro.setAno(Integer.parseInt(txtAno.getText()));
+					carro.setCor(txtCor.getText());
+					carro.setModelo(txtModelo.getText());
+					carro.setPlaca(txtPlaca.getText());
+				
 					cliente.setNome(nome);
 					cliente.setCpf(cpf);
 					cliente.setTelefone(telefone);
@@ -115,13 +122,14 @@ public class PainelCadastroOrcamento extends JPanel {
 					carro.setIdCliente(cliente.getIdCliente());
 					carro = controllerCarro.cadastrarCarro(carro);
 					
-					Orcamento orcamento = new Orcamento();
 					orcamento.setIdCarro(carro.getIdCarro());
 					orcamento.setDescricao(txtDescricao.getText());
 					orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
 					orcamento.setIdSituacao(0);
-					controller.cadastrarOrcamento(orcamento);
+					controllerOrcamento.cadastrarOrcamento(orcamento);
 					limparCampos();
+					
+					JOptionPane.showMessageDialog(null, "Orçamento cadastrado com sucesso! ");
 					
 				}else {
 					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.INFORMATION_MESSAGE);
@@ -374,12 +382,14 @@ public class PainelCadastroOrcamento extends JPanel {
 		txtNome.setText("");
 		txtCPF.setText("");
 		txtTelefone.setText("");
+		txtCor.setText("");
 		txtAno.setText("");
 		txtDescricao.setText("");
 		txtModelo.setText("");
 		txtMarca.setText("");
 		txtDtEntrada.setText("");
 		txtPlaca.setText("");
+		cbSituacao.setSelectedIndex(-1);
 	}
 	
 	
