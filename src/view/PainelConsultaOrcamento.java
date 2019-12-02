@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControllerMecanico;
 import controller.ControllerOrcamento;
 import controller.ControllerSituacao;
+import model.entity.Carro;
+import model.entity.Cliente;
 import model.entity.Orcamento;
 import model.entity.Peca;
 
@@ -28,6 +30,8 @@ public class PainelConsultaOrcamento extends JPanel {
 	private JTable tblOrcamento;
 	private String[] colunasTabelaOrc = { "#ID"," CLIENTE", "CARRO", "DATA ENTRADA", "VALOR TOTAL", "SITUAÇÃO" };
 	private ArrayList<Orcamento>orcamentos;
+	private ArrayList<Cliente>clientes;
+	private ArrayList<Carro>carros;
 	ControllerOrcamento controller = new ControllerOrcamento();
 	ControllerMecanico controllerMecanico = new ControllerMecanico();
 	
@@ -211,8 +215,8 @@ public class PainelConsultaOrcamento extends JPanel {
 		for (Orcamento orc : orcamentos) {
 			String[] novaLinha = new String[6];
 			novaLinha[0] = String.valueOf(orc.getIdOrcamento());
-			novaLinha[1] = String.valueOf(orc.getIdCarro());
-			novaLinha[2] = String.valueOf(orc.getIdCarro());
+			novaLinha[1] = String.valueOf(orc.getCliente().getNome());
+			novaLinha[2] = String.valueOf(orc.getCliente().getCarro().getModelo());
 			novaLinha[3] = String.valueOf(orc.getDataInicio());
 			novaLinha[4] = String.valueOf(orc.getValorTotal());
 			novaLinha[5] = String.valueOf(orc.getIdSituacao());			

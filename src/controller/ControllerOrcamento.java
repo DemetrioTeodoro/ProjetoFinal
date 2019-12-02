@@ -85,7 +85,7 @@ public class ControllerOrcamento {
 			mensagem += " Por favor, informe o modelo do carro! \n";
 		}
 		
-		if (placa.isEmpty() || marca.trim().length() < 6) {
+		if (placa.isEmpty() || placa.trim().length() != 7) {
 			mensagem += " Por favor, informe a placa corretamente! \n";
 		}
 		

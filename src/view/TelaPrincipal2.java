@@ -62,7 +62,7 @@ public class TelaPrincipal2 extends JFrame {
 		
 		painelEsquerdo = new JPanel();
 		sl_contentPane.putConstraint(SpringLayout.WEST, painelEsquerdo, -5, SpringLayout.WEST, contentPane);
-		painelEsquerdo.setBackground(Color.GRAY);
+		painelEsquerdo.setBackground(Color.LIGHT_GRAY);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, painelEsquerdo, 5, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, painelEsquerdo, 55, SpringLayout.SOUTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, painelEsquerdo, 262, SpringLayout.WEST, contentPane);

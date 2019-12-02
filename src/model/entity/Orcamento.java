@@ -16,6 +16,7 @@ public class Orcamento {
 	private int idServico;
 	private int idOrcamento;
 	private int idCarro;
+	private Cliente cliente;
 
 
 	public Orcamento() {
@@ -119,6 +120,14 @@ public class Orcamento {
 
 	public void setIdServico(int idServico) {
 		this.idServico = idServico;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

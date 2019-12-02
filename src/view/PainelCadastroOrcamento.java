@@ -122,6 +122,7 @@ public class PainelCadastroOrcamento extends JPanel {
 					carro.setIdCliente(cliente.getIdCliente());
 					carro = controllerCarro.cadastrarCarro(carro);
 					
+					orcamento.setCliente(cliente);
 					orcamento.setIdCarro(carro.getIdCarro());
 					orcamento.setDescricao(txtDescricao.getText());
 					orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
@@ -184,6 +185,7 @@ public class PainelCadastroOrcamento extends JPanel {
 		ControllerSituacao controllerSituacao = new ControllerSituacao();
 		situacoes = controllerSituacao.consultarSituacao();	
 		cbSituacao = new JComboBox(situacoes.toArray());
+		cbSituacao.setEnabled(false);
 		cbSituacao.setSelectedIndex(-1);
 		
 		txtDtEntrada = new JTextField();
