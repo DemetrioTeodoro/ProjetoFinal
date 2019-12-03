@@ -133,7 +133,7 @@ public class PainelCadastroOrcamento extends JPanel {
 					JOptionPane.showMessageDialog(null, "Orçamento cadastrado com sucesso! ");
 					
 				}else {
-					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.WARNING_MESSAGE);
 				}
 	
 			}
