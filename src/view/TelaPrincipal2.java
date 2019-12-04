@@ -18,6 +18,19 @@ public class TelaPrincipal2 extends JFrame {
 
 	public static final String OPCAO_SELECIONE = "   --Selecione--";
 	private JPanel contentPane;
+	private JButton btnAlteraPeca;
+	private JButton btnCadastroPeca;
+	private JButton btnCadastroOrcamento;
+	private JButton btnConsultaPeca;
+	private JButton btnConsultaOrcamento;
+	private JButton btnAlterarOrcamento;
+	private JLabel lblLinha2;
+	private JLabel lblConsulta;
+	private JLabel lblLinha3;
+	private JLabel lblLinha4;
+	private JLabel lblAlterar;
+	private JLabel lblLinha5;
+	private JLabel lblLinha6;
 	private JPanel painelDireito = new JPanel();
 	private JPanel painelEsquerdo = new JPanel();
 	
@@ -31,6 +44,84 @@ public class TelaPrincipal2 extends JFrame {
 	private PainelDeletarPeca painelDeletarPeca = new PainelDeletarPeca();
 	private PainelAjuda painelAjuda = new PainelAjuda();
 	
+	public JLabel getLblLinha2() {
+		return lblLinha2;
+	}
+	public void setLblLinha2(JLabel lblLinha2) {
+		this.lblLinha2 = lblLinha2;
+	}
+	public JLabel getLblConsulta() {
+		return lblConsulta;
+	}
+	public void setLblConsulta(JLabel lblConsulta) {
+		this.lblConsulta = lblConsulta;
+	}
+	public JLabel getLblLinha3() {
+		return lblLinha3;
+	}
+	public void setLblLinha3(JLabel lblLinha3) {
+		this.lblLinha3 = lblLinha3;
+	}
+	public JLabel getLblLinha4() {
+		return lblLinha4;
+	}
+	public void setLblLinha4(JLabel lblLinha4) {
+		this.lblLinha4 = lblLinha4;
+	}
+	public JLabel getLblAlterar() {
+		return lblAlterar;
+	}
+	public void setLblAlterar(JLabel lblAlterar) {
+		this.lblAlterar = lblAlterar;
+	}
+	public JLabel getLblLinha5() {
+		return lblLinha5;
+	}
+	public void setLblLinha5(JLabel lblLinha5) {
+		this.lblLinha5 = lblLinha5;
+	}
+	public JLabel getLblLinha6() {
+		return lblLinha6;
+	}
+	public void setLblLinha6(JLabel lblLinha6) {
+		this.lblLinha6 = lblLinha6;
+	}
+	public JButton getBtnAlteraPeca() {
+		return btnAlteraPeca;
+	}
+	public void setBtnAlteraPeca(JButton btnAlteraPeca) {
+		this.btnAlteraPeca = btnAlteraPeca;
+	}
+	public JButton getBtnCadastroPeca() {
+		return btnCadastroPeca;
+	}
+	public void setBtnCadastroPeca(JButton btnCadastroPeca) {
+		this.btnCadastroPeca = btnCadastroPeca;
+	}
+	public JButton getBtnCadastroOrcamento() {
+		return btnCadastroOrcamento;
+	}
+	public void setBtnCadastroOrcamento(JButton btnCadastroOrcamento) {
+		this.btnCadastroOrcamento = btnCadastroOrcamento;
+	}
+	public JButton getBtnConsultaPeca() {
+		return btnConsultaPeca;
+	}
+	public void setBtnConsultaPeca(JButton btnConsultaPeca) {
+		this.btnConsultaPeca = btnConsultaPeca;
+	}
+	public JButton getBtnConsultaOrcamento() {
+		return btnConsultaOrcamento;
+	}
+	public void setBtnConsultaOrcamento(JButton btnConsultaOrcamento) {
+		this.btnConsultaOrcamento = btnConsultaOrcamento;
+	}
+	public JButton getBtnAlterarOrcamento() {
+		return btnAlterarOrcamento;
+	}
+	public void setBtnAlterarOrcamento(JButton btnAlterarOrcamento) {
+		this.btnAlterarOrcamento = btnAlterarOrcamento;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -82,14 +173,15 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, lblCadastro, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
 		painelEsquerdo.add(lblCadastro);
 		
-		JLabel label = new JLabel("______________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, label, 0, SpringLayout.NORTH, lblCadastro);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, label, 6, SpringLayout.EAST, lblCadastro);
-		painelEsquerdo.add(label);
+		JLabel lblLinha1 = new JLabel("______________________");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblLinha1, 0, SpringLayout.NORTH, lblCadastro);
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, lblLinha1, 6, SpringLayout.EAST, lblCadastro);
+		painelEsquerdo.add(lblLinha1);
 		
-		JLabel label_1 = new JLabel("_________________________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, label_1, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
-		painelEsquerdo.add(label_1);
+		lblLinha2 = new JLabel("_________________________________");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblLinha2, 213, SpringLayout.NORTH, painelEsquerdo);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, lblLinha2, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
+		painelEsquerdo.add(lblLinha2);
 		
 		painelDireito = new JPanel();
 		sl_contentPane.putConstraint(SpringLayout.NORTH, painelDireito, 5, SpringLayout.NORTH, contentPane);
@@ -99,116 +191,115 @@ public class TelaPrincipal2 extends JFrame {
 		
 		incluirPaineisEscondidos();
 		
-		JButton btnCadastroPeca = new JButton("Pe\u00E7a");
+		btnCadastroPeca = new JButton("Pe\u00E7a");
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnCadastroPeca, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnCadastroPeca, -4, SpringLayout.NORTH, lblLinha2);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnCadastroPeca, -26, SpringLayout.EAST, lblOficinaMecanicaAutobot);
 		btnCadastroPeca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mostrarPainel(painelCadastroPeca);
 			}
 		});
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, label_1, 62, SpringLayout.SOUTH, btnCadastroPeca);
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnCadastroPeca, 16, SpringLayout.SOUTH, lblCadastro);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnCadastroPeca, 10, SpringLayout.WEST, painelEsquerdo);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnCadastroPeca, 57, SpringLayout.SOUTH, lblCadastro);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnCadastroPeca, -26, SpringLayout.EAST, lblOficinaMecanicaAutobot);
 		btnCadastroPeca.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/settings-icon.png")));
 		painelEsquerdo.add(btnCadastroPeca);
 		
-		JButton btnCadastroOrcamento = new JButton("Or\u00E7amento");
+		btnCadastroOrcamento = new JButton("Or\u00E7amento");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnCadastroOrcamento, 16, SpringLayout.SOUTH, lblCadastro);
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnCadastroOrcamento, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnCadastroOrcamento, -62, SpringLayout.NORTH, lblLinha2);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnCadastroOrcamento, -52, SpringLayout.EAST, painelEsquerdo);
 		btnCadastroOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelCadastroOrcamento);
 			}
 		});
 		btnCadastroOrcamento.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/Documents-icon.png")));
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnCadastroOrcamento, -47, SpringLayout.NORTH, label_1);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnCadastroOrcamento, 10, SpringLayout.WEST, painelEsquerdo);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnCadastroOrcamento, -6, SpringLayout.NORTH, label_1);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnCadastroOrcamento, 0, SpringLayout.EAST, btnCadastroPeca);
 		painelEsquerdo.add(btnCadastroOrcamento);
 		
-		JLabel lblConsulta = new JLabel("Consulta");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblConsulta, 6, SpringLayout.SOUTH, label_1);
+		lblConsulta = new JLabel("Consulta");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblConsulta, 6, SpringLayout.SOUTH, lblLinha2);
 		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, lblConsulta, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
 		lblConsulta.setFont(new Font("Tahoma", Font.BOLD, 17));
 		painelEsquerdo.add(lblConsulta);
 		
-		JLabel label_2 = new JLabel("______________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, label_2, 6, SpringLayout.SOUTH, label_1);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, label_2, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
-		painelEsquerdo.add(label_2);
+		lblLinha3 = new JLabel("______________________");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblLinha3, 6, SpringLayout.SOUTH, lblLinha2);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, lblLinha3, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
+		painelEsquerdo.add(lblLinha3);
 		
-		JButton btnConsultaPeca = new JButton("Pe\u00E7a");
+		btnConsultaPeca = new JButton("Pe\u00E7a");
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnConsultaPeca, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnConsultaPeca, -52, SpringLayout.EAST, painelEsquerdo);
 		btnConsultaPeca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelConsultarPeca);
 			}
 		});
 		btnConsultaPeca.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/settings-icon.png")));
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnConsultaPeca, 6, SpringLayout.SOUTH, lblConsulta);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnConsultaPeca, 10, SpringLayout.WEST, painelEsquerdo);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnConsultaPeca, 47, SpringLayout.SOUTH, lblConsulta);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnConsultaPeca, 0, SpringLayout.EAST, btnCadastroPeca);
 		painelEsquerdo.add(btnConsultaPeca);
 		
-		JButton btnConsultaOrcamento = new JButton("Or\u00E7amento");
+		btnConsultaOrcamento = new JButton("Or\u00E7amento");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnConsultaOrcamento, 6, SpringLayout.SOUTH, lblConsulta);
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnConsultaOrcamento, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnConsultaOrcamento, -13, SpringLayout.NORTH, btnConsultaPeca);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnConsultaOrcamento, 0, SpringLayout.EAST, btnCadastroPeca);
 		btnConsultaOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelConsultaOrcamento);
 			}
 		});
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnConsultaOrcamento, 13, SpringLayout.SOUTH, btnConsultaPeca);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnConsultaOrcamento, 10, SpringLayout.WEST, painelEsquerdo);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnConsultaOrcamento, 54, SpringLayout.SOUTH, btnConsultaPeca);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnConsultaOrcamento, 0, SpringLayout.EAST, btnCadastroPeca);
 		btnConsultaOrcamento.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/Documents-icon.png")));
 		painelEsquerdo.add(btnConsultaOrcamento);
 		
-		JLabel label_3 = new JLabel("_________________________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, label_3, 6, SpringLayout.SOUTH, btnConsultaOrcamento);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, label_3, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
-		painelEsquerdo.add(label_3);
+		lblLinha4 = new JLabel("_________________________________");
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnConsultaPeca, -6, SpringLayout.NORTH, lblLinha4);
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblLinha4, 363, SpringLayout.NORTH, painelEsquerdo);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, lblLinha4, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
+		painelEsquerdo.add(lblLinha4);
 		
-		JLabel lblAlterar = new JLabel("Alterar");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblAlterar, 6, SpringLayout.SOUTH, label_3);
+		lblAlterar = new JLabel("Alterar");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblAlterar, 6, SpringLayout.SOUTH, lblLinha4);
 		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, lblAlterar, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
 		lblAlterar.setFont(new Font("Tahoma", Font.BOLD, 17));
 		painelEsquerdo.add(lblAlterar);
 		
-		JLabel label_4 = new JLabel("______________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, label_4, 6, SpringLayout.SOUTH, label_3);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, label_4, 6, SpringLayout.EAST, lblAlterar);
-		painelEsquerdo.add(label_4);
+		lblLinha5 = new JLabel("______________________");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblLinha5, 6, SpringLayout.SOUTH, lblLinha4);
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, lblLinha5, 6, SpringLayout.EAST, lblAlterar);
+		painelEsquerdo.add(lblLinha5);
 		
-		JButton btnAlteraPeca = new JButton("Pe\u00E7a");
+		btnAlteraPeca = new JButton("Pe\u00E7a");
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnAlteraPeca, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnAlteraPeca, 0, SpringLayout.EAST, btnCadastroPeca);
 		btnAlteraPeca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelAlterarPeca);
 			}
 		});
 		btnAlteraPeca.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/settings-icon.png")));
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnAlteraPeca, 6, SpringLayout.SOUTH, lblAlterar);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnAlteraPeca, 10, SpringLayout.WEST, painelEsquerdo);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnAlteraPeca, 47, SpringLayout.SOUTH, lblAlterar);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnAlteraPeca, 0, SpringLayout.EAST, btnCadastroPeca);
 		painelEsquerdo.add(btnAlteraPeca);
 		
-		JButton btnAlterarOrcamento = new JButton("Or\u00E7amento");
+		btnAlterarOrcamento = new JButton("Or\u00E7amento");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnAlterarOrcamento, 11, SpringLayout.SOUTH, lblAlterar);
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnAlterarOrcamento, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnAlterarOrcamento, -52, SpringLayout.EAST, painelEsquerdo);
 		btnAlterarOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelAlterarOrcamento);
 			}
 		});
 		btnAlterarOrcamento.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/Documents-icon.png")));
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnAlterarOrcamento, 13, SpringLayout.SOUTH, btnAlteraPeca);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnAlterarOrcamento, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnAlterarOrcamento, 54, SpringLayout.SOUTH, btnAlteraPeca);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnAlterarOrcamento, 0, SpringLayout.EAST, btnCadastroPeca);
 		painelEsquerdo.add(btnAlterarOrcamento);
 		
-		JLabel label_5 = new JLabel("_________________________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, label_5, 6, SpringLayout.SOUTH, btnAlterarOrcamento);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, label_5, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
-		painelEsquerdo.add(label_5);
+		lblLinha6 = new JLabel("_________________________________");
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnAlteraPeca, -63, SpringLayout.SOUTH, lblLinha6);
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnAlteraPeca, -6, SpringLayout.NORTH, lblLinha6);
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnAlterarOrcamento, -55, SpringLayout.NORTH, lblLinha6);
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblLinha6, 513, SpringLayout.NORTH, painelEsquerdo);
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnConsultaPeca, -213, SpringLayout.SOUTH, lblLinha6);
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnCadastroPeca, -361, SpringLayout.SOUTH, lblLinha6);
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, lblLinha6, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
+		painelEsquerdo.add(lblLinha6);
 		
 		JButton btnSair = new JButton("Sair");
 		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnSair, 10, SpringLayout.WEST, painelEsquerdo);
@@ -220,20 +311,20 @@ public class TelaPrincipal2 extends JFrame {
 		});
 		painelEsquerdo.add(btnSair);
 		
-		JButton button = new JButton("");
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, button, 97, SpringLayout.EAST, btnSair);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, button, -26, SpringLayout.EAST, painelEsquerdo);
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnSair, -41, SpringLayout.SOUTH, button);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnSair, 0, SpringLayout.SOUTH, button);
-		button.addActionListener(new ActionListener() {
+		JButton btnAjuda = new JButton("");
+		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnAjuda, 97, SpringLayout.EAST, btnSair);
+		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnAjuda, -26, SpringLayout.EAST, painelEsquerdo);
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnSair, -41, SpringLayout.SOUTH, btnAjuda);
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnSair, 0, SpringLayout.SOUTH, btnAjuda);
+		btnAjuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarPainel(painelAjuda);
 			}
 		});
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, button, -103, SpringLayout.SOUTH, painelEsquerdo);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, button, -56, SpringLayout.SOUTH, painelEsquerdo);
-		button.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/Help-icon.png")));
-		painelEsquerdo.add(button);
+		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnAjuda, -103, SpringLayout.SOUTH, painelEsquerdo);
+		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnAjuda, -56, SpringLayout.SOUTH, painelEsquerdo);
+		btnAjuda.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/Help-icon.png")));
+		painelEsquerdo.add(btnAjuda);
 		contentPane.add(painelDireito);
 	}
 	

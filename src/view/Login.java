@@ -77,29 +77,49 @@ public class Login extends JFrame {
 				System.exit(0);
 			}
 		});
+		
+		JButton btnCliente = new JButton("Cliente");
+		btnCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaPrincipal2 telaPrincipal2 = new TelaPrincipal2();
+				telaPrincipal2.getBtnAlteraPeca().setVisible(false);
+				telaPrincipal2.getBtnAlterarOrcamento().setVisible(false);
+				telaPrincipal2.getBtnCadastroPeca().setVisible(false);
+				telaPrincipal2.getBtnConsultaOrcamento().setVisible(false);
+				telaPrincipal2.getBtnConsultaPeca().setVisible(false);
+				telaPrincipal2.getLblLinha2().setVisible(false);
+				telaPrincipal2.getLblConsulta().setVisible(false);
+				telaPrincipal2.getLblLinha3().setVisible(false);
+				telaPrincipal2.getLblLinha4().setVisible(false);
+				telaPrincipal2.getLblAlterar().setVisible(false);
+				telaPrincipal2.getLblLinha5().setVisible(false);
+				telaPrincipal2.getLblLinha6().setVisible(false);
+				telaPrincipal2.setVisible(true);
+				telaPrincipal2.setExtendedState(MAXIMIZED_BOTH);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(44)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(44)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblSenha)
-								.addComponent(lblNome)
-								.addComponent(btnFechar, Alignment.TRAILING))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(passwd, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(169)
-							.addComponent(lblLogin)))
-					.addContainerGap(153, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(282, Short.MAX_VALUE)
-					.addComponent(btnEntrar)
-					.addGap(43))
+						.addComponent(lblSenha)
+						.addComponent(lblNome)
+						.addComponent(btnFechar, Alignment.TRAILING))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(passwd, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnEntrar)
+						.addComponent(btnCliente))
+					.addGap(41))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(169)
+					.addComponent(lblLogin)
+					.addContainerGap(198, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -109,15 +129,16 @@ public class Login extends JFrame {
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNome)
-						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnCliente))
 					.addGap(32)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(passwd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblSenha))
 					.addGap(43)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEntrar)
-						.addComponent(btnFechar))
+						.addComponent(btnFechar)
+						.addComponent(btnEntrar))
 					.addContainerGap(43, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);

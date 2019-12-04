@@ -29,10 +29,10 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		try {
-			stmt.setInt(1, orcamento.getIdCarro());
+			stmt.setInt(1, orcamento.getCarro().getIdCarro());
 			stmt.setString(2, orcamento.getDescricao());
 			stmt.setDate(3, Date.valueOf(orcamento.getDataInicio()));
-			stmt.setInt(4, orcamento.getIdSituacao());
+			stmt.setInt(4, orcamento.getSituacao().getIdSituacao());
 						
 			stmt.execute();
 			

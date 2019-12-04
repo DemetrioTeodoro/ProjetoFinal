@@ -329,7 +329,28 @@ public class PecaDAO implements BaseDAO<Peca> {
 
 
 	public String excluirPeca(String codigo) {
-		// TODO Auto-generated method stub
+		Connection conexao = Banco.getConnection();
+		Statement statement = Banco.getStatement(conexao);
+		String sql = " DELETE FROM ITEM_PECA WHERE CODIGO = " + codigo;
+
+		int quantidadeRegistrosExcluidos = 0;
+		try {
+			quantidadeRegistrosExcluidos = statement.executeUpdate(sql);
+			
+			if (quantidadeRegistrosExcluidos > 0) {
+				sql = " DELETE FROM PECA WHERE CODIGO = " + codigo;
+				quantidadeRegistrosExcluidos = quantidadeRegistrosExcluidos + statement.executeUpdate(sql);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir peça.");
+			System.out.println("Erro: " + e.getMessage());
+		}finally {
+			Banco.closePreparedStatement(statement);
+			Banco.closeConnection(conexao);
+		}
+
 		return null;
 	}
 }
