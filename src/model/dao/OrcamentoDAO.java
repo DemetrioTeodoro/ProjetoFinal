@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import model.entity.Mecanico;
 import model.entity.Orcamento;
 import model.entity.Peca;
 
@@ -128,21 +129,32 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 			String descricao = rs.getString("DESCRICAO");
 			double ValPecas = rs.getDouble("VALORPECAS");
 			double ValMaoObra = rs.getDouble("VALORMAOOBRA");
-			LocalDate dataInicio = (LocalDate.parse((CharSequence) rs.getDate("DATAINICIO").toString(), formatador));
+			
+			Date dataInicioBanco = rs.getDate("DATAINICIO");
+			
+			orc = new Orcamento();
+			
+			if(dataInicioBanco != null) {
+				LocalDate dataInicio = (LocalDate.parse((CharSequence) dataInicioBanco.toString(), formatador));
+				orc.setDataInicio(dataInicio);
+			}
+			
 			LocalDate dataFinal = (LocalDate.parse((CharSequence) rs.getDate("DATAFINAL").toString(), formatador));
+			
 			int idMecanico = rs.getInt("IDMECANICO");
+			
+			MecanicoDAO mecDAO = new MecanicoDAO();
+			Mecanico mecanicoDoOrcamento = mecDAO.consultarPorId(idMecanico);
+			
 			int idCarro = rs.getInt("IDCARRO");
 			int idSituacao = rs.getInt("IDSITUACAO");
 			int idServico = rs.getInt("IDSERVICO");
 				
-			
-			orc = new Orcamento();
 			orc.setIdOrcamento(id);
 			orc.setNumeroOrcamento(numeroOrcamento);
 			orc.setDescricao(descricao);
 			orc.setValorPeca(ValPecas);
 			orc.setValorMaoObra(ValMaoObra);
-			orc.setDataInicio(dataInicio);
 			orc.setDataFinal(dataFinal);
 			orc.setIdMecanico(idMecanico);
 			orc.setIdCarro(idCarro);

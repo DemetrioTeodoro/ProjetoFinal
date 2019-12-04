@@ -11,11 +11,11 @@ public class Orcamento {
 	private double valorTotal;
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
-	private int idMecanico;
-	private int idSituacao;
-	private int idServico;
+	private Mecanico mecanico;
+	private Situacao situacao;
+	private Servico servico;
 	private int idOrcamento;
-	private int idCarro;
+	private Carro carro;
 	private Cliente cliente;
 
 
@@ -80,15 +80,7 @@ public class Orcamento {
 	public void setIdOrcamento(int idOrcamento) {
 		this.idOrcamento = idOrcamento;
 	}
-
-	public int getIdCarro() {
-		return idCarro;
-	}
-
-	public void setIdCarro(int idCarro) {
-		this.idCarro = idCarro;
-	}
-
+	
 
 	public double getValorTotal() {
 		return valorTotal;
@@ -98,29 +90,6 @@ public class Orcamento {
 		this.valorTotal = valorTotal;
 	}
 
-	public int getIdMecanico() {
-		return idMecanico;
-	}
-
-	public void setIdMecanico(int idMecanico) {
-		this.idMecanico = idMecanico;
-	}
-
-	public int getIdSituacao() {
-		return idSituacao;
-	}
-
-	public void setIdSituacao(int idSituacao) {
-		this.idSituacao = idSituacao;
-	}
-
-	public int getIdServico() {
-		return idServico;
-	}
-
-	public void setIdServico(int idServico) {
-		this.idServico = idServico;
-	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -128,6 +97,38 @@ public class Orcamento {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Mecanico getMecanico() {
+		return mecanico;
+	}
+
+	public void setMecanico(Mecanico mecanico) {
+		this.mecanico = mecanico;
+	}
+
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
+	}
+
+	public Servico getServico() {
+		return servico;
+	}
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
+	}
+
+	public Carro getCarro() {
+		return carro;
+	}
+
+	public void setCarro(Carro carro) {
+		this.carro = carro;
 	}
 	
 	
