@@ -104,8 +104,8 @@ public class PainelCadastroOrcamento extends JPanel {
 				String cor = carro.setCor(txtCor.getText());
 				String modelo = carro.setModelo(txtModelo.getText());
 				String placa = (String) carro.setPlaca(txtPlaca.getText());
-				msg += controllerOrcamento.validarCamposCliente(nome, cpf, telefone);
-				msg += controllerOrcamento.validarCamposCarro(marca, ano, cor, modelo, placa);
+				msg += controllerCliente.validarCamposCliente(nome, cpf, telefone);
+				msg += controllerCarro.validarCamposCarro(marca, ano, cor, modelo, placa);
 				
 				if (msg.isEmpty()) {
 					carro.setMarca(txtMarca.getText());
@@ -130,7 +130,7 @@ public class PainelCadastroOrcamento extends JPanel {
 					controllerOrcamento.cadastrarOrcamento(orcamento);
 					limparCampos();
 					
-					JOptionPane.showMessageDialog(null, "Orçamento cadastrado com sucesso! ");
+					JOptionPane.showMessageDialog(null, " Orçamento cadastrado com sucesso! ");
 					
 				}else {
 					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.WARNING_MESSAGE);

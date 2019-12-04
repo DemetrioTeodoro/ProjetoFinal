@@ -1,7 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-
 
 import model.bo.PecaBO;
 import model.entity.Peca;
@@ -10,6 +10,7 @@ import model.utils.GeradorPlanilhas;
 
 
 public class ControllerPeca {
+	
 	
 	Peca peca = new Peca();
 	
@@ -64,6 +65,28 @@ public class ControllerPeca {
 		PecaBO pecaBO = new PecaBO();
 		pecaBO.consultarPecaCodigo(codigo);
 		return peca;
+	}
+
+	public String validarCamposPeca(String nomePeca, String codigoPeca, double valorCompra, double valorVenda,
+			int quantidade, LocalDate dataEntrada, LocalDate dataSaida) {
+		String msg = "";
+		
+		if (nomePeca.isEmpty() || nomePeca.trim().length() < 3) {
+			msg += " Nome da peça deve possuir mais de 3 letras! ";
+		}
+		if (codigoPeca.isEmpty() || codigoPeca.trim().length() < 2) {
+			msg += " Código da peça deve possuir mais de 2 letras! ";
+		}
+		if (valorCompra == 0.00 || valorCompra == 0 || valorCompra == 00|| valorCompra == 00.00) {
+			msg += " Valor da compra da peça incorreto! ";
+		}
+		if (valorVenda == 0.00 || valorVenda == 0 || valorVenda == 00 || valorVenda == 00.00) {
+			msg += " Valor da venda da peça incorreto! ";
+		}
+		if (quantidade == 0 || quantidade == 00 || quantidade == 000 || quantidade == 0000) {
+			msg += " Quantidade deve ser maior que zero! ";
+		}
+		return msg;
 	}
 
 

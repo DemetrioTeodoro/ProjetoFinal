@@ -210,48 +210,6 @@ public class TelaPrincipal2 extends JFrame {
 		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, label_5, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
 		painelEsquerdo.add(label_5);
 		
-		JLabel lblDeletar = new JLabel("Deletar");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, lblDeletar, 6, SpringLayout.SOUTH, label_5);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, lblDeletar, 0, SpringLayout.EAST, lblAlterar);
-		lblDeletar.setFont(new Font("Tahoma", Font.BOLD, 17));
-		painelEsquerdo.add(lblDeletar);
-		
-		JLabel label_6 = new JLabel("______________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, label_6, 0, SpringLayout.WEST, label_4);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, label_6, 0, SpringLayout.SOUTH, lblDeletar);
-		painelEsquerdo.add(label_6);
-		
-		JButton btnDeletarPeca = new JButton("Pe\u00E7a");
-		btnDeletarPeca.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mostrarPainel(painelDeletarPeca);
-			}
-		});
-		btnDeletarPeca.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/settings-icon.png")));
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnDeletarPeca, 7, SpringLayout.SOUTH, lblDeletar);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnDeletarPeca, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnDeletarPeca, 48, SpringLayout.SOUTH, lblDeletar);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnDeletarPeca, 0, SpringLayout.EAST, btnCadastroPeca);
-		painelEsquerdo.add(btnDeletarPeca);
-		
-		JButton btnDeletarOrcamento = new JButton("Or\u00E7amento");
-		btnDeletarOrcamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mostrarPainel(painelDeletarOrcamento);
-			}
-		});
-		btnDeletarOrcamento.setIcon(new ImageIcon(TelaPrincipal2.class.getResource("/icones/Documents-icon.png")));
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, btnDeletarOrcamento, 11, SpringLayout.SOUTH, btnDeletarPeca);
-		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnDeletarOrcamento, 0, SpringLayout.WEST, lblOficinaMecanicaAutobot);
-		sl_painelEsquerdo.putConstraint(SpringLayout.SOUTH, btnDeletarOrcamento, 52, SpringLayout.SOUTH, btnDeletarPeca);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnDeletarOrcamento, 0, SpringLayout.EAST, btnCadastroPeca);
-		painelEsquerdo.add(btnDeletarOrcamento);
-		
-		JLabel label_7 = new JLabel("_________________________________");
-		sl_painelEsquerdo.putConstraint(SpringLayout.NORTH, label_7, 6, SpringLayout.SOUTH, btnDeletarOrcamento);
-		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, label_7, 0, SpringLayout.EAST, lblOficinaMecanicaAutobot);
-		painelEsquerdo.add(label_7);
-		
 		JButton btnSair = new JButton("Sair");
 		sl_painelEsquerdo.putConstraint(SpringLayout.WEST, btnSair, 10, SpringLayout.WEST, painelEsquerdo);
 		sl_painelEsquerdo.putConstraint(SpringLayout.EAST, btnSair, 0, SpringLayout.EAST, lblCadastro);
@@ -286,8 +244,6 @@ public class TelaPrincipal2 extends JFrame {
 		painelDireito.add(painelConsultarPeca);
 		painelDireito.add(painelAlterarOrcamento);
 		painelDireito.add(painelAlterarPeca);
-		painelDireito.add(painelDeletarOrcamento);
-		painelDireito.add(painelDeletarPeca);
 		painelDireito.add(painelAjuda);
 		esconderTodosPaineis();
 	}
@@ -299,8 +255,6 @@ public class TelaPrincipal2 extends JFrame {
 		painelConsultarPeca.setVisible(false);
 		painelAlterarOrcamento.setVisible(false);
 		painelAlterarPeca.setVisible(false);
-		painelDeletarOrcamento.setVisible(false);
-		painelDeletarPeca.setVisible(false);
 		painelAjuda.setVisible(false);
 	}
 

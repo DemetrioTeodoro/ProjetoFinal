@@ -66,6 +66,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaPrincipal2 telaPrincipal2 = new TelaPrincipal2();
 				telaPrincipal2.setVisible(true);
+				telaPrincipal2.setExtendedState(MAXIMIZED_BOTH);
 				setVisible(false);
 			}
 		});

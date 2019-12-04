@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -20,17 +22,19 @@ import model.entity.Peca;
 import java.awt.Font;
 
 public class PainelCadastroPeca extends JPanel {
-	private JTextField txtNmPeca;
-	private JTextField txtCdPeca;
+	private JTextField txtNomePeca;
+	private JTextField txtCodigoPeca;
 	private JTextField txtValorCompra;
 	private JTextField txtValorVenda;
 	private JTextField txtQuantidade;
 	private JTextField txtDtEntrada;
 	private JTextField txtDtSaida;
-
+	private Peca peca = new Peca();
+	private ControllerPeca controllerPeca = new ControllerPeca();
+	
+	DecimalFormat decimalFormata = new DecimalFormat("0.00");
 	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-	ControllerPeca controller = new ControllerPeca();
 
 	/**
 	 * Create the panel.
@@ -48,11 +52,11 @@ public class PainelCadastroPeca extends JPanel {
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		
-		txtNmPeca = new JTextField();
-		txtNmPeca.setColumns(10);
+		txtNomePeca = new JTextField();
+		txtNomePeca.setColumns(10);
 		
-		txtCdPeca = new JTextField();
-		txtCdPeca.setColumns(10);
+		txtCodigoPeca = new JTextField();
+		txtCodigoPeca.setColumns(10);
 		
 		txtValorCompra = new JTextField();
 		txtValorCompra.setColumns(10);
@@ -63,18 +67,33 @@ public class PainelCadastroPeca extends JPanel {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	
-				Peca peca = new Peca();
-				peca.setNomePeca(txtNmPeca.getText());
-				peca.setCodigo(txtCdPeca.getText());
+				String msg = "";
+				String nomePeca = txtNomePeca.getText();
+				String codigoPeca = txtCodigoPeca.getText();
+				double valorCompra = Double.parseDouble(txtValorCompra.getText());
+				double valorVenda = Double.parseDouble(txtValorVenda.getText());
+				int quantidade = Integer.parseInt(txtQuantidade.getText());
+				LocalDate dataEntrada = LocalDate.parse(txtDtEntrada.getText());
+				LocalDate dataSaida = LocalDate.parse(txtDtSaida.getText());
+				msg = controllerPeca.validarCamposPeca(nomePeca, codigoPeca, valorCompra, valorVenda, quantidade, dataEntrada, dataSaida);
+				
+				if (msg.isEmpty()) {
+				peca.setNomePeca(txtNomePeca.getText());
+				peca.setCodigo(txtCodigoPeca.getText());
 				peca.setValCompra(Double.parseDouble(txtValorCompra.getText()));
 				peca.setValVenda(Double.parseDouble(txtValorVenda.getText()));
 				peca.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
 				peca.setDataEntrada(LocalDate.parse((txtDtEntrada.getText()), format));
 				peca.setDataSaida(LocalDate.parse((txtDtSaida.getText()),format));
-				
-				controller.cadastrarPeca(peca);
+				controllerPeca.cadastrarPeca(peca);
 				limparCampos();
+				
+				JOptionPane.showMessageDialog(null, " Peça cadastrada com sucesso! ");
+				
+				}else {
+					JOptionPane.showMessageDialog(null, msg, " Atenção! ", JOptionPane.WARNING_MESSAGE);
+				}
+				
 			}
 		});
 		
@@ -131,9 +150,9 @@ public class PainelCadastroPeca extends JPanel {
 								.addComponent(lblDtEntrada, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(txtCdPeca)
+						.addComponent(txtCodigoPeca)
 						.addComponent(txtValorCompra)
-						.addComponent(txtNmPeca, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtNomePeca, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 							.addComponent(txtValorVenda, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
 							.addComponent(txtQuantidade, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
@@ -153,11 +172,11 @@ public class PainelCadastroPeca extends JPanel {
 					.addGap(103)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNomeDaPeca)
-						.addComponent(txtNmPeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtNomePeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblCodigo)
-						.addComponent(txtCdPeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtCodigoPeca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblValorCompra)
@@ -189,8 +208,8 @@ public class PainelCadastroPeca extends JPanel {
 	}
 
 	private void limparCampos() {
-		txtNmPeca.setText("");
-		txtCdPeca.setText("");
+		txtNomePeca.setText("");
+		txtCodigoPeca.setText("");
 		txtValorCompra.setText("");
 		txtValorVenda.setText("");
 		txtQuantidade.setText("");
