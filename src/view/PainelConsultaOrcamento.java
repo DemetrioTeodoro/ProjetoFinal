@@ -191,7 +191,7 @@ public class PainelConsultaOrcamento extends JPanel {
 	protected void atualizarTabelaOrc() {
 		String filtroNome = textNome.getText();
 		String filtroCarro = textAutomovel.getText();
-		int filtroSituacao = orcamento.getIdSituacao();
+		int filtroSituacao = orcamento.getSituacao().getIdSituacao();
 		if (!filtroNome.equals("")) {
 			orcamentos = controller.consultarOrcNome(filtroNome);
 		}
@@ -219,7 +219,7 @@ public class PainelConsultaOrcamento extends JPanel {
 			novaLinha[2] = String.valueOf(orc.getCliente().getCarro().getModelo());
 			novaLinha[3] = String.valueOf(orc.getDataInicio());
 			novaLinha[4] = String.valueOf(orc.getValorTotal());
-			novaLinha[5] = String.valueOf(orc.getIdSituacao());			
+			novaLinha[5] = String.valueOf(orc.getSituacao());			
 			
 			model.addRow(novaLinha);
 		}

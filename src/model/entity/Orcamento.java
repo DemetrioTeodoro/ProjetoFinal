@@ -28,48 +28,99 @@ public class Orcamento {
 		return numeroOrcamento;
 	}
 
+
 	public void setNumeroOrcamento(int numeroOrcamento) {
 		this.numeroOrcamento = numeroOrcamento;
 	}
+
 
 	public String getDescricao() {
 		return descricao;
 	}
 
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 
 	public double getValorPeca() {
 		return valorPeca;
 	}
 
+
 	public void setValorPeca(double valorPeca) {
 		this.valorPeca = valorPeca;
 	}
+
 
 	public double getValorMaoObra() {
 		return valorMaoObra;
 	}
 
+
 	public void setValorMaoObra(double valorMaoObra) {
 		this.valorMaoObra = valorMaoObra;
 	}
+
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
 
 	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
+
 	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
+
 
 	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
 
+
 	public void setDataFinal(LocalDate dataFinal) {
 		this.dataFinal = dataFinal;
+	}
+
+
+	public Mecanico getMecanico() {
+		return mecanico;
+	}
+
+
+	public void setMecanico(Mecanico mecanico) {
+		this.mecanico = mecanico;
+	}
+
+
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
+	}
+
+
+	public Servico getServico() {
+		return servico;
+	}
+
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
 
@@ -77,17 +128,19 @@ public class Orcamento {
 		return idOrcamento;
 	}
 
+
 	public void setIdOrcamento(int idOrcamento) {
 		this.idOrcamento = idOrcamento;
 	}
-	
 
-	public double getValorTotal() {
-		return valorTotal;
+
+	public Carro getCarro() {
+		return carro;
 	}
 
-	public void setValorTotal(double valorTotal) {
-		this.valorTotal = valorTotal;
+
+	public void setCarro(Carro carro) {
+		this.carro = carro;
 	}
 
 
@@ -95,41 +148,11 @@ public class Orcamento {
 		return cliente;
 	}
 
+
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-	public Mecanico getMecanico() {
-		return mecanico;
-	}
-
-	public void setMecanico(Mecanico mecanico) {
-		this.mecanico = mecanico;
-	}
-
-	public Situacao getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
-	}
-
-	public Servico getServico() {
-		return servico;
-	}
-
-	public void setServico(Servico servico) {
-		this.servico = servico;
-	}
-
-	public Carro getCarro() {
-		return carro;
-	}
-
-	public void setCarro(Carro carro) {
-		this.carro = carro;
-	}
 	
 	
 	

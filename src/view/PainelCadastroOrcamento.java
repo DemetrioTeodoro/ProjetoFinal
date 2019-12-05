@@ -119,14 +119,14 @@ public class PainelCadastroOrcamento extends JPanel {
 					cliente.setTelefone(telefone);
 					cliente.setCarro(carro);
 					cliente = controllerCliente.cadastrarCliente(cliente);
-					carro.setIdCliente(cliente.getIdCliente());
+					carro.setCliente(cliente);
 					carro = controllerCarro.cadastrarCarro(carro);
 					
 					orcamento.setCliente(cliente);
-					orcamento.setIdCarro(carro.getIdCarro());
+					orcamento.setCarro(carro);
 					orcamento.setDescricao(txtDescricao.getText());
 					orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
-					orcamento.setIdSituacao(0);
+					orcamento.setSituacao(0);
 					controllerOrcamento.cadastrarOrcamento(orcamento);
 					limparCampos();
 					

@@ -24,7 +24,7 @@ public class CarroDAO implements BaseDAO<Carro> {
 			stmt.setString(3, carro.getCor());
 			stmt.setString(4, carro.getModelo());
 			stmt.setString(5, carro.getPlaca());
-			stmt.setInt(6, carro.getIdCliente());
+			stmt.setInt(6, carro.getCliente().getIdCliente());
 			
 			
 			stmt.execute();
@@ -114,7 +114,7 @@ public class CarroDAO implements BaseDAO<Carro> {
 			carro.setCor(cor);
 			carro.setPlaca(placa);
 			carro.setAno(ano);
-			carro.setIdCliente(idCliente);
+			carro.setCliente(carro.getCliente());
 			
 	
 		} catch (SQLException e) {

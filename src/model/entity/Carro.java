@@ -8,7 +8,7 @@ public class Carro {
 	private String cor;
 	private int ano;
 	private int idCarro;
-	private int IdCliente;
+	private Cliente cliente;
 
 	
 	
@@ -75,13 +75,14 @@ public class Carro {
 		this.idCarro = idCarro;
 	}
 
-	public int getIdCliente() {
-		return IdCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setIdCliente(int idCliente) {
-		IdCliente = idCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
+
 
 	
 
