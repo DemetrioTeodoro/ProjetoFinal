@@ -142,9 +142,9 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 			LocalDate dataFinal = (LocalDate.parse((CharSequence) rs.getDate("DATAFINAL").toString(), formatador));
 			
 			int idMecanico = rs.getInt("IDMECANICO");
-			
+			Mecanico mecanico = new Mecanico();
 			MecanicoDAO mecDAO = new MecanicoDAO();
-			Mecanico mecanicoDoOrcamento = mecDAO.consultarPorId(idMecanico);
+			Mecanico mecanicoDoOrcamento = mecDAO.consultarPorId(mecanico.getIdMecanico());
 			
 			int idCarro = rs.getInt("IDCARRO");
 			int idSituacao = rs.getInt("IDSITUACAO");
