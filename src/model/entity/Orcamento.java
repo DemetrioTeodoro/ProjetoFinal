@@ -1,6 +1,7 @@
 package model.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Orcamento {
 	
@@ -17,6 +18,7 @@ public class Orcamento {
 	private int idOrcamento;
 	private Carro carro;
 	private Cliente cliente;
+	private ArrayList<Peca> pecas;
 
 
 	public Orcamento() {
@@ -151,6 +153,14 @@ public class Orcamento {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public ArrayList<Peca> getPecas() {
+		return pecas;
+	}
+
+	public void setPecas(ArrayList<Peca> pecas) {
+		this.pecas = pecas;
 	}
 
 	

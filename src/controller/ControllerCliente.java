@@ -48,6 +48,13 @@ public class ControllerCliente {
 		
 		return mensagem;
 	}
+
+
+	public Cliente consultarNome(int idCliente) {
+		Cliente objCliente = null;
+		objCliente = clienteBO.consultarNome(idCliente);
+		return objCliente;
+	}
 	
 
 }

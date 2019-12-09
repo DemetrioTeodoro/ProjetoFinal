@@ -99,6 +99,12 @@ public class Peca {
 	public void setIdItempeca(int idItempeca) {
 		this.idItempeca = idItempeca;
 	}
+
+	@Override
+	public String toString() {
+		return  nomePeca;
+	}
+	
 	
 
 }

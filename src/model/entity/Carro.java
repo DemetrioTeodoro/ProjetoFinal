@@ -8,19 +8,9 @@ public class Carro {
 	private String cor;
 	private int ano;
 	private int idCarro;
-	private Cliente cliente;
+	private int idCliente;
 
 	
-	
-	public Carro(String marca, String modelo, String placa, String cor, int ano) {
-		super();
-		this.marca = marca;
-		this.modelo = modelo;
-		this.placa = placa;
-		this.cor = cor;
-		this.ano = ano;
-		
-	}
 
 	public Carro() {
 		super();
@@ -75,13 +65,15 @@ public class Carro {
 		this.idCarro = idCarro;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public int getIdCliente() {
+		return idCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
+
+	
 
 
 	

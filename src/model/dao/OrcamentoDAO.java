@@ -10,9 +10,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import model.entity.Carro;
 import model.entity.Mecanico;
 import model.entity.Orcamento;
 import model.entity.Peca;
+import model.entity.Servico;
+import model.entity.Situacao;
 
 public class OrcamentoDAO implements BaseDAO<Orcamento> {
 
@@ -87,14 +90,7 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	}
 
 	public ArrayList<Orcamento> listarTodos() {
-		String sql = " SELECT O.IDORCAMENTO, CL.NOME, C.MODELO, O.DATAINICIO, (O.VALORPECAS + O.VALORMAOOBRA) AS VALTOTAL, S.DESITUACAO"
-				+ " FROM ORCAMENTO AS O"
-				+ " INNER JOIN CARRO AS C ON"
-				+ " O.IDCARRO = C.IDCARRO"
-				+ " INNER JOIN CLIENTE AS CL ON"
-				+ " C.IDCLIENTE = CL.IDCLIENTE"
-				+ " INNER JOIN SITUACAO AS S ON"
-				+ " O.IDSITUACAO = S.IDSITUACAO";
+		String sql = " SELECT * FROM ORCAMENTO";
 
 		Connection conexao = Banco.getConnection();
 		ResultSet resultadoDaConsulta = null;
@@ -108,7 +104,7 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 				orcamentos.add(orcamentoBuscado);
 			}
 		}catch(SQLException ex) {
-			System.out.println("Erro ao consultar pecas cadastradas ");
+			System.out.println("Erro ao consultar orcamento cadastrados ");
 			System.out.println("Erro: " + ex.getMessage());
 		}finally {
 			Banco.closeResultSet(resultadoDaConsulta);
@@ -127,39 +123,62 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 			int id = rs.getInt("IDORCAMENTO");
 			int numeroOrcamento = rs.getInt("NUORCAMENTO");
 			String descricao = rs.getString("DESCRICAO");
-			double ValPecas = rs.getDouble("VALORPECAS");
-			double ValMaoObra = rs.getDouble("VALORMAOOBRA");
+			double valPecas = rs.getDouble("VALORPECAS");
+			double valMaoObra = rs.getDouble("VALORMAOOBRA");
 			
 			Date dataInicioBanco = rs.getDate("DATAINICIO");
 			
 			orc = new Orcamento();
+			
+			orc.setIdOrcamento(id);
+			orc.setNumeroOrcamento(numeroOrcamento);
+			orc.setDescricao(descricao);
 			
 			if(dataInicioBanco != null) {
 				LocalDate dataInicio = (LocalDate.parse((CharSequence) dataInicioBanco.toString(), formatador));
 				orc.setDataInicio(dataInicio);
 			}
 			
-			LocalDate dataFinal = (LocalDate.parse((CharSequence) rs.getDate("DATAFINAL").toString(), formatador));
+			Date dataFinalBanco = rs.getDate("DATAFINAL");
 			
+			if (dataFinalBanco != null) {
+				LocalDate dataFinal = (LocalDate.parse((CharSequence) dataFinalBanco.toString(), formatador));
+				orc.setDataFinal(dataFinal);
+			}
+				
 			int idMecanico = rs.getInt("IDMECANICO");
-			Mecanico mecanico = new Mecanico();
-			MecanicoDAO mecDAO = new MecanicoDAO();
-			Mecanico mecanicoDoOrcamento = mecDAO.consultarPorId(mecanico.getIdMecanico());
+			
+			if (idMecanico != 0) {
+				MecanicoDAO mecDAO = new MecanicoDAO();
+				Mecanico mecanicoDoOrcamento = mecDAO.consultarPorId(idMecanico);
+				orc.setMecanico(mecanicoDoOrcamento);
+			}
 			
 			int idCarro = rs.getInt("IDCARRO");
+			
+			if (idCarro != 0) {
+				CarroDAO carDAO = new CarroDAO();
+				Carro carroDoOrcamento = carDAO.consultarPorId(idCarro);
+				orc.setCarro(carroDoOrcamento);
+			}
+			
 			int idSituacao = rs.getInt("IDSITUACAO");
-			int idServico = rs.getInt("IDSERVICO");
-				
-			orc.setIdOrcamento(id);
-			orc.setNumeroOrcamento(numeroOrcamento);
-			orc.setDescricao(descricao);
-			orc.setValorPeca(ValPecas);
-			orc.setValorMaoObra(ValMaoObra);
-			orc.setDataFinal(dataFinal);
-			orc.setIdMecanico(idMecanico);
-			orc.setIdCarro(idCarro);
-			orc.setIdSituacao(idSituacao);
-			orc.setIdServico(idServico);
+				SituacaoDAO sitDAO = new SituacaoDAO();
+				Situacao situacaoDoOrcamento = sitDAO.consultarPorId(idSituacao);
+				orc.setSituacao(situacaoDoOrcamento);
+			
+					
+			int idServico = rs.getInt("IDSERVICO");	
+			
+			if (idServico != 0) {
+				ServicoDAO serDAO = new ServicoDAO();
+				Servico servicoDoOrcamento = serDAO.consultarPorId(idServico);
+				orc.setServico(servicoDoOrcamento);
+			}
+			
+			
+			orc.setValorPeca(valPecas);
+			orc.setValorMaoObra(valMaoObra);
 	
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir orcamento do ResultSet ");

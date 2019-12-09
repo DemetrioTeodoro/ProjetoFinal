@@ -195,22 +195,31 @@ public class PecaDAO implements BaseDAO<Peca> {
 		Peca pc = null;
 		
 		try {
+			pc = new Peca();
+			
 			String codigo = rs.getString("CODIGO");
 			String nome = rs.getString("NOMEPECA");
 			double valorCompra = rs.getDouble("VALORCOMPRA");
 			double valorVenda = rs.getDouble("VALORVENDA");
 			LocalDate dataEntrada = (LocalDate.parse((CharSequence) rs.getDate("DATAENTRADA").toString(), formatador));
-			LocalDate dataSaida = (LocalDate.parse((CharSequence) rs.getDate("DATASAIDA").toString(), formatador));
+			
+            Date dataSaidaBanco = rs.getDate("DATASAIDA");
+			
+			if (dataSaidaBanco != null) {
+				LocalDate dataSaida = (LocalDate.parse((CharSequence) dataSaidaBanco.toString(), formatador));
+				pc.setDataSaida(dataSaida);
+			}
+			
 			int quantidade = rs.getInt("QUANTIDADE");
 			int id = rs.getInt("IDPECA");
 			
-			pc = new Peca();
+			
 			pc.setCodigo(codigo);
 			pc.setNomePeca(nome);
 			pc.setValCompra(valorCompra);
 			pc.setValVenda(valorVenda);
 			pc.setDataEntrada(dataEntrada);
-			pc.setDataSaida(dataSaida);
+			
 			pc.setQuantidade(quantidade);
 			pc.setIdPeca(id);
 					
@@ -226,8 +235,8 @@ public class PecaDAO implements BaseDAO<Peca> {
 
 	public Peca cadastrarItemPeca(Peca peca) {
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO ITEM_PECA (IDPECA, QUANTIDADE, VALORCOMPRA, VALORVENDA, DATAENTRADA, DATASAIDA) "
-				+ "VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO ITEM_PECA (IDPECA, QUANTIDADE, VALORCOMPRA, VALORVENDA, DATAENTRADA) "
+				+ "VALUES (?,?,?,?,?)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		
@@ -237,7 +246,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 			stmt.setDouble(3, peca.getValCompra());
 			stmt.setDouble(4, peca.getValVenda());
 			stmt.setDate(5, Date.valueOf(peca.getDataEntrada()));
-			stmt.setDate(6, Date.valueOf(peca.getDataSaida()));
+			
 			
 			
 			stmt.execute();

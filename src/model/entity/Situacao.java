@@ -5,11 +5,7 @@ public class Situacao {
 	private int idSituacao;
 	private String deSituacao;
 	
-	public Situacao(int idSituacao, String deSituacao) {
-		super();
-		this.idSituacao = idSituacao;
-		this.deSituacao = deSituacao;
-	}
+	
 
 	public Situacao() {
 		super();

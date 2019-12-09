@@ -68,7 +68,7 @@ public class ControllerPeca {
 	}
 
 	public String validarCamposPeca(String nomePeca, String codigoPeca, double valorCompra, double valorVenda,
-			int quantidade, LocalDate dataEntrada, LocalDate dataSaida) {
+			int quantidade, LocalDate dataEntrada) {
 		String msg = "";
 		
 		if (nomePeca.isEmpty() || nomePeca.trim().length() < 3) {

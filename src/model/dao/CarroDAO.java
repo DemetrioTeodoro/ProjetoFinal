@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import model.entity.Carro;
 import model.entity.Cliente;
+import model.entity.Mecanico;
 
 public class CarroDAO implements BaseDAO<Carro> {
 
@@ -24,7 +25,7 @@ public class CarroDAO implements BaseDAO<Carro> {
 			stmt.setString(3, carro.getCor());
 			stmt.setString(4, carro.getModelo());
 			stmt.setString(5, carro.getPlaca());
-			stmt.setInt(6, carro.getCliente().getIdCliente());
+			stmt.setInt(6, carro.getIdCliente());
 			
 			
 			stmt.execute();
@@ -77,7 +78,7 @@ public class CarroDAO implements BaseDAO<Carro> {
 		try {
 			resultadoDaConsulta = stmt.executeQuery();
 			while(resultadoDaConsulta.next()) {
-				carro = construirDoResultSet(resultadoDaConsulta);
+				carro = construirCarroDoResultSet(resultadoDaConsulta);
 				
 				
 			}
@@ -93,7 +94,7 @@ public class CarroDAO implements BaseDAO<Carro> {
 		return carro;
 	}
 	
-	private Carro construirDoResultSet(ResultSet rs) {
+	private Carro construirCarroDoResultSet(ResultSet rs) {
 		Carro carro = null;
 		
 		  
@@ -114,7 +115,7 @@ public class CarroDAO implements BaseDAO<Carro> {
 			carro.setCor(cor);
 			carro.setPlaca(placa);
 			carro.setAno(ano);
-			carro.setCliente(carro.getCliente());
+			carro.setIdCliente(idCliente);
 			
 	
 		} catch (SQLException e) {
@@ -123,6 +124,27 @@ public class CarroDAO implements BaseDAO<Carro> {
 		}
 		
 		return carro;
+	}
+
+	public Carro consultarPorId(int idCarro) {
+		Carro c = null;
+
+		String sql = " SELECT * FROM CARRO WHERE IDCARRO = " + idCarro;
+
+		PreparedStatement stmt;
+		try {
+			stmt = Banco.getConnection().prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				c = this.construirCarroDoResultSet(rs);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar carro por id. Erro: " + e.getMessage());
+		}
+
+		return c;
 	}
 
 }

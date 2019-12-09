@@ -29,6 +29,7 @@ import controller.ControllerSituacao;
 import model.entity.Carro;
 import model.entity.Cliente;
 import model.entity.Orcamento;
+import model.entity.Situacao;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
@@ -47,7 +48,7 @@ public class PainelCadastroOrcamento extends JPanel {
 	private String msg = "";
 	private JFormattedTextField txtCPF;
 	private JTextField txtModelo;
-	private JTextField txtPlaca;
+	private JFormattedTextField txtPlaca;
 	private JTextField txtDataSaida;
 	private JTextField txtDtEntrada;
 	private JTextField txtMarca;
@@ -65,6 +66,15 @@ public class PainelCadastroOrcamento extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelCadastroOrcamento() {
+		
+		MaskFormatter formatoPlaca;
+		try {
+			formatoPlaca = new MaskFormatter("AAA-####");
+			 txtPlaca = new JFormattedTextField(formatoPlaca);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 		
 		
 		
@@ -119,14 +129,16 @@ public class PainelCadastroOrcamento extends JPanel {
 					cliente.setTelefone(telefone);
 					cliente.setCarro(carro);
 					cliente = controllerCliente.cadastrarCliente(cliente);
-					carro.setCliente(cliente);
+					carro.setIdCliente(cliente.getIdCliente());
 					carro = controllerCarro.cadastrarCarro(carro);
 					
 					orcamento.setCliente(cliente);
 					orcamento.setCarro(carro);
 					orcamento.setDescricao(txtDescricao.getText());
 					orcamento.setDataInicio(LocalDate.parse((txtDtEntrada.getText()), format));
-					orcamento.setSituacao(0);
+					Situacao situacao = new Situacao();
+					situacao.setIdSituacao(0);
+					orcamento.setSituacao(situacao);
 					controllerOrcamento.cadastrarOrcamento(orcamento);
 					limparCampos();
 					
@@ -150,7 +162,8 @@ public class PainelCadastroOrcamento extends JPanel {
 		
 		JLabel lblPlaca = new JLabel("Placa:");
 		
-		txtPlaca = new JTextField();
+		
+		txtPlaca.setText("   -    ");
 		txtPlaca.setColumns(10);
 		
 		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o:");

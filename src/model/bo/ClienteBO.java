@@ -41,4 +41,11 @@ public class ClienteBO {
 		objCliente = clienteDAO.consultarPorCpf(cpf);
 		return objCliente;
 	}
+
+	public Cliente consultarNome(int idCliente) {
+		objCliente = clienteDAO.consultarNome(idCliente);
+		return objCliente;
+		
+		
+	}
 }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import model.entity.Carro;
 import model.entity.Cliente;
 import model.entity.Orcamento;
 
@@ -83,7 +84,7 @@ public class ClienteDAO implements BaseDAO<Cliente> {
 		try {
 			resultadoDaConsulta = stmt.executeQuery();
 			while(resultadoDaConsulta.next()) {
-				cliente = construirDoResultSet(resultadoDaConsulta);
+				cliente = construirClienteDoResultSet(resultadoDaConsulta);
 				
 				
 			}
@@ -99,7 +100,7 @@ public class ClienteDAO implements BaseDAO<Cliente> {
 		return cliente;
 	}
 	
-	private Cliente construirDoResultSet(ResultSet rs) {
+	private Cliente construirClienteDoResultSet(ResultSet rs) {
 		Cliente cliente = null;
 		
 		  
@@ -117,10 +118,32 @@ public class ClienteDAO implements BaseDAO<Cliente> {
 			
 	
 		} catch (SQLException e) {
-			System.out.println("Erro ao construir orcamento do ResultSet ");
+			System.out.println("Erro ao construir cliente do ResultSet ");
 			System.out.println("Erro: " + e.getMessage());
 		}
 		
 		return cliente;
+	}
+
+
+	public Cliente consultarNome(int idCliente) {
+		Cliente c = null;
+
+		String sql = " SELECT * FROM CLIENTE WHERE IDCLIENTE = " + idCliente;
+
+		PreparedStatement stmt;
+		try {
+			stmt = Banco.getConnection().prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				c = this.construirClienteDoResultSet(rs);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar cliente por id. Erro: " + e.getMessage());
+		}
+
+		return c;
 	}
 }
