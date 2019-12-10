@@ -38,7 +38,6 @@ import java.awt.Font;
 public class PainelCadastroOrcamento extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtTelefone;
-	private JTextField txtTelefone_1;
 	private ControllerCliente controllerCliente = new ControllerCliente();
 	private ControllerOrcamento controllerOrcamento = new ControllerOrcamento();
 	private ControllerCarro controllerCarro = new ControllerCarro();
@@ -91,20 +90,20 @@ public class PainelCadastroOrcamento extends JPanel {
 		txtNome = new JTextField();
 		txtNome.setColumns(10);
 		
+		MaskFormatter formatoTelefone;
 		txtTelefone = new JTextField();
 		txtTelefone.setColumns(10);
 		try {
-			formatoPlaca = new MaskFormatter("(##)#####-####");
-			 txtTelefone_1 = new JFormattedTextField(formatoPlaca);
+			formatoTelefone = new MaskFormatter("(##)#####-####");
+			 txtTelefone = new JFormattedTextField(formatoTelefone);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.getMessage();
 		}
-		
-		MaskFormatter formato;
+		MaskFormatter formatoCPF;
 		try {
-			formato = new MaskFormatter("###.###.###-##");
-			 txtCPF = new JFormattedTextField(formato);
+			formatoCPF = new MaskFormatter("###.###.###-##");
+			 txtCPF = new JFormattedTextField(formatoCPF);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.getMessage();
@@ -121,7 +120,7 @@ public class PainelCadastroOrcamento extends JPanel {
 				int ano = carro.setAno(Integer.parseInt(txtAno.getText()));
 				String cor = carro.setCor(txtCor.getText());
 				String modelo = carro.setModelo(txtModelo.getText());
-				String placa = (String) carro.setPlaca(txtPlaca.getText());
+				String placa = (String) carro.setPlaca(txtPlaca.getText().replace("-", ""));
 				LocalDate dataEntrada = LocalDate.parse((txtDtEntrada.getText()), format);
 				msg += controllerCliente.validarCamposCliente(nome, cpf, telefone);
 				msg += controllerCarro.validarCamposCarro(marca, ano, cor, modelo, placa);
@@ -132,7 +131,7 @@ public class PainelCadastroOrcamento extends JPanel {
 					carro.setAno(Integer.parseInt(txtAno.getText()));
 					carro.setCor(txtCor.getText());
 					carro.setModelo(txtModelo.getText());
-					carro.setPlaca(txtPlaca.getText());
+					carro.setPlaca(txtPlaca.getText().replace("-", ""));
 				
 					cliente.setNome(nome);
 					cliente.setCpf(cpf);
@@ -221,11 +220,12 @@ public class PainelCadastroOrcamento extends JPanel {
 		
 		JLabel lblAno = new JLabel("Ano:");
 		
+		MaskFormatter formatoAno;
 		txtAno = new JTextField();
 		txtAno.setColumns(10);
 		try {
-			formatoPlaca = new MaskFormatter("####");
-			 txtAno = new JFormattedTextField(formatoPlaca);
+			formatoAno = new MaskFormatter("####");
+			 txtAno = new JFormattedTextField(formatoAno);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.getMessage();
@@ -316,7 +316,7 @@ public class PainelCadastroOrcamento extends JPanel {
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(txtTelefone_1, Alignment.LEADING)
+									.addComponent(txtTelefone, Alignment.LEADING)
 									.addComponent(txtCPF, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
 								.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE))
 							.addGap(78)))
@@ -341,7 +341,7 @@ public class PainelCadastroOrcamento extends JPanel {
 						.addComponent(txtCPF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtTelefone_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblTelefone))
 					.addGap(7)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -412,7 +412,7 @@ public class PainelCadastroOrcamento extends JPanel {
 	public void limparCampos() {
 		txtNome.setText("");
 		txtCPF.setText("");
-		txtTelefone_1.setText("");
+		txtTelefone.setText("");
 		txtCor.setText("");
 		txtAno.setText("");
 		txtDescricao.setText("");

@@ -76,9 +76,9 @@ public class ControllerOrcamento {
 	public String validarDataEntrada(LocalDate dataEntrada) {
 		String mensagem = "";
 
-		if (dataEntrada != LocalDate.now()) {
-			mensagem += " A data deve ser maior que a corrente! \n";
-		}
+//		if (dataEntrada != LocalDate.now()) {
+//			mensagem += " A data deve ser igual a corrente! \n";
+//		}
 
 		return mensagem;
 	}
