@@ -2,6 +2,7 @@ package model.bo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.dao.PecaDAO;
 import model.entity.Peca;
@@ -49,6 +50,12 @@ public class PecaBO {
 			excluirPeca(peca.getIdPeca());
 		}
 		 return peca;
+	}
+	
+	public int codigosAleatorios() {
+		Random random = new Random();
+		int codigosRandom = random.nextInt(100);
+		return codigosRandom;
 	}
 
 }

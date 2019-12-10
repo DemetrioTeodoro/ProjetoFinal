@@ -12,6 +12,7 @@ import javax.swing.text.MaskFormatter;
 import controller.ControllerCliente;
 import controller.ControllerMecanico;
 import controller.ControllerOrcamento;
+import controller.ControllerPeca;
 import controller.ControllerSituacao;
 import model.entity.Carro;
 import model.entity.Cliente;
@@ -20,6 +21,7 @@ import model.entity.Peca;
 import model.entity.Situacao;
 
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -137,6 +139,22 @@ public class PainelConsultaOrcamento extends JPanel {
 		
 		txtPlaca.setText("   -    ");
 		txtPlaca.setColumns(10);
+		
+		JButton btnGerarRelatrio = new JButton("Gerar Relat\u00F3rio");
+		btnGerarRelatrio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser jcf = new JFileChooser();
+				jcf.setDialogTitle("Salvar relatório como...");
+				
+				int resultado = jcf.showSaveDialog(null);
+				if (resultado == JFileChooser.APPROVE_OPTION) {
+					String caminhoEscolhido = jcf.getSelectedFile().getAbsolutePath();
+					
+					ControllerOrcamento controllerOrcamento = new ControllerOrcamento();
+					controllerOrcamento.gerarRelatorio(orcamentos, caminhoEscolhido);
+				}
+			}
+		});
 	
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -155,12 +173,13 @@ public class PainelConsultaOrcamento extends JPanel {
 								.addComponent(lblSituacao))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textAutomovel, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-								.addComponent(cbSituacao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(textNome, GroupLayout.PREFERRED_SIZE, 456, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(btnConsultar))))
+									.addComponent(btnConsultar))
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(cbSituacao, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(textAutomovel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(32)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -175,7 +194,9 @@ public class PainelConsultaOrcamento extends JPanel {
 											.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(btnExcluir)
-											.addPreferredGap(ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+											.addComponent(btnGerarRelatrio)
+											.addGap(26)
 											.addComponent(btnLimpar)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(btnFechar))
@@ -206,13 +227,14 @@ public class PainelConsultaOrcamento extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblDigiteAPlaca)
 						.addComponent(txtPlaca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnFechar)
 						.addComponent(btnLimpar)
 						.addComponent(lblDigiteId)
 						.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnExcluir))
+						.addComponent(btnExcluir)
+						.addComponent(btnGerarRelatrio))
 					.addGap(21))
 		);
 		setLayout(groupLayout);

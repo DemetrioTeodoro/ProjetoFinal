@@ -1,6 +1,7 @@
 package model.bo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import model.dao.OrcamentoDAO;
 import model.entity.Orcamento;
@@ -50,6 +51,12 @@ public class OrcamentoBO {
 	public ArrayList<Orcamento> consultarOrcSituacao(int filtroSituacao) {
 		ArrayList<Orcamento> orcamentos = orcamentoDAO.consultarOrcSituacao(filtroSituacao);
 		return orcamentos;
+	}
+	
+	public int codigosAleatorios() {
+		Random random = new Random();
+		int codigosRandom = random.nextInt(100);
+		return codigosRandom;
 	}
 
 }

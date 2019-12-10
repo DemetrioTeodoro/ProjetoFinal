@@ -1,11 +1,13 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.bo.CarroBO;
 import model.bo.ClienteBO;
 import model.bo.OrcamentoBO;
 import model.entity.Orcamento;
+import model.utils.GeradorPlanilhas;
 
 public class ControllerOrcamento {
 	
@@ -65,6 +67,23 @@ public class ControllerOrcamento {
 		orcamentos = orcamentoBO.consultarOrcSituacao(filtroSituacao);
 		return orcamentos;
 	}
+
+	public void gerarRelatorio(ArrayList<Orcamento> orcamentosRelatorio, String caminhoEscolhido) {
+		GeradorPlanilhas gerador = new GeradorPlanilhas();
+		gerador.gerarPlanilhasOrcamento(orcamentosRelatorio, caminhoEscolhido);
+	}
+
+	public String validarDataEntrada(LocalDate dataEntrada) {
+		String mensagem = "";
+
+		if (dataEntrada != LocalDate.now()) {
+			mensagem += " A data deve ser maior que a corrente! \n";
+		}
+
+		return mensagem;
+	}
+
+	
 
 
 }

@@ -72,11 +72,11 @@ public class GeradorPlanilhas {
 	}
 	
 	public void gerarPlanilhasOrcamento(List<Orcamento> orcamentos, String caminhoEscolhido) {
-		String[] colunasTabelaPecas = { "#ID"," CLIENTE", "CARRO", "DATA ENTRADA", "VALOR TOTAL", "SITUAÇÃO" };
+		String[] colunasTabelaPecas = { "#ID"," CLIENTE", "CARRO", "DATA DE ENTRADA", " DATA DE SAÍDA ", "VALOR TOTAL", "SITUAÇÃO" };
 		
 		HSSFWorkbook planilha = new HSSFWorkbook();
 		
-		HSSFSheet abaPlanilha = planilha.createSheet("Pecas");
+		HSSFSheet abaPlanilha = planilha.createSheet("Orçamentos");
 		
 		Row headerRow = abaPlanilha.createRow(0);
 		

@@ -71,6 +71,13 @@ public class PainelCadastroPeca extends JPanel {
 		
 		txtValorCompra = new JTextField();
 		txtValorCompra.setColumns(10);
+		try {
+			formato = new MaskFormatter("####,##");
+			 txtValorCompra = new JFormattedTextField(formato);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 		
 		txtQuantidade = new JTextField();
 		txtQuantidade.setColumns(10);
@@ -81,8 +88,8 @@ public class PainelCadastroPeca extends JPanel {
 				String msg = "";
 				String nomePeca = txtNomePeca.getText();
 				String codigoPeca = txtCodigoPeca.getText();
-				double valorCompra = Double.parseDouble(txtValorCompra.getText());
-				double valorVenda = Double.parseDouble(txtValorVenda.getText());
+				double valorCompra = Double.parseDouble(txtValorCompra.getText().replace(",", "."));
+				double valorVenda = Double.parseDouble(txtValorVenda.getText().replace(",", "."));
 				int quantidade = Integer.parseInt(txtQuantidade.getText());
 				LocalDate dataEntrada = LocalDate.parse(txtDtEntrada.getText(), format);
 				msg = controllerPeca.validarCamposPeca(nomePeca, codigoPeca, valorCompra, valorVenda, quantidade, dataEntrada);
@@ -90,8 +97,8 @@ public class PainelCadastroPeca extends JPanel {
 				if (msg.isEmpty()) {
 				peca.setNomePeca(txtNomePeca.getText());
 				peca.setCodigo(txtCodigoPeca.getText());
-				peca.setValCompra(Double.parseDouble(txtValorCompra.getText()));
-				peca.setValVenda(Double.parseDouble(txtValorVenda.getText()));
+				peca.setValCompra(Double.parseDouble(txtValorCompra.getText().replace(",", ".")));
+				peca.setValVenda(Double.parseDouble(txtValorVenda.getText().replace(",", ".")));
 				peca.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
 				peca.setDataEntrada(LocalDate.parse((txtDtEntrada.getText()), format));
 				controllerPeca.cadastrarPeca(peca);
@@ -116,6 +123,13 @@ public class PainelCadastroPeca extends JPanel {
 		
 		txtValorVenda = new JTextField();
 		txtValorVenda.setColumns(10);
+		try {
+			formato = new MaskFormatter("####,##");
+			 txtValorVenda = new JFormattedTextField(formato);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 		
 		JLabel lblValorVenda = new JLabel("Valor de Venda:");
 		

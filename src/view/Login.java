@@ -96,6 +96,7 @@ public class Login extends JFrame {
 				telaPrincipal2.getLblLinha6().setVisible(false);
 				telaPrincipal2.setVisible(true);
 				telaPrincipal2.setExtendedState(MAXIMIZED_BOTH);
+				setVisible(false);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

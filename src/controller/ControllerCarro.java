@@ -50,7 +50,7 @@ CarroBO carroBO = new CarroBO();
 			mensagem += " Por favor, informe o modelo do carro! \n";
 		}
 		
-		if (placa.isEmpty() || placa.trim().length() != 7) {
+		if (placa.isEmpty()) {
 			mensagem += " Por favor, informe a placa corretamente! \n";
 		}
 		
