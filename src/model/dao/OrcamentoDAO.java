@@ -26,8 +26,8 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	@Override
 	public Orcamento cadastrar(Orcamento orcamento) {
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO ORCAMENTO (IDCARRO, DESCRICAO, DATAINICIO, IDSITUACAO ) "
-				+ "VALUES (?,?,?,?)";
+		String sql = "INSERT INTO ORCAMENTO (IDCARRO, DESCRICAO, DATAINICIO, IDSITUACAO, NUORCAMENTO ) "
+				+ "VALUES (?,?,?,?,?)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, 
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		
@@ -36,6 +36,7 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 			stmt.setString(2, orcamento.getDescricao());
 			stmt.setDate(3, Date.valueOf(orcamento.getDataInicio()));
 			stmt.setInt(4, orcamento.getSituacao().getIdSituacao());
+			stmt.setInt(5, orcamento.getNumeroOrcamento());
 						
 			stmt.execute();
 			

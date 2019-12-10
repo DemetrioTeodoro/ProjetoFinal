@@ -25,8 +25,7 @@ import controller.ControllerPeca;
 import controller.ControllerServico;
 import controller.ControllerSituacao;
 import model.entity.Peca;
-import model.vo.Carro;
-import model.vo.Montadora;
+
 
 import java.awt.Font;
 
@@ -47,7 +46,7 @@ public class PainelAlterarOrcamento extends JPanel {
 	private JTextField txtAno;
 	private JTextField txtDescricao;
 	private List<Peca> pecas;
-	private List<Peca> pcs;
+	private ArrayList<Peca> pcs;
 	private JComboBox cbPeca;
 	ControllerPeca controllerPeca = new ControllerPeca();
 	
@@ -119,6 +118,11 @@ public class PainelAlterarOrcamento extends JPanel {
 				));
 		
 		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				atualizarTabelaPecas();
+			}
+		});
 		
 		JLabel lblDataEntrada = new JLabel("Data de Entrada:");
 		
@@ -325,8 +329,11 @@ public class PainelAlterarOrcamento extends JPanel {
 	}
 	
 protected void atualizarTabelaPecas() {
+	
+Peca p = null;
 						
-		pcs =  (Peca) cbPeca.getSelectedItem();
+		p =  (Peca) cbPeca.getSelectedItem();
+		pcs.add(p);
 		
 		
 		DefaultTableModel model = (DefaultTableModel) tblPeca.getModel();
@@ -345,7 +352,7 @@ protected void atualizarTabelaPecas() {
 
 			model.addRow(novaLinha);
 		}
-	
+}
 	private void consultarPecas() {
 		
 		pecas = controllerPeca.listarPecas();

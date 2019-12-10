@@ -12,7 +12,8 @@ public class OrcamentoBO {
 	OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 	
 	public Orcamento cadastrarOrcamentoBO(Orcamento orcamento) {
-		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();		
+		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();	
+		orcamento.setNumeroOrcamento(codigosAleatorios());
 		orcamentoDAO.cadastrar(orcamento);
 			
 		return orcamento;
