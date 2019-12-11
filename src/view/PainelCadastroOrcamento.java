@@ -116,22 +116,22 @@ public class PainelCadastroOrcamento extends JPanel {
 				String nome = txtNome.getText();
 				String cpf = txtCPF.getText().replace(".", "").replace("-", "");
 				String telefone = txtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
-				String marca = carro.setMarca(txtMarca.getText());
-				int ano = carro.setAno(Integer.parseInt(txtAno.getText()));
-				String cor = carro.setCor(txtCor.getText());
-				String modelo = carro.setModelo(txtModelo.getText());
-				String placa = (String) carro.setPlaca(txtPlaca.getText().replace("-", ""));
+				String marca = txtMarca.getText();
+				int ano = Integer.parseInt(txtAno.getText());
+				String cor = txtCor.getText();
+				String modelo = txtModelo.getText();
+				String placa = txtPlaca.getText().replace("-", "");
 				LocalDate dataEntrada = LocalDate.parse((txtDtEntrada.getText()), format);
 				msg += controllerCliente.validarCamposCliente(nome, cpf, telefone);
 				msg += controllerCarro.validarCamposCarro(marca, ano, cor, modelo, placa);
 				msg += controllerOrcamento.validarDataEntrada(dataEntrada);
 				
 				if (msg.isEmpty()) {
-					carro.setMarca(txtMarca.getText());
-					carro.setAno(Integer.parseInt(txtAno.getText()));
-					carro.setCor(txtCor.getText());
-					carro.setModelo(txtModelo.getText());
-					carro.setPlaca(txtPlaca.getText().replace("-", ""));
+					carro.setMarca(marca);
+					carro.setAno(ano);
+					carro.setCor(cor);
+					carro.setModelo(modelo);
+					carro.setPlaca(placa);
 				
 					cliente.setNome(nome);
 					cliente.setCpf(cpf);

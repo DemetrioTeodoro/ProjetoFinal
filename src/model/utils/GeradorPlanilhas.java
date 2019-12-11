@@ -72,7 +72,7 @@ public class GeradorPlanilhas {
 	}
 	
 	public void gerarPlanilhasOrcamento(List<Orcamento> orcamentos, String caminhoEscolhido) {
-		String[] colunasTabelaPecas = { "#ID"," CLIENTE", "CARRO", "DATA DE ENTRADA", " DATA DE SAÍDA ", "VALOR TOTAL", "SITUAÇÃO" };
+		String[] colunasTabelaOrcamento = { "N."," CLIENTE", "CARRO", "DATA DE ENTRADA", "VALOR TOTAL", "SITUAÇÃO" };
 		
 		HSSFWorkbook planilha = new HSSFWorkbook();
 		
@@ -80,9 +80,9 @@ public class GeradorPlanilhas {
 		
 		Row headerRow = abaPlanilha.createRow(0);
 		
-		for (int i = 0; i < colunasTabelaPecas.length; i++) {
+		for (int i = 0; i < colunasTabelaOrcamento.length; i++) {
 			Cell cell = headerRow.createCell(i);
-			cell.setCellValue(colunasTabelaPecas[i]);
+			cell.setCellValue(colunasTabelaOrcamento[i]);
 		}
 		
 		DateTimeFormatter formatadorDeData = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -91,16 +91,15 @@ public class GeradorPlanilhas {
 		for (Orcamento orcamento : orcamentos) {
 			Row novaLinha = abaPlanilha.createRow(rowNum++);
 			
-			novaLinha.createCell(0).setCellValue(orcamento.getIdOrcamento());
+			novaLinha.createCell(0).setCellValue(orcamento.getNumeroOrcamento());
 			novaLinha.createCell(1).setCellValue(orcamento.getCliente().getNome());
 			novaLinha.createCell(2).setCellValue(orcamento.getCarro().getModelo());
-			novaLinha.createCell(3).setCellValue(Date.valueOf(orcamento.getDataInicio()));
-			novaLinha.createCell(4).setCellValue(Date.valueOf(orcamento.getDataFinal()));
-			novaLinha.createCell(5).setCellValue(orcamento.getValorTotal());
-			novaLinha.createCell(6).setCellValue(orcamento.getSituacao().getDeSituacao());
+			novaLinha.createCell(3).setCellValue(orcamento.getDataInicio().format(formatadorDeData));
+			novaLinha.createCell(4).setCellValue(orcamento.getValorTotal());
+			novaLinha.createCell(5).setCellValue(orcamento.getSituacao().getDeSituacao());
 		}
 		
-		for (int i = 0; i < colunasTabelaPecas.length; i++) {
+		for (int i = 0; i < colunasTabelaOrcamento.length; i++) {
 			abaPlanilha.autoSizeColumn(i);
 		}
 		

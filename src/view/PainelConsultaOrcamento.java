@@ -269,8 +269,9 @@ public class PainelConsultaOrcamento extends JPanel {
 			novaLinha[0] = String.valueOf(orc.getNumeroOrcamento());
 			
 			Cliente c = new Cliente();
-			c = controllercliente.consultarNome(orc.getCarro().getIdCliente());					
-			novaLinha[1] = c.getNome();
+			c = controllercliente.consultarNome(orc.getCarro().getIdCliente());		
+			orc.setCliente(c);
+			novaLinha[1] = orc.getCliente().getNome();
 			
 			novaLinha[2] = String.valueOf(orc.getCarro().getModelo());
 			novaLinha[3] = String.valueOf(orc.getCarro().getPlaca());
