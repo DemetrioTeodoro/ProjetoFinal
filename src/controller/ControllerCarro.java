@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.List;
+
 import model.bo.CarroBO;
+import model.bo.PecaBO;
 import model.entity.Carro;
 
 public class ControllerCarro {
@@ -30,6 +33,12 @@ CarroBO carroBO = new CarroBO();
 		carroBO.deletarCliente(id);
 		return msg;
 	}
+	
+	public List<Carro> listarTodos() {
+		String msg = null;
+		CarroBO carroBO = new CarroBO();
+		return carroBO.listarTodos();
+	}
 
 	public String validarCamposCarro(String marca, int ano, String cor, String modelo, String placa) {
 		String mensagem = "";
@@ -56,6 +65,9 @@ CarroBO carroBO = new CarroBO();
 		
 		return mensagem;
 	}
+
+
+	
 
 	
 }

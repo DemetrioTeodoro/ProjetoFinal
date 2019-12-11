@@ -73,6 +73,11 @@ public class Carro {
 		this.idCliente = idCliente;
 	}
 
+	@Override
+	public String toString() {
+		return  marca;
+	}
+
 	
 
 

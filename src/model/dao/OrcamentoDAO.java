@@ -70,10 +70,10 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	}
 
 	@Override
-	public boolean deletar(int id) {
+	public boolean deletar(int nuExclusao) {
 		Connection conexao = Banco.getConnection();
 		Statement statement = Banco.getStatement(conexao);
-		String sql = " DELETE FROM ORCAMENTO WHERE IDORCAMENTO = " + id;
+		String sql = " DELETE FROM ORCAMENTO WHERE NUORCAMENTO = " + nuExclusao;
 
 		int quantidadeRegistrosExcluidos = 0;
 		try {
@@ -190,15 +190,12 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	}
 
 	public ArrayList<Orcamento> consultarOrcNome(String filtroNome) {
-		String sql = " SELECT O.IDORCAMENTO, CL.NOME, C.MODELO, O.DATAINICIO, (O.VALORPECAS + O.VALORMAOOBRA) AS VALTOTAL, S.DESITUACAO"
-				+ " FROM ORCAMENTO AS O"
-				+ " INNER JOIN CARRO AS C ON"
-				+ " O.IDCARRO = C.IDCARRO"
-				+ " INNER JOIN CLIENTE AS CL ON"
-				+ " C.IDCLIENTE = CL.IDCLIENTE"
-				+ " INNER JOIN SITUACAO AS S ON"
-				+ " O.IDSITUACAO = S.IDSITUACAO"
-				+ " WHERE CL.NOME LIKE '%" + filtroNome + "%'";
+		String sql = " SELECT * FROM ORCAMENTO AS O"
+				+ " INNER JOIN CARRO AS CR ON"
+				+ " O.IDCARRO = CR.IDCARRO"
+				+ " INNER JOIN CLIENTE AS C ON"
+				+ " CR.IDCLIENTE = C.IDCLIENTE"
+				+ " WHERE C.NOME LIKE '%" + filtroNome + "%'";
 
 		Connection conexao = Banco.getConnection();
 		ResultSet resultadoDaConsulta = null;
@@ -224,15 +221,10 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	}
 
 	public ArrayList<Orcamento> consultarOrcCarro(String filtroCarro) {
-		String sql = " SELECT O.IDORCAMENTO, CL.NOME, C.MODELO, O.DATAINICIO, (O.VALORPECAS + O.VALORMAOOBRA) AS VALTOTAL, S.DESITUACAO"
-				+ " FROM ORCAMENTO AS O"
-				+ " INNER JOIN CARRO AS C ON"
-				+ " O.IDCARRO = C.IDCARRO"
-				+ " INNER JOIN CLIENTE AS CL ON"
-				+ " C.IDCLIENTE = CL.IDCLIENTE"
-				+ " INNER JOIN SITUACAO AS S ON"
-				+ " O.IDSITUACAO = S.IDSITUACAO"
-				+ " WHERE C.MODELO = '" + filtroCarro + "'";
+		String sql = " SELECT * FROM ORCAMENTO AS O"
+				+ " INNER JOIN CARRO AS CR ON"
+				+ " O.IDCARRO = CR.IDCARRO"
+				+ " WHERE CR.MARCA = '" + filtroCarro + "'";
 
 		Connection conexao = Banco.getConnection();
 		ResultSet resultadoDaConsulta = null;
@@ -258,15 +250,130 @@ public class OrcamentoDAO implements BaseDAO<Orcamento> {
 	}
 
 	public ArrayList<Orcamento> consultarOrcSituacao(int filtroSituacao) {
-		String sql = " SELECT O.IDORCAMENTO, CL.NOME, C.MODELO, O.DATAINICIO, (O.VALORPECAS + O.VALORMAOOBRA) AS VALTOTAL, S.DESITUACAO"
-				+ " FROM ORCAMENTO AS O"
-				+ " INNER JOIN CARRO AS C ON"
-				+ " O.IDCARRO = C.IDCARRO"
-				+ " INNER JOIN CLIENTE AS CL ON"
-				+ " C.IDCLIENTE = CL.IDCLIENTE"
-				+ " INNER JOIN SITUACAO AS S ON"
-				+ " O.IDSITUACAO = S.IDSITUACAO"
-				+ " WHERE S.IDSITUACAO = " + filtroSituacao;
+		String sql = " SELECT * FROM ORCAMENTO AS O"
+				+ " WHERE O.IDSITUACAO = " + filtroSituacao;
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Orcamento> orcamentos = new ArrayList<Orcamento>();
+		
+		try {
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Orcamento orcamentoBuscado = construirDoResultSet(resultadoDaConsulta);
+				orcamentos.add(orcamentoBuscado);
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar orcamento cadastrado ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return orcamentos;
+	}
+
+	public ArrayList<Orcamento> consultarPorNomeMarca(String filtroNome, String marca) {
+		String sql = " SELECT * FROM ORCAMENTO AS O"
+				+ " INNER JOIN CARRO AS CR ON"
+				+ " O.IDCARRO = CR.IDCARRO"
+				+ " INNER JOIN CLIENTE AS C ON"
+				+ " CR.IDCLIENTE = C.IDCLIENTE"
+				+ " WHERE C.NOME LIKE '%" + filtroNome + "%' AND CR.MARCA = '" + marca + "'";
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Orcamento> orcamentos = new ArrayList<Orcamento>();
+		
+		try {
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Orcamento orcamentoBuscado = construirDoResultSet(resultadoDaConsulta);
+				orcamentos.add(orcamentoBuscado);
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar orcamento cadastrado ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return orcamentos;
+	}
+
+	public ArrayList<Orcamento> consultarPorNomeSituacao(String filtroNome, int filtroSituacao) {
+		String sql = " SELECT * FROM ORCAMENTO AS O"
+				+ " INNER JOIN CARRO AS CR ON"
+				+ " O.IDCARRO = CR.IDCARRO"
+				+ " INNER JOIN CLIENTE AS C ON"
+				+ " CR.IDCLIENTE = C.IDCLIENTE"
+				+ " WHERE C.NOME LIKE '%" + filtroNome + "%' AND O.IDSITUACAO = " + filtroSituacao;
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Orcamento> orcamentos = new ArrayList<Orcamento>();
+		
+		try {
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Orcamento orcamentoBuscado = construirDoResultSet(resultadoDaConsulta);
+				orcamentos.add(orcamentoBuscado);
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar orcamento cadastrado ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return orcamentos;
+	}
+
+	public ArrayList<Orcamento> consultarPorMarcaSituacao(String marca, int filtroSituacao) {
+		String sql = " SELECT * FROM ORCAMENTO AS O"
+				+ " INNER JOIN CARRO AS CR ON"
+				+ " O.IDCARRO = CR.IDCARRO"
+				+ " WHERE CR.MARCA = '" + marca + "' AND O.IDSITUACAO = " + filtroSituacao;
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Orcamento> orcamentos = new ArrayList<Orcamento>();
+		
+		try {
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Orcamento orcamentoBuscado = construirDoResultSet(resultadoDaConsulta);
+				orcamentos.add(orcamentoBuscado);
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar orcamento cadastrado ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return orcamentos;
+	}
+
+	public ArrayList<Orcamento> consultarPorTodosFiltros(String filtroNome, String marca, int filtroSituacao) {
+		String sql = " SELECT * FROM ORCAMENTO AS O"
+				+ " INNER JOIN CARRO AS CR ON"
+				+ " O.IDCARRO = CR.IDCARRO"
+				+ " INNER JOIN CLIENTE AS C ON"
+				+ " CR.IDCLIENTE = C.IDCLIENTE"
+				+ " WHERE C.NOME LIKE '%" + filtroNome + "%' AND CR.MARCA = '" + marca + "' AND O.IDSITUACAO = " + filtroSituacao;
 
 		Connection conexao = Banco.getConnection();
 		ResultSet resultadoDaConsulta = null;

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.bo.CarroBO;
 import model.bo.ClienteBO;
 import model.bo.OrcamentoBO;
+import model.entity.Carro;
 import model.entity.Orcamento;
 import model.utils.GeradorPlanilhas;
 
@@ -39,16 +40,16 @@ public class ControllerOrcamento {
 		return msg; 
 	}
 	
-	public String deletarOrcamento(int id) {
+	public String deletarOrcamento(String nuExclusao) {
 		String msg = null;
 		OrcamentoBO orcamentoBO = new OrcamentoBO();  
-		orcamentoBO.deletarOrcamentoBO(id);
+		orcamentoBO.deletarOrcamentoBO(nuExclusao);
 		return msg;
 	}
 
-	public ArrayList<Orcamento> listarOrcamentos() {
+	public ArrayList<Orcamento> listarOrcamentos(String filtroNome, Carro filtroCarro, int filtroSituacao) {
 		OrcamentoBO orcamentoBO = new OrcamentoBO();
-		return orcamentoBO.listarOrcamentos();
+		return orcamentoBO.listarOrcamentos(filtroNome, filtroCarro, filtroSituacao);
 		
 	}
 

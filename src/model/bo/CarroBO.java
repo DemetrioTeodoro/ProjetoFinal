@@ -1,7 +1,11 @@
 package model.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.dao.CarroDAO;
 import model.entity.Carro;
+import model.entity.Peca;
 
 public class CarroBO {
 	
@@ -36,6 +40,11 @@ public class CarroBO {
 	public Carro consultarPorPlaca(String placa) {	
 		objCarro = carroDAO.consultarPorPlaca(placa);
 	return objCarro;
+	}
+
+	public List<Carro> listarTodos() {
+		List<Carro> carros = carroDAO.listarTodos();
+		return carros;
 	}
 	
 }

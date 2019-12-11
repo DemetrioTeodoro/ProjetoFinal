@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JPanel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -9,6 +10,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControllerCarro;
 import controller.ControllerCliente;
 import controller.ControllerMecanico;
 import controller.ControllerOrcamento;
@@ -27,31 +29,31 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 
 public class PainelConsultaOrcamento extends JPanel {
 	private JTextField textNome;
-	private JTextField textAutomovel;
 	private JTable tblOrcamento;
 	private String[] colunasTabelaOrc = { "N."," CLIENTE", "CARRO", "PLACA", "DATA ENTRADA", "VALOR", "SITUAÇÃO" };
 	private ArrayList<Orcamento>orcamentos;
 	private ArrayList<Cliente>clientes;
-	private ArrayList<Carro>carros;
 	ControllerOrcamento controller = new ControllerOrcamento();
 	ControllerMecanico controllerMecanico = new ControllerMecanico();
 	ControllerCliente controllercliente = new ControllerCliente();
-	
-	
 	ControllerSituacao controllerSituacao = new ControllerSituacao();
 	ArrayList<String> situacoes; 
 	private JTextField txtNumero;
 	JComboBox cbSituacao;
 	Orcamento orcamento = new Orcamento();
-	private JFormattedTextField txtPlaca;
+	private JComboBox cbMarca;
+	private List<Carro>carros;
+	ControllerCarro controllerCarro = new ControllerCarro();
 	
-	
+	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 
 	/**
@@ -62,7 +64,6 @@ public class PainelConsultaOrcamento extends JPanel {
 		MaskFormatter formato;
 		try {
 			formato = new MaskFormatter("AAA-####");
-			 txtPlaca = new JFormattedTextField(formato);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.getMessage();
@@ -76,10 +77,7 @@ public class PainelConsultaOrcamento extends JPanel {
 		textNome = new JTextField();
 		textNome.setColumns(10);
 		
-		JLabel lblAutomovel = new JLabel("Autom\u00F3vel:");
-		
-		textAutomovel = new JTextField();
-		textAutomovel.setColumns(10);
+		JLabel lblAutomovel = new JLabel("Marca:");
 		
 		
 		tblOrcamento = new JTable();
@@ -91,8 +89,9 @@ public class PainelConsultaOrcamento extends JPanel {
 				
 				atualizarTabelaOrc();
 				txtNumero.setText("");
-				textAutomovel.setText("");
+				cbMarca.setSelectedIndex(-1);
 				textNome.setText("");
+				cbSituacao.setSelectedIndex(-1);
 				
 			}
 		});
@@ -110,7 +109,7 @@ public class PainelConsultaOrcamento extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				limparTabela();
 				txtNumero.setText("");
-				textAutomovel.setText("");
+				cbMarca.setSelectedIndex(-1);
 				textNome.setText("");
 				cbSituacao.setSelectedIndex(-1);
 			}
@@ -119,10 +118,10 @@ public class PainelConsultaOrcamento extends JPanel {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(txtNumero.getText());
-				controller.deletarOrcamento(id);			
+				String Nuexclusao = txtNumero.getText();
+				controller.deletarOrcamento(Nuexclusao);			
 				txtNumero.setText("");
-				textAutomovel.setText("");
+				cbMarca.setSelectedIndex(-1);
 				textNome.setText("");
 				cbSituacao.setSelectedIndex(-1);
 				limparTabela();
@@ -133,12 +132,6 @@ public class PainelConsultaOrcamento extends JPanel {
 		
 		txtNumero = new JTextField();
 		txtNumero.setColumns(10);
-		
-		JLabel lblDigiteAPlaca = new JLabel("Digite a Placa:");
-		
-		
-		txtPlaca.setText("   -    ");
-		txtPlaca.setColumns(10);
 		
 		JButton btnGerarRelatrio = new JButton("Gerar Relat\u00F3rio");
 		btnGerarRelatrio.addActionListener(new ActionListener() {
@@ -155,6 +148,11 @@ public class PainelConsultaOrcamento extends JPanel {
 				}
 			}
 		});
+		
+		this.popularCbMarca();
+		cbMarca = new JComboBox();
+		cbMarca.setModel(new DefaultComboBoxModel(carros.toArray()));
+		cbMarca.setSelectedIndex(-1);
 	
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -178,29 +176,25 @@ public class PainelConsultaOrcamento extends JPanel {
 									.addGap(18)
 									.addComponent(btnConsultar))
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(cbSituacao, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(textAutomovel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))))
+									.addComponent(cbMarca, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(cbSituacao, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(32)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(tblOrcamento, GroupLayout.PREFERRED_SIZE, 826, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblDigiteAPlaca)
-										.addComponent(lblDigiteId))
+									.addComponent(lblDigiteId)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnExcluir)
-											.addPreferredGap(ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
-											.addComponent(btnGerarRelatrio)
-											.addGap(26)
-											.addComponent(btnLimpar)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnFechar))
-										.addComponent(txtPlaca, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))))))
+									.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnExcluir)
+									.addPreferredGap(ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
+									.addComponent(btnGerarRelatrio)
+									.addGap(18)
+									.addComponent(btnLimpar)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnFechar)
+									.addGap(22)))))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -216,25 +210,21 @@ public class PainelConsultaOrcamento extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblAutomovel)
-						.addComponent(textAutomovel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(cbMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSituacao)
 						.addComponent(cbSituacao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(27)
 					.addComponent(tblOrcamento, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblDigiteAPlaca)
-						.addComponent(txtPlaca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnFechar)
-						.addComponent(btnLimpar)
 						.addComponent(lblDigiteId)
 						.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnExcluir)
-						.addComponent(btnGerarRelatrio))
+						.addComponent(btnGerarRelatrio)
+						.addComponent(btnLimpar)
+						.addComponent(btnFechar))
 					.addGap(21))
 		);
 		setLayout(groupLayout);
@@ -242,23 +232,12 @@ public class PainelConsultaOrcamento extends JPanel {
 	}
 	protected void atualizarTabelaOrc() {
 		String filtroNome = textNome.getText();
-		String filtroCarro = textAutomovel.getText();
+		Carro filtroCarro = (Carro)cbMarca.getSelectedItem();
 		int filtroSituacao = cbSituacao.getSelectedIndex();
-		if (!filtroNome.equals("")) {
-			orcamentos = controller.consultarOrcNome(filtroNome);
-		}
-		if (!filtroCarro.equals("")) {
-			orcamentos = controller.consultarOrcCarro(filtroCarro);
+	
 			
-		}
-		if (filtroSituacao != -1) {
-			orcamentos = controller.consultarOrcSituacao(filtroSituacao);
-			
-		}
-		if (filtroNome.equals("") && filtroCarro.equals("") && filtroSituacao == -1) {
-			
-			orcamentos = controller.listarOrcamentos();  
-		}
+		orcamentos = controller.listarOrcamentos(filtroNome, filtroCarro, filtroSituacao);  
+		
 			
 
 		limparTabela();
@@ -275,7 +254,7 @@ public class PainelConsultaOrcamento extends JPanel {
 			
 			novaLinha[2] = String.valueOf(orc.getCarro().getModelo());
 			novaLinha[3] = String.valueOf(orc.getCarro().getPlaca());
-			novaLinha[4] = String.valueOf(orc.getDataInicio());
+			novaLinha[4] = String.valueOf(orc.getDataInicio().format(format));
 			
 			double valTotal = (orc.getValorPeca() + orc.getValorMaoObra());
 			String valor = "R$" + String.valueOf(valTotal);
@@ -291,4 +270,11 @@ public class PainelConsultaOrcamento extends JPanel {
 		
 		tblOrcamento.setModel(new DefaultTableModel(new Object[][] { colunasTabelaOrc, }, colunasTabelaOrc));
 	}
+	
+	private void popularCbMarca() {
+		
+		carros = controllerCarro.listarTodos();
+	}
+	
+	
 }

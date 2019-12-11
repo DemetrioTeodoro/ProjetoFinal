@@ -3,16 +3,19 @@ package model.bo;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 import model.dao.OrcamentoDAO;
+import model.entity.Carro;
 import model.entity.Orcamento;
-import model.entity.Peca;
+
+
 
 public class OrcamentoBO {
 
 	OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+	ArrayList<Orcamento> objOrcamento;
 	
 	public Orcamento cadastrarOrcamentoBO(Orcamento orcamento) {
-		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();	
 		orcamento.setNumeroOrcamento(codigosAleatorios());
 		orcamentoDAO.cadastrar(orcamento);
 			
@@ -20,23 +23,45 @@ public class OrcamentoBO {
 	}
 	
 	public Orcamento consultarOrcamentoBO(Orcamento orcamento) {
-		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 		return orcamentoDAO.consultar(orcamento);
 	}
 	
 	public boolean alterarOrcamentoBO(Orcamento orcamento) {
-		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 		return orcamentoDAO.alterar(orcamento);
 	}
 	
-	public boolean deletarOrcamentoBO(int id) {
-		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		return orcamentoDAO.deletar(id);
+	public boolean deletarOrcamentoBO(String nuExclusao) {
+		int numero = Integer.parseInt(nuExclusao);
+		return orcamentoDAO.deletar(numero);
 	}
 
-	public ArrayList<Orcamento> listarOrcamentos() {
-		ArrayList<Orcamento> orcamentos = orcamentoDAO.listarTodos();
-		return orcamentos;
+	public ArrayList<Orcamento> listarOrcamentos(String filtroNome, Carro filtroCarro, int filtroSituacao) {
+		if (filtroNome.equals("") && filtroCarro == null && filtroSituacao == -1) {
+			objOrcamento = orcamentoDAO.listarTodos();
+		}
+		if (!filtroNome.equals("") && filtroCarro == null && filtroSituacao == -1) {
+			objOrcamento = orcamentoDAO.consultarOrcNome(filtroNome);
+		}
+		if (filtroNome.equals("") && filtroCarro != null && filtroSituacao == -1) {
+			objOrcamento = orcamentoDAO.consultarOrcCarro(filtroCarro.getMarca());
+		}
+		if (filtroNome.equals("") && filtroCarro == null && filtroSituacao != -1) {
+			objOrcamento = orcamentoDAO.consultarOrcSituacao(filtroSituacao);
+		}
+		if (!filtroNome.equals("") && filtroCarro != null && filtroSituacao == -1) {
+			objOrcamento = orcamentoDAO.consultarPorNomeMarca(filtroNome, filtroCarro.getMarca());
+		}
+		if (!filtroNome.equals("") && filtroCarro == null && filtroSituacao != -1) {
+			objOrcamento = orcamentoDAO.consultarPorNomeSituacao(filtroNome, filtroSituacao);
+		}
+		if (filtroNome.equals("") && filtroCarro != null && filtroSituacao != -1) {
+			objOrcamento = orcamentoDAO.consultarPorMarcaSituacao(filtroCarro.getMarca(), filtroSituacao);
+		}
+		if (!filtroNome.equals("") && filtroCarro != null && filtroSituacao != -1) {
+			objOrcamento = orcamentoDAO.consultarPorTodosFiltros(filtroNome, filtroCarro.getMarca(), filtroSituacao);
+		}
+		
+		return objOrcamento;
 	}
 
 	public ArrayList<Orcamento> consultarOrcNome(String filtroNome) {

@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.entity.Carro;
 import model.entity.Cliente;
 import model.entity.Mecanico;
+import model.entity.Peca;
 
 public class CarroDAO implements BaseDAO<Carro> {
 
@@ -119,7 +122,26 @@ public class CarroDAO implements BaseDAO<Carro> {
 			
 	
 		} catch (SQLException e) {
-			System.out.println("Erro ao construir orcamento do ResultSet ");
+			System.out.println("Erro ao construir carro do ResultSet ");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return carro;
+	}
+	
+	private Carro construirCarroComboDoResultSet(ResultSet rs) {
+		Carro carro = null;
+				  
+		try {
+			
+			String marca = rs.getString("MARCA");			
+			
+			carro = new Carro();
+			carro.setMarca(marca);
+			
+	
+		} catch (SQLException e) {
+			System.out.println("Erro ao construir carro do ResultSet ");
 			System.out.println("Erro: " + e.getMessage());
 		}
 		
@@ -145,6 +167,33 @@ public class CarroDAO implements BaseDAO<Carro> {
 		}
 
 		return c;
+	}
+
+	public List<Carro> listarTodos() {
+		String sql = " SELECT DISTINCT MARCA FROM CARRO";
+			
+
+		Connection conexao = Banco.getConnection();
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Carro> carros = new ArrayList<Carro>();
+		
+		try {
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Carro carroBuscado = construirCarroComboDoResultSet(resultadoDaConsulta);
+				carros.add(carroBuscado);
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar carros cadastradas ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return carros;
 	}
 
 }
