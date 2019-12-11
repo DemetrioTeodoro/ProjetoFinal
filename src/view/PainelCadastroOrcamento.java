@@ -120,7 +120,7 @@ public class PainelCadastroOrcamento extends JPanel {
 				int ano = Integer.parseInt(txtAno.getText());
 				String cor = txtCor.getText();
 				String modelo = txtModelo.getText();
-				String placa = txtPlaca.getText().replace("-", "");
+				String placa = txtPlaca.getText();
 				LocalDate dataEntrada = LocalDate.parse((txtDtEntrada.getText()), format);
 				msg += controllerCliente.validarCamposCliente(nome, cpf, telefone);
 				msg += controllerCarro.validarCamposCarro(marca, ano, cor, modelo, placa);
