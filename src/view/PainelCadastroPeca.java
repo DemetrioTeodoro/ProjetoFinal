@@ -80,10 +80,10 @@ public class PainelCadastroPeca extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String msg = "";
 				String nomePeca = txtNomePeca.getText();
-				double valorCompra = Double.parseDouble(txtValorCompra.getText().replace(",", "."));
-				double valorVenda = Double.parseDouble(txtValorVenda.getText().replace(",", "."));
-				int quantidade = Integer.parseInt(txtQuantidade.getText());
-				LocalDate dataEntrada = LocalDate.parse(txtDataEntrada.getText(), format);
+				String valorCompra = txtValorCompra.getText().replace(",", "");
+				String valorVenda = txtValorVenda.getText().replace(",", "");
+				String quantidade = txtQuantidade.getText();
+				String dataEntrada = txtDataEntrada.getText();
 				msg = controllerPeca.validarCamposPeca(nomePeca, valorCompra, valorVenda, quantidade, dataEntrada);
 				
 				if (msg.isEmpty()) {

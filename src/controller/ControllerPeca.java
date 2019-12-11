@@ -67,22 +67,22 @@ public class ControllerPeca {
 		return peca;
 	}
 
-	public String validarCamposPeca(String nomePeca, double valorCompra, double valorVenda,
-			int quantidade, LocalDate dataEntrada) {
+	public String validarCamposPeca(String nomePeca, String valorCompra, String valorVenda,
+			String quantidade, String dataEntrada) {
 		String msg = "";
 		
 		if (nomePeca.isEmpty() || nomePeca.trim().length() < 3) {
-			msg += " Nome da peça deve possuir mais de 3 letras! ";
+			msg += " Nome da peça deve possuir mais de 3 letras! \n";
 		}
 		
-		if (valorCompra == 0.00 || valorCompra == 0 || valorCompra == 00|| valorCompra == 00.00) {
-			msg += " Valor da compra da peça incorreto! ";
+		if (valorCompra.isEmpty()) {
+			msg += " Valor da compra da peça deve ser informado! \n";
 		}
-		if (valorVenda == 0.00 || valorVenda == 0 || valorVenda == 00 || valorVenda == 00.00) {
-			msg += " Valor da venda da peça incorreto! ";
+		if (valorVenda.isEmpty()) {
+			msg += " Valor da venda da peça deve ser informado! \n";
 		}
-		if (quantidade == 0 || quantidade == 00 || quantidade == 000 || quantidade == 0000) {
-			msg += " Quantidade deve ser maior que zero! ";
+		if (quantidade.isEmpty()) {
+			msg += " Quantidade deve ser informado! \n";
 		}
 		return msg;
 	}

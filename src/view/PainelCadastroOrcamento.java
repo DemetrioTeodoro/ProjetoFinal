@@ -119,11 +119,15 @@ public class PainelCadastroOrcamento extends JPanel {
 				String cpf = txtCPF.getText().replace(".", "").replace("-", "");
 				String telefone = txtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
 				String marca = txtMarca.getText();
-				int ano = Integer.parseInt(txtAno.getText());
+				int ano = 0;
+				String anoValor = txtAno.getText();
+				if (!anoValor.equals("    ")) {
+					ano = Integer.parseInt(txtAno.getText());
+				}
 				String cor = txtCor.getText();
 				String modelo = txtModelo.getText();
 				String placa = txtPlaca.getText();
-				LocalDate dataEntrada = LocalDate.parse((txtDataEntrada.getText()), format);
+				String dataEntrada = txtDataEntrada.getText();
 				msg += controllerCliente.validarCamposCliente(nome, cpf, telefone);
 				msg += controllerCarro.validarCamposCarro(marca, ano, cor, modelo, placa);
 				msg += controllerValidarCPF.validaCPF(cpf);

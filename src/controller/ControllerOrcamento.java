@@ -76,12 +76,12 @@ public class ControllerOrcamento {
 		gerador.gerarPlanilhasOrcamento(orcamentosRelatorio, caminhoEscolhido);
 	}
 
-	public String validarDataEntrada(LocalDate dataEntrada) {
+	public String validarDataEntrada(String dataEntrada) {
 		String mensagem = "";
-
-//		if (dataEntrada != LocalDate.now()) {
-//			mensagem += " A data deve ser igual a corrente! \n";
-//		}
+		//LocalDate dataEntrada = LocalDate.parse((txtDataEntrada.getText()), format);
+		if (dataEntrada.isEmpty()) {
+			mensagem += " A data deve estar preenchida! \n";
+		}
 
 		return mensagem;
 	}
