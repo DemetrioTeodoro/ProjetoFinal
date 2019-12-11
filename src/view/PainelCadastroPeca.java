@@ -30,7 +30,7 @@ public class PainelCadastroPeca extends JPanel {
 	private JTextField txtValorCompra;
 	private JTextField txtValorVenda;
 	private JTextField txtQuantidade;
-	private JTextField txtDtEntrada;
+	private JTextField txtDataEntrada;
 	private Peca peca = new Peca();
 	private ControllerPeca controllerPeca = new ControllerPeca();
 	
@@ -72,7 +72,7 @@ public class PainelCadastroPeca extends JPanel {
 		txtValorCompra = new JTextField();
 		txtValorCompra.setColumns(10);
 		try {
-			formato = new MaskFormatter("####,##");
+			formato = new MaskFormatter("##,##");
 			 txtValorCompra = new JFormattedTextField(formato);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -91,7 +91,7 @@ public class PainelCadastroPeca extends JPanel {
 				double valorCompra = Double.parseDouble(txtValorCompra.getText().replace(",", "."));
 				double valorVenda = Double.parseDouble(txtValorVenda.getText().replace(",", "."));
 				int quantidade = Integer.parseInt(txtQuantidade.getText());
-				LocalDate dataEntrada = LocalDate.parse(txtDtEntrada.getText(), format);
+				LocalDate dataEntrada = LocalDate.parse(txtDataEntrada.getText(), format);
 				msg = controllerPeca.validarCamposPeca(nomePeca, codigoPeca, valorCompra, valorVenda, quantidade, dataEntrada);
 				
 				if (msg.isEmpty()) {
@@ -100,7 +100,7 @@ public class PainelCadastroPeca extends JPanel {
 				peca.setValCompra(Double.parseDouble(txtValorCompra.getText().replace(",", ".")));
 				peca.setValVenda(Double.parseDouble(txtValorVenda.getText().replace(",", ".")));
 				peca.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-				peca.setDataEntrada(LocalDate.parse((txtDtEntrada.getText()), format));
+				peca.setDataEntrada(LocalDate.parse((txtDataEntrada.getText()), format));
 				controllerPeca.cadastrarPeca(peca);
 				limparCampos();
 				
@@ -124,7 +124,7 @@ public class PainelCadastroPeca extends JPanel {
 		txtValorVenda = new JTextField();
 		txtValorVenda.setColumns(10);
 		try {
-			formato = new MaskFormatter("####,##");
+			formato = new MaskFormatter("##,##");
 			 txtValorVenda = new JFormattedTextField(formato);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -135,8 +135,18 @@ public class PainelCadastroPeca extends JPanel {
 		
 		JLabel lblDtEntrada = new JLabel("Data de Entrada:");
 		
-		txtDtEntrada = new JTextField();
-		txtDtEntrada.setColumns(10);
+		MaskFormatter formatoDataEntrada;
+		txtDataEntrada = new JTextField();
+		txtDataEntrada.setColumns(10);
+		txtDataEntrada.setColumns(10);
+		try {
+			formatoDataEntrada = new MaskFormatter("##/##/####");
+			 txtDataEntrada = new JFormattedTextField(formatoDataEntrada);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -168,7 +178,7 @@ public class PainelCadastroPeca extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(txtNomePeca, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(txtDtEntrada, Alignment.LEADING)
+							.addComponent(txtDataEntrada, Alignment.LEADING)
 							.addComponent(txtQuantidade, Alignment.LEADING)
 							.addComponent(txtValorVenda, Alignment.LEADING)
 							.addComponent(txtValorCompra, Alignment.LEADING)
@@ -207,7 +217,7 @@ public class PainelCadastroPeca extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblDtEntrada)
-						.addComponent(txtDtEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtDataEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(91)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnFechar)
@@ -224,7 +234,7 @@ public class PainelCadastroPeca extends JPanel {
 		txtValorCompra.setText("");
 		txtValorVenda.setText("");
 		txtQuantidade.setText("");
-		txtDtEntrada.setText("");
+		txtDataEntrada.setText("");
 		
 		
 	}
