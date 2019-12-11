@@ -26,6 +26,7 @@ import controller.ControllerMecanico;
 import controller.ControllerOrcamento;
 import controller.ControllerServico;
 import controller.ControllerSituacao;
+import controller.ControllerValidarCPF;
 import model.entity.Carro;
 import model.entity.Cliente;
 import model.entity.Orcamento;
@@ -41,6 +42,7 @@ public class PainelCadastroOrcamento extends JPanel {
 	private ControllerCliente controllerCliente = new ControllerCliente();
 	private ControllerOrcamento controllerOrcamento = new ControllerOrcamento();
 	private ControllerCarro controllerCarro = new ControllerCarro();
+	private ControllerValidarCPF controllerValidarCPF = new ControllerValidarCPF();
 	private Orcamento orcamento = new Orcamento();
 	private Cliente cliente = new Cliente();
 	private Carro carro = new Carro();
@@ -124,6 +126,7 @@ public class PainelCadastroOrcamento extends JPanel {
 				LocalDate dataEntrada = LocalDate.parse((txtDataEntrada.getText()), format);
 				msg += controllerCliente.validarCamposCliente(nome, cpf, telefone);
 				msg += controllerCarro.validarCamposCarro(marca, ano, cor, modelo, placa);
+				msg += controllerValidarCPF.validaCPF(cpf);
 				msg += controllerOrcamento.validarDataEntrada(dataEntrada);
 				
 				if (msg.isEmpty()) {

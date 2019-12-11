@@ -38,10 +38,6 @@ public class ControllerCliente {
 			mensagem += " O nome deve possuir pelo menos 3 letras! \n";
 		}
 
-		if (cpf.isEmpty() || cpf.trim().length() != 11) {
-			mensagem += " O CPF deve possuir 11 exatamente digitos! \n";
-		}
-
 		if (telefone.isEmpty() || telefone.trim().length() < 11) {
 			mensagem += "O telefone deve possuir pelo menos 11 numeros! \n";
 		}
