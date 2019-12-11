@@ -82,7 +82,7 @@ public class ControllerOrcamento {
 		if (dataEntrada.isEmpty()) {
 			mensagem += " A data deve estar preenchida! \n";
 		}
-
+		//
 		return mensagem;
 	}
 
