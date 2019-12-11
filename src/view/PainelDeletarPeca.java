@@ -122,7 +122,7 @@ public class PainelDeletarPeca extends JPanel {
 		
 		for (Peca peca : pecas) {
 			String[] novaLinha = new String[5];
-			novaLinha[0] = peca.getCodigo();
+			novaLinha[0] = String.valueOf(peca.getCodigo());
 			novaLinha[1] = peca.getNomePeca();
 			novaLinha[2] = String.valueOf(peca.getValVenda());
 			novaLinha[3] = String.valueOf(peca.getValCompra());

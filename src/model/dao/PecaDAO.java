@@ -27,7 +27,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 		
 		try {
 			stmt.setString(1, peca.getNomePeca()); 
-			stmt.setString(2, peca.getCodigo());
+			stmt.setInt(2, peca.getCodigo());
 			
 			
 			stmt.execute();
@@ -68,7 +68,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 			stmt.setInt(1, peca.getIdPeca());
 			
 			pecs.setNomePeca(rs.getString("NOMEPECA")); 
-			pecs.setCodigo(rs.getString("CODIGO"));
+			pecs.setCodigo(rs.getInt("CODIGO"));
 			pecs.setIdPeca(rs.getInt("IDPECA"));
 			pecs.setQuantidade(rs.getInt("QUANTIDADE"));
 			pecs.setValCompra(rs.getDouble("VALORCOMPRA"));
@@ -197,7 +197,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 		try {
 			pc = new Peca();
 			
-			String codigo = rs.getString("CODIGO");
+			int codigo = rs.getInt("CODIGO");
 			String nome = rs.getString("NOMEPECA");
 			double valorCompra = rs.getDouble("VALORCOMPRA");
 			double valorVenda = rs.getDouble("VALORVENDA");
@@ -337,7 +337,7 @@ public class PecaDAO implements BaseDAO<Peca> {
 	}
 
 
-	public String excluirPeca(String codigo) {
+	public String excluirPeca(int codigo) {
 		Connection conexao = Banco.getConnection();
 		Statement statement = Banco.getStatement(conexao);
 		String sql = " DELETE FROM ITEM_PECA WHERE CODIGO = " + codigo;

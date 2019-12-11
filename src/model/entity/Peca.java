@@ -6,7 +6,7 @@ import java.util.Date;
 public class Peca {
 	
 	private String nomePeca;
-	private String codigo;
+	private int codigo;
 	private double valorCompra;
 	private double valorVenda;
 	private LocalDate dataEntrada;
@@ -34,13 +34,13 @@ public class Peca {
 
 	public void setNomePeca(String nomePeca) {
 		this.nomePeca = nomePeca;
-	}
+	}	
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

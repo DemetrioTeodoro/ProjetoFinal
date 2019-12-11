@@ -14,6 +14,7 @@ public class PecaBO {
 	PecaDAO pecaDAO = new PecaDAO();
 
 	public Peca cadastrarPecaBO(Peca peca) {
+		peca.setCodigo(codigosAleatorios());
 		 pecaDAO.cadastrar(peca);
 		 if (peca.getIdPeca() != 0) {
 			 pecaDAO.cadastrarItemPeca(peca);
